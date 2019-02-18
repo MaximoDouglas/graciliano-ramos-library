@@ -16,7 +16,7 @@ def reshape(w, h):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     gluPerspective(45, w/h, 0.01, 100)
-    gluLookAt(0.0, 12.0, 30.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(0.0, 15.0, 35.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
 def rotacionate():
     global degree
@@ -36,6 +36,7 @@ def draw_scenario():
     glPushMatrix();
     glRotatef(degree, 0.0, 1.0, 0.0);
     obj.draw_floors()
+    obj.draw_tops()
     obj.draw_walls()
     obj.draw_doors()
     glPopMatrix()
@@ -61,11 +62,10 @@ def main():
     glutInitWindowSize(1200, 500)
     glutInitWindowPosition(100, 100)
     glutCreateWindow("Graciliano Ramos Library")
-
     init()
     glutDisplayFunc(draw_scenario)
-    glutMouseFunc(OnMouseClick)
     glutIdleFunc(draw_scenario)
+    glutMouseFunc(OnMouseClick)
     glutReshapeFunc(reshape)
     glutMainLoop()
 

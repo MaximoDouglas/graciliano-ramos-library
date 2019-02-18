@@ -13,6 +13,16 @@ class Objects():
                 glVertex3fv(vertex)
             glEnd()
 
+    def draw_tops():
+        for top in c.tops:
+            glPushMatrix()
+            glBegin(GL_TRIANGLES)
+            for vertex in top:
+                glColor3fv((0.5, 0.5, 0.5))
+                glVertex3fv(vertex)
+            glEnd()
+            glPopMatrix()
+
     def draw_walls():
         for wall in c.walls:
             glBegin(GL_QUADS)
@@ -22,7 +32,6 @@ class Objects():
             glEnd()
 
     def draw_doors():
-
         for door in c.doors:
             glBegin(GL_POLYGON)
             for vertex in door:
