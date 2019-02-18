@@ -40,13 +40,14 @@ class Objects():
             glEnd()
 
         # --- DRAW LINE TO SEPARETE DOORS (THIS WILL BE DELETED WHEN ADDED THE OPEN_DOORS FUNC)
-        for x in c.centers:
-            glBegin(GL_LINES)
-            glColor3fv((0, 0, 0))
+        for y in c.levels:
+            for x in c.centers:
+                glBegin(GL_LINES)
+                glColor3fv((0, 0, 0))
 
-            h = 2.5
-            if x == 0: h = 2.75
-            glVertex3fv((x, h, 8.01))
-            glVertex3fv((x, 0, 8.01))
+                h = 2.5
+                if x == 0 and y == 0: h = 2.75
+                glVertex3fv((x, y + h, 8.01))
+                glVertex3fv((x, y, 8.01))
 
-            glEnd()
+                glEnd()

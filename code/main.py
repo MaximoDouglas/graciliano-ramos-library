@@ -23,9 +23,9 @@ def rotacionate():
 
     if(rotate):
         if (rotateLeft):
-            degree = (degree + 1) % 360
+            degree = (degree + 5) % 360
         else:
-            degree = (degree - 1) % 360
+            degree = (degree - 5) % 360
 
 def draw_scenario():
 
