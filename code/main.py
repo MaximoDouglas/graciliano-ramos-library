@@ -1,69 +1,72 @@
-import pygame
-from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from simple_objects import Objects as obj
 
-x_move = 0
-y_move = 0
+degree = 0
+rotate = False
+rotateLeft = False;
 
 def init():
-    pygame.init()
-    display = (1000, 700)
-    pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
-    gluPerspective(45, (display[0]/display[1]), 0.01, 100)
-    glTranslatef(0, 0, -40)
-    glEnable(GL_DEPTH_TEST)
+	glClearColor(0.0, 0.0, 0.0, 0.0)
+	glEnable(GL_DEPTH_TEST)
+
+def reshape(w, h):
+    glViewport(0, 0, w, h)
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
+    gluPerspective(45, w/h, 0.01, 100)
+    gluLookAt(0.0, 12.0, 30.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
+def rotacionate():
+    global degree
+
+    if(rotate):
+        if (rotateLeft):
+            degree = (degree + 1) % 360
+        else:
+            degree = (degree - 1) % 360
 
 def draw_scenario():
+
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-    glTranslatef(x_move, y_move, 0)
+    rotacionate()
+
+    glPushMatrix();
+    glRotatef(degree, 0.0, 1.0, 0.0);
     obj.draw_floors()
     obj.draw_walls()
     obj.draw_doors()
+    glPopMatrix()
 
-def event_ctrl(event):
-    global x_move
-    global y_move
+    glutSwapBuffers()
 
-    if (event.type == pygame.QUIT):
-        pygame.quit()
-        quit()
+def OnMouseClick(button, state, x, y):
+    global rotate
+    global rotateLeft
 
-    if event.type == pygame.KEYDOWN:
-        if (event.key == pygame.K_LEFT):
-            x_move = 0.5
-        if (event.key == pygame.K_RIGHT):
-            x_move = -0.5
-        if (event.key == pygame.K_UP):
-            y_move = -0.5
-        if (event.key == pygame.K_DOWN):
-            y_move = 0.5
-
-    if event.type == pygame.KEYUP:
-        if (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
-            x_move = 0
-        if (event.key == pygame.K_UP or event.key == pygame.K_DOWN):
-            y_move = 0
-
-    #Zoom in and zoom out
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        if event.button == 4:
-            glScalef(1.1, 1.1, 1.1)
-        if event.button == 5:
-            glScalef(0.9, 0.9, 0.9)
+    if button == GLUT_LEFT_BUTTON:
+        rotate = True
+        rotateLeft = True
+    if button == GLUT_RIGHT_BUTTON:
+        rotate = True
+        rotateLeft = False
+    if button == GLUT_MIDDLE_BUTTON:
+        rotate = False
 
 def main():
+    glutInit()
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
+    glutInitWindowSize(1200, 500)
+    glutInitWindowPosition(100, 100)
+    glutCreateWindow("Graciliano Ramos Library")
+
     init()
-
-    while True:
-        draw_scenario()
-        pygame.display.flip()
-        pygame.time.wait(10)
-
-        for event in pygame.event.get():
-            event_ctrl(event)
+    glutDisplayFunc(draw_scenario)
+    glutMouseFunc(OnMouseClick)
+    glutIdleFunc(draw_scenario)
+    glutReshapeFunc(reshape)
+    glutMainLoop()
 
 main()
