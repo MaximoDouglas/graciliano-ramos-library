@@ -22,6 +22,7 @@ def draw_scenario():
     glTranslatef(x_move, y_move, 0)
     obj.draw_ground()
     obj.draw_walls()
+    obj.draw_doors()
 
 def event_ctrl(event):
     global x_move
