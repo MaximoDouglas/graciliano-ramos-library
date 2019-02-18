@@ -20,7 +20,7 @@ def draw_scenario():
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
     glTranslatef(x_move, y_move, 0)
-    obj.draw_ground()
+    obj.draw_floors()
     obj.draw_walls()
     obj.draw_doors()
 
@@ -34,13 +34,13 @@ def event_ctrl(event):
 
     if event.type == pygame.KEYDOWN:
         if (event.key == pygame.K_LEFT):
-            x_move = -0.2
+            x_move = 0.5
         if (event.key == pygame.K_RIGHT):
-            x_move = 0.2
+            x_move = -0.5
         if (event.key == pygame.K_UP):
-            y_move = 0.2
+            y_move = -0.5
         if (event.key == pygame.K_DOWN):
-            y_move = -0.2
+            y_move = 0.5
 
     if event.type == pygame.KEYUP:
         if (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):

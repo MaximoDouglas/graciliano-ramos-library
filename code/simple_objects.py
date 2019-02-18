@@ -5,12 +5,13 @@ from coordinates import Coordinates as c
 
 class Objects():
 
-    def draw_ground():
-        glBegin(GL_QUADS)
-        for vertex in c.ground0:
-            glColor3fv((1, 1, 0.8))
-            glVertex3fv(vertex)
-        glEnd()
+    def draw_floors():
+        for floor in c.floors:
+            glBegin(GL_QUADS)
+            for vertex in floor:
+                glColor3fv((1, 1, 0.8))
+                glVertex3fv(vertex)
+            glEnd()
 
     def draw_walls():
         for wall in c.walls:
