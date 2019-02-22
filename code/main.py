@@ -16,16 +16,16 @@ def reshape(w, h):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     gluPerspective(45, w/h, 0.01, 100)
-    gluLookAt(0.0, 15.0, 35.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(0.0, 15.0, 30.0, 0.0, 3.0, 0.0, 0.0, 1.0, 0.0);
 
 def rotacionate():
     global degree
 
     if(rotate):
         if (rotateLeft):
-            degree = (degree + 5) % 360
+            degree = (degree + 1) % 360
         else:
-            degree = (degree - 5) % 360
+            degree = (degree - 1) % 360
 
 def draw_scenario():
 
