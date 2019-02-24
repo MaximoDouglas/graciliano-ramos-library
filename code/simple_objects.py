@@ -58,6 +58,6 @@ class Objects():
                 for face in part:
                     glBegin(GL_QUADS)
                     for vertex in face:
-                        glColor3fv((1.0, 0.4, 0.3))
+                        glColor3fv((0.2, 0.0, 0.0))
                         glVertex3fv(vertex)
                     glEnd()

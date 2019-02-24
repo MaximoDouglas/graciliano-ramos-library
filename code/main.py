@@ -16,7 +16,7 @@ def reshape(w, h):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     gluPerspective(45, w/h, 0.01, 100)
-    gluLookAt(1.0, 0.5, 2.0, 0.0, 0.5, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(0.9, 0.5, 1.8, 0.0, 0.5, 0.0, 0.0, 1.0, 0.0);
 
 def rotacionate():
     global degree
