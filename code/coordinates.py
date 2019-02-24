@@ -143,3 +143,39 @@ class Coordinates():
         (1, 12, 4),
         (0, 13, 5)
     ))
+
+    # CHAIR coordinates
+    referente = [0, 0, 0]
+    chair_back_half_height = 0.25
+    chair_back_half_width = 0.25
+    chair_back_half_depth = 0.05
+
+    # This vector will store the four parts - back, sit, legs and the iron stick that holds the back part
+    chair = []
+
+    # This vectos will store the eight faces of the back of the chair
+    chair_back = []
+
+    # This vector stores the vertices of the front face of the back part of the chair
+    chair_back_front = []
+    chair_back_front.append((
+        (),
+        (),
+        (),
+        ()
+    ))
+
+    # This vector stores the vertices of the back face of the back part of the chair
+    chair_back_back = []
+
+    # This vector stores the vertices of the right face of the back part of the chair
+    chair_back_right = []
+
+    # This vector stores the vertices of the left face of the back part of the chair
+    chair_back_left = []
+
+    # This vector stores the vertices of the top face of the back part of the chair
+    chair_back_top = []
+
+    # This vector stores the vertices of the bottom face of the back part of the chair
+    chair_back_bottom = []
