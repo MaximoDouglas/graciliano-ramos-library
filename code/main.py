@@ -16,7 +16,7 @@ def reshape(w, h):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     gluPerspective(45, w/h, 0.01, 100)
-    gluLookAt(0.0, 15.0, 30.0, 0.0, 3.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(1.0, 0.5, 2.0, 0.0, 0.5, 0.0, 0.0, 1.0, 0.0);
 
 def rotacionate():
     global degree
@@ -29,19 +29,19 @@ def rotacionate():
 
 def draw_scenario():
 
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-    rotacionate()
+	rotacionate()
+	#glPushMatrix()
+	#glRotatef(degree, 0.0, 1.0, 0.0)
+	obj.draw_floors()
+	obj.draw_tops()
+	obj.draw_walls()
+	obj.draw_doors()
+	obj.draw_chairs()
 
-    glPushMatrix();
-    glRotatef(degree, 0.0, 1.0, 0.0);
-    obj.draw_floors()
-    obj.draw_tops()
-    obj.draw_walls()
-    obj.draw_doors()
-    glPopMatrix()
-
-    glutSwapBuffers()
+	#glPopMatrix()
+	glutSwapBuffers()
 
 def OnMouseClick(button, state, x, y):
     global rotate

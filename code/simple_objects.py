@@ -51,3 +51,13 @@ class Objects():
                 glVertex3fv((x, y, 8.01))
 
                 glEnd()
+
+    def draw_chairs():
+        for chair in c.chairs:
+            for part in chair:
+                for face in part:
+                    glBegin(GL_QUADS)
+                    for vertex in face:
+                        glColor3fv((1.0, 0.4, 0.3))
+                        glVertex3fv(vertex)
+                    glEnd()

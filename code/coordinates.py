@@ -150,10 +150,13 @@ class Coordinates():
     chair_back_half_width = 0.25
     chair_back_half_depth = 0.05
 
+    # This vector will store the chairs in the building
+    chairs = []
+
     # This vector will store the four parts - back, sit, legs and the iron stick that holds the back part
     chair = []
 
-    # This vectos will store the eight faces of the back of the chair
+    # This vectos will store the six faces of the back of the chair
     chair_back = []
 
     # a, b, c, d, e and f vertices
@@ -206,25 +209,29 @@ class Coordinates():
     )
 
     # This vector stores the vertices of the front face of the back part of the chair
-    chair_back_front = []
-    chair_back_front.append((a,b,c,d))
+    chair_back_front = (a,b,c,d)
+    chair_back.append(chair_back_front)
+
 
     # This vector stores the vertices of the back face of the back part of the chair
-    chair_back_back = []
-    chair_back_back.append((e,f,g,h))
+    chair_back_back = (e,f,g,h)
+    chair_back.append(chair_back_back)
 
     # This vector stores the vertices of the right face of the back part of the chair
-    chair_back_right = []
-    chair_back_right.append((b,f,g,c))
+    chair_back_right = (b,f,g,c)
+    chair_back.append(chair_back_right)
 
     # This vector stores the vertices of the left face of the back part of the chair
-    chair_back_left = []
-    chair_back_left.append((e,a,d,h))
+    chair_back_left = (e,a,d,h)
+    chair_back.append(chair_back_left)
 
     # This vector stores the vertices of the top face of the back part of the chair
-    chair_back_top = []
-    chair_back_top.append((c,g,h,d))
+    chair_back_top = (c,g,h,d)
+    chair_back.append(chair_back_top)
 
     # This vector stores the vertices of the bottom face of the back part of the chair
-    chair_back_bottom = []
-    chair_back_bottom.append((a,e,f,b))
+    chair_back_bottom = (a,e,f,b)
+    chair_back.append(chair_back_bottom)
+
+    chair.append(chair_back)
+    chairs.append(chair)
