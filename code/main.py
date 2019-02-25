@@ -32,15 +32,15 @@ def draw_scenario():
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
 	rotacionate()
-	#glPushMatrix()
-	#glRotatef(degree, 0.0, 1.0, 0.0)
+	glPushMatrix()
+	glRotatef(degree, 0.0, 1.0, 0.0)
 	obj.draw_floors()
 	obj.draw_tops()
 	obj.draw_walls()
 	obj.draw_doors()
 	obj.draw_chairs()
 
-	#glPopMatrix()
+	glPopMatrix()
 	glutSwapBuffers()
 
 def OnMouseClick(button, state, x, y):
