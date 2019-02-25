@@ -8,7 +8,8 @@ from simple_objects import Objects as obj
 rotate = False
 rotateLeft = False;
 
-degree = 0
+az_degree = 0
+el_degree = 0
 radius = 50.0
 rad = math.pi/180
 
@@ -38,28 +39,35 @@ def reshape(w, h):
     gluLookAt(30.0, 30.0, 30.0, 0.0, 0.5, 0.0, 0.0, 1.0, 0.0);
 
 
-def navigate():
+def navigate(elevate=False):
     glLoadIdentity()
     gluPerspective(45.0, aspect_ratio, 0.01, 100.0)
-    gluLookAt(radius * math.sin(degree * rad), 0, radius * math.cos(degree * rad),
-               0.0, 0.5, 0.0,
-               0.0, 1.0, 0.0)
+    gluLookAt(radius * math.sin(az_degree * rad),
+              radius * math.sin(el_degree * rad),
+              radius * math.cos(az_degree * rad),
+              0.0, 0.5, 0.0,
+              0.0, 1.0, 0.0)
 
 
 def draw_scenario():
 
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+    
+    glPushMatrix()
+    
+    obj.draw_floors()
+    obj.draw_tops()
+    obj.draw_walls()
+    obj.draw_doors()
+    obj.draw_chairs()
 
-	glPushMatrix()
+    alt = 50.0                                                                                                
+    axis((0.0, 0.0, alt), (1.0, 0.0, 0.0)) # z to red                  
+    axis((0.0, alt, 0.0), (0.0, 1.0, 0.0)) # y to green
+    axis((alt, 0.0, 0.0), (0.0, 0.0, 1.0)) # x to blue
 
-	obj.draw_floors()
-	obj.draw_tops()
-	obj.draw_walls()
-	obj.draw_doors()
-	obj.draw_chairs()
-
-	glPopMatrix()
-	glutSwapBuffers()
+    glPopMatrix()
+    glutSwapBuffers()
 
 
 # TODO: implement in `navigate`
@@ -78,16 +86,23 @@ def OnMouseClick(button, state, x, y):
 
 
 def keyboard(key, x, y):
-    global degree
+    global az_degree
+    global el_degree
     global radius
 
     key = key.decode("utf-8")
 
     if key == 'r':
-        degree = (degree + 5) % 360
+        az_degree = (az_degree + 5) % 360
         navigate()
     elif key == 'R':
-        degree = (degree - 5) % 360
+        az_degree = (az_degree - 5) % 360
+        navigate()
+    elif key == 'e':
+        el_degree = (el_degree + 5) % 360
+        navigate()
+    elif key == 'E':
+        el_degree = (el_degree - 5) % 360
         navigate()
     elif key == 'w':
         radius -= 3
@@ -98,8 +113,19 @@ def keyboard(key, x, y):
     elif key == 'q':
         sys.exit()
 
+    print(az_degree, el_degree)
+
     glutPostRedisplay()
 
+
+# just for debug purposes :)
+def axis(last_vertex, c):                             
+    glColor(c)     
+    glBegin(GL_LINES)                   
+    glVertex((0.0, 0.0, 0.0))
+    glVertex(last_vertex)
+    glEnd()        
+           
 
 def main():
     glutInit()
