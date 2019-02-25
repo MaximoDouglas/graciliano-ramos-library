@@ -36,7 +36,11 @@ def reshape(w, h):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     gluPerspective(45, aspect_ratio, 0.01, 100)
-    gluLookAt(30.0, 30.0, 30.0, 0.0, 0.5, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(radius * math.sin(az_degree * rad),
+              radius * math.sin(el_degree * rad),
+              radius * math.cos(az_degree * rad),
+              0.0, 0.5, 0.0,
+              0.0, 1.0, 0.0)
 
 
 def navigate(elevate=False):
