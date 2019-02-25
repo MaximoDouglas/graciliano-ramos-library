@@ -113,8 +113,6 @@ def keyboard(key, x, y):
     elif key == 'q':
         sys.exit()
 
-    print(az_degree, el_degree)
-
     glutPostRedisplay()
 
 
