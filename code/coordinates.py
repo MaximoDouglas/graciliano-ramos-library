@@ -155,13 +155,17 @@ class Coordinates():
     chair = []
 
     #A for iteration for each one of the seven parts that compose the chair
-    new_part_half_width = [0.25, 0.05, 0.25]
-    new_part_half_height = [0.25, 0.10, 0.05]
-    new_part_half_depth = [0.05, 0.025, 0.25]
+    new_part_half_width = [0.25, 0.05, 0.25, 0.01, 0.01, 0.01, 0.01]
+    new_part_half_height = [0.25, 0.10, 0.05, 0.2, 0.2, 0.2, 0.2]
+    new_part_half_depth = [0.05, 0.025, 0.25, 0.01, 0.01, 0.01, 0.01]
     new_part_center = [
                     (referente[0] + 0.0, referente[1] + 0.85, referente[2] + 0.0),
                     (referente[0] + 0.0, referente[1] + 0.5, referente[2] - 0.025),
-                    (referente[0] + 0.0, referente[1] + 0.45, referente[2] + 0.25)
+                    (referente[0] + 0.0, referente[1] + 0.45, referente[2] + 0.25),
+                    (referente[0] + 0.24, referente[1] + 0.2, referente[2] + 0.01),
+                    (referente[0] - 0.24, referente[1] + 0.2, referente[2] + 0.01),
+                    (referente[0] + 0.24, referente[1] + 0.2, referente[2] + 0.49),
+                    (referente[0] - 0.24, referente[1] + 0.2, referente[2] + 0.49)
                     ]
 
     # For loop to generate all the coordinates of the chair parts
