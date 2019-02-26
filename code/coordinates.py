@@ -237,7 +237,7 @@ class Coordinates():
     chair.append(chair_back)
 
     # This vectos will store the six faces of the back of the chair
-    chair_column = []
+    '''chair_column = []
     chair_column_half_height = 0.10
     chair_column_half_width = 0.05
     chair_column_half_depth = 0.025
@@ -317,13 +317,14 @@ class Coordinates():
     chair_column_bottom = (a,e,f,b)
     chair_column.append(chair_column_bottom)
 
-    chair.append(chair_column)
+    chair.append(chair_column)'''
 
     #A for iteration for each one of the seven parts that compose the chair
-    new_part_half_width = [0.25]
-    new_part_half_height = [0.05]
-    new_part_half_depth = [0.25]
-    new_part_center = [(referente[0] + 0.0, referente[1] + 0.45, referente[2] + 0.25)]
+    new_part_half_width = [0.05, 0.25]
+    new_part_half_height = [0.10, 0.05]
+    new_part_half_depth = [0.025, 0.25]
+    new_part_center = [(referente[0] + 0.0, referente[1] + 0.5, referente[2] - 0.025),
+                    (referente[0] + 0.0, referente[1] + 0.45, referente[2] + 0.25)]
 
     for i in range(len(new_part_half_height)):
         new_part = []
