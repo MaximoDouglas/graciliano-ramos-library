@@ -37,7 +37,7 @@ def reshape(w, h):
     glLoadIdentity()
     gluPerspective(45, aspect_ratio, 0.01, 100)
     gluLookAt(radius * math.sin(az_degree * rad),
-              radius * math.sin(el_degree * rad),
+              radius * math.sin(el_degree * rad) + 1,
               radius * math.cos(az_degree * rad),
               0.0, 0.5, 0.0,
               0.0, 1.0, 0.0)
@@ -47,7 +47,7 @@ def navigate(elevate=False):
     glLoadIdentity()
     gluPerspective(45.0, aspect_ratio, 0.01, 100.0)
     gluLookAt(radius * math.sin(az_degree * rad),
-              radius * math.sin(el_degree * rad),
+              radius * math.sin(el_degree * rad) + 1,
               radius * math.cos(az_degree * rad),
               0.0, 0.5, 0.0,
               0.0, 1.0, 0.0)
@@ -56,17 +56,17 @@ def navigate(elevate=False):
 def draw_scenario():
 
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-    
+
     glPushMatrix()
-    
+
     obj.draw_floors()
     obj.draw_tops()
     obj.draw_walls()
     obj.draw_doors()
     obj.draw_chairs()
 
-    alt = 50.0                                                                                                
-    axis((0.0, 0.0, alt), (1.0, 0.0, 0.0)) # z to red                  
+    alt = 50.0
+    axis((0.0, 0.0, alt), (1.0, 0.0, 0.0)) # z to red
     axis((0.0, alt, 0.0), (0.0, 1.0, 0.0)) # y to green
     axis((alt, 0.0, 0.0), (0.0, 0.0, 1.0)) # x to blue
 
@@ -121,13 +121,13 @@ def keyboard(key, x, y):
 
 
 # just for debug purposes :)
-def axis(last_vertex, c):                             
-    glColor(c)     
-    glBegin(GL_LINES)                   
+def axis(last_vertex, c):
+    glColor(c)
+    glBegin(GL_LINES)
     glVertex((0.0, 0.0, 0.0))
     glVertex(last_vertex)
-    glEnd()        
-           
+    glEnd()
+
 
 def main():
     glutInit()
@@ -145,4 +145,3 @@ def main():
 
 
 main()
-

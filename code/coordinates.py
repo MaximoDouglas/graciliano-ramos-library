@@ -155,10 +155,10 @@ class Coordinates():
     chair = []
 
     #A for iteration for each one of the seven parts that compose the chair
-    new_part_half_width = [0.25, 0.05, 0.25, 0.01, 0.01, 0.01, 0.01]
-    new_part_half_height = [0.25, 0.10, 0.05, 0.2, 0.2, 0.2, 0.2]
-    new_part_half_depth = [0.05, 0.025, 0.25, 0.01, 0.01, 0.01, 0.01]
-    new_part_center = [
+    sub_part_half_width = [0.25, 0.05, 0.25, 0.01, 0.01, 0.01, 0.01]
+    sub_part_half_height = [0.25, 0.10, 0.05, 0.2, 0.2, 0.2, 0.2]
+    sub_part_half_depth = [0.05, 0.025, 0.25, 0.01, 0.01, 0.01, 0.01]
+    sub_part_center = [
                     (referente[0] + 0.0, referente[1] + 0.85, referente[2] + 0.0),
                     (referente[0] + 0.0, referente[1] + 0.5, referente[2] - 0.025),
                     (referente[0] + 0.0, referente[1] + 0.45, referente[2] + 0.25),
@@ -169,83 +169,83 @@ class Coordinates():
                     ]
 
     # For loop to generate all the coordinates of the chair parts
-    for i in range(len(new_part_half_height)):
-        new_part = []
+    for i in range(len(sub_part_half_height)):
+        sub_part = []
 
         # a, b, c, d, e and f vertices
         a = (
-            referente[0] - new_part_half_width[i] + new_part_center[i][0] ,
-            referente[1] + new_part_center[i][1] - new_part_half_height[i],
-            referente[2] + new_part_half_depth[i] + new_part_center[i][2]
+            referente[0] - sub_part_half_width[i] + sub_part_center[i][0] ,
+            referente[1] + sub_part_center[i][1] - sub_part_half_height[i],
+            referente[2] + sub_part_half_depth[i] + sub_part_center[i][2]
         )
 
         b = (
-            referente[0] + new_part_half_width[i] + new_part_center[i][0],
-            referente[1] + new_part_center[i][1] - new_part_half_height[i],
-            referente[2] + new_part_half_depth[i] + new_part_center[i][2]
+            referente[0] + sub_part_half_width[i] + sub_part_center[i][0],
+            referente[1] + sub_part_center[i][1] - sub_part_half_height[i],
+            referente[2] + sub_part_half_depth[i] + sub_part_center[i][2]
         )
 
         c = (
-            referente[0] + new_part_half_width[i] + new_part_center[i][0] ,
-            referente[1] + new_part_center[i][1] + new_part_half_height[i],
-            referente[2] + new_part_half_depth[i] + new_part_center[i][2]
+            referente[0] + sub_part_half_width[i] + sub_part_center[i][0] ,
+            referente[1] + sub_part_center[i][1] + sub_part_half_height[i],
+            referente[2] + sub_part_half_depth[i] + sub_part_center[i][2]
         )
 
         d = (
-            referente[0] - new_part_half_width[i] + new_part_center[i][0] ,
-            referente[1] + new_part_center[i][1] + new_part_half_height[i],
-            referente[2] + new_part_half_depth[i] + new_part_center[i][2]
+            referente[0] - sub_part_half_width[i] + sub_part_center[i][0] ,
+            referente[1] + sub_part_center[i][1] + sub_part_half_height[i],
+            referente[2] + sub_part_half_depth[i] + sub_part_center[i][2]
         )
 
         e = (
-            referente[0] - new_part_half_width[i] + new_part_center[i][0] ,
-            referente[1] + new_part_center[i][1] - new_part_half_height[i],
-            referente[2] - new_part_half_depth[i] + new_part_center[i][2]
+            referente[0] - sub_part_half_width[i] + sub_part_center[i][0] ,
+            referente[1] + sub_part_center[i][1] - sub_part_half_height[i],
+            referente[2] - sub_part_half_depth[i] + sub_part_center[i][2]
         )
 
         f = (
-            referente[0] + new_part_half_width[i] + new_part_center[i][0] ,
-            referente[1] + new_part_center[i][1] - new_part_half_height[i],
-            referente[2] - new_part_half_depth[i] + new_part_center[i][2]
+            referente[0] + sub_part_half_width[i] + sub_part_center[i][0] ,
+            referente[1] + sub_part_center[i][1] - sub_part_half_height[i],
+            referente[2] - sub_part_half_depth[i] + sub_part_center[i][2]
         )
 
         g = (
-            referente[0] + new_part_half_width[i] + new_part_center[i][0] ,
-            referente[1] + new_part_center[i][1] + new_part_half_height[i],
-            referente[2] - new_part_half_depth[i] + new_part_center[i][2]
+            referente[0] + sub_part_half_width[i] + sub_part_center[i][0] ,
+            referente[1] + sub_part_center[i][1] + sub_part_half_height[i],
+            referente[2] - sub_part_half_depth[i] + sub_part_center[i][2]
         )
 
         h = (
-            referente[0] - new_part_half_width[i] + new_part_center[i][0] ,
-            referente[1] + new_part_center[i][1] + new_part_half_height[i],
-            referente[2] - new_part_half_depth[i] + new_part_center[i][2]
+            referente[0] - sub_part_half_width[i] + sub_part_center[i][0] ,
+            referente[1] + sub_part_center[i][1] + sub_part_half_height[i],
+            referente[2] - sub_part_half_depth[i] + sub_part_center[i][2]
         )
 
-        # This vector stores the vertices of the front face of the new_part part of the chair
-        new_part_front = (a,b,c,d)
-        new_part.append(new_part_front)
+        # This vector stores the vertices of the front face of the sub_part part of the chair
+        sub_part_front = (a,b,c,d)
+        sub_part.append(sub_part_front)
 
 
-        # This vector stores the vertices of the new_part face of the new_part part of the chair
-        new_part_back = (e,f,g,h)
-        new_part.append(new_part_back)
+        # This vector stores the vertices of the sub_part face of the sub_part part of the chair
+        sub_part_back = (e,f,g,h)
+        sub_part.append(sub_part_back)
 
-        # This vector stores the vertices of the right face of the new_part part of the chair
-        new_part_right = (b,f,g,c)
-        new_part.append(new_part_right)
+        # This vector stores the vertices of the right face of the sub_part part of the chair
+        sub_part_right = (b,f,g,c)
+        sub_part.append(sub_part_right)
 
-        # This vector stores the vertices of the left face of the new_part part of the chair
-        new_part_left = (e,a,d,h)
-        new_part.append(new_part_left)
+        # This vector stores the vertices of the left face of the sub_part part of the chair
+        sub_part_left = (e,a,d,h)
+        sub_part.append(sub_part_left)
 
-        # This vector stores the vertices of the top face of the new_part part of the chair
-        new_part_top = (c,g,h,d)
-        new_part.append(new_part_top)
+        # This vector stores the vertices of the top face of the sub_part part of the chair
+        sub_part_top = (c,g,h,d)
+        sub_part.append(sub_part_top)
 
-        # This vector stores the vertices of the bottom face of the new_part part of the chair
-        new_part_bottom = (a,e,f,b)
-        new_part.append(new_part_bottom)
+        # This vector stores the vertices of the bottom face of the sub_part part of the chair
+        sub_part_bottom = (a,e,f,b)
+        sub_part.append(sub_part_bottom)
 
-        chair.append(new_part)
+        chair.append(sub_part)
 
     chairs.append(chair)

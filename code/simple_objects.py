@@ -27,7 +27,7 @@ class Objects():
         for wall in c.walls:
             glBegin(GL_QUADS)
             for vertex in wall:
-                glColor3fv((1, 0.7, 0.7))
+                glColor3fv((1, 0.63, 0.48))
                 glVertex3fv(vertex)
             glEnd()
 
