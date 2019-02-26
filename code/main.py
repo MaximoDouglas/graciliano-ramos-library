@@ -39,7 +39,7 @@ def reshape(w, h):
     gluLookAt(radius * math.sin(az_degree * rad),
               radius * math.sin(el_degree * rad) + 1,
               radius * math.cos(az_degree * rad),
-              0.0, 0.5, 0.0,
+              0.0, 1.0, 0.0,
               0.0, 1.0, 0.0)
 
 
@@ -49,7 +49,7 @@ def navigate(elevate=False):
     gluLookAt(radius * math.sin(az_degree * rad),
               radius * math.sin(el_degree * rad) + 1,
               radius * math.cos(az_degree * rad),
-              0.0, 0.5, 0.0,
+              0.0, 1.0, 0.0,
               0.0, 1.0, 0.0)
 
 
