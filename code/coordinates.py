@@ -149,6 +149,7 @@ class Coordinates():
     chair_back_half_height = 0.25
     chair_back_half_width = 0.25
     chair_back_half_depth = 0.05
+    chair_back_center = (referente[0] + 0.0, referente[1] + 0.85, referente[2] + 0.0)
 
     # This vector will store the chairs in the building
     chairs = []
@@ -161,51 +162,51 @@ class Coordinates():
 
     # a, b, c, d, e and f vertices
     a = (
-        referente[0] - chair_back_half_width,
-        referente[1] + 0.75 - chair_back_half_height,
-        referente[2] + chair_back_half_depth
+        referente[0] - chair_back_half_width + chair_back_center[0] ,
+        referente[1] + chair_back_center[1] - chair_back_half_height,
+        referente[2] + chair_back_half_depth + chair_back_center[2]
     )
 
     b = (
-        referente[0] + chair_back_half_width,
-        referente[1] + 0.75 - chair_back_half_height,
-        referente[2] + chair_back_half_depth
+        referente[0] + chair_back_half_width + chair_back_center[0] ,
+        referente[1] + chair_back_center[1] - chair_back_half_height,
+        referente[2] + chair_back_half_depth + chair_back_center[2]
     )
 
     c = (
-        referente[0] + chair_back_half_width,
-        referente[1] + 0.75 + chair_back_half_height,
-        referente[2] + chair_back_half_depth
+        referente[0] + chair_back_half_width + chair_back_center[0] ,
+        referente[1] + chair_back_center[1] + chair_back_half_height,
+        referente[2] + chair_back_half_depth + chair_back_center[2]
     )
 
     d = (
-        referente[0] - chair_back_half_width,
-        referente[1] + 0.75 + chair_back_half_height,
-        referente[2] + chair_back_half_depth
+        referente[0] - chair_back_half_width + chair_back_center[0] ,
+        referente[1] + chair_back_center[1] + chair_back_half_height,
+        referente[2] + chair_back_half_depth + chair_back_center[2]
     )
 
     e = (
-        referente[0] - chair_back_half_width,
-        referente[1] + 0.75 - chair_back_half_height,
-        referente[2] - chair_back_half_depth
+        referente[0] - chair_back_half_width + chair_back_center[0] ,
+        referente[1] + chair_back_center[1] - chair_back_half_height,
+        referente[2] - chair_back_half_depth + chair_back_center[2]
     )
 
     f = (
-        referente[0] + chair_back_half_width,
-        referente[1] + 0.75 - chair_back_half_height,
-        referente[2] - chair_back_half_depth
+        referente[0] + chair_back_half_width + chair_back_center[0] ,
+        referente[1] + chair_back_center[1] - chair_back_half_height,
+        referente[2] - chair_back_half_depth + chair_back_center[2]
     )
 
     g = (
-        referente[0] + chair_back_half_width,
-        referente[1] + 0.75 + chair_back_half_height,
-        referente[2] - chair_back_half_depth
+        referente[0] + chair_back_half_width + chair_back_center[0] ,
+        referente[1] + chair_back_center[1] + chair_back_half_height,
+        referente[2] - chair_back_half_depth + chair_back_center[2]
     )
 
     h = (
-        referente[0] - chair_back_half_width,
-        referente[1] + 0.75 + chair_back_half_height,
-        referente[2] - chair_back_half_depth
+        referente[0] - chair_back_half_width + chair_back_center[0] ,
+        referente[1] + chair_back_center[1] + chair_back_half_height,
+        referente[2] - chair_back_half_depth + chair_back_center[2]
     )
 
     # This vector stores the vertices of the front face of the back part of the chair
@@ -234,4 +235,87 @@ class Coordinates():
     chair_back.append(chair_back_bottom)
 
     chair.append(chair_back)
+
+    # This vectos will store the six faces of the back of the chair
+    chair_column = []
+    chair_column_half_height = 0.10
+    chair_column_half_width = 0.05
+    chair_column_half_depth = 0.025
+    chair_column_center = (referente[0] + 0.0, referente[1] + 0.5, referente[2] - 0.025)
+
+    # a, b, c, d, e and f vertices
+    a = (
+        referente[0] - chair_column_half_width + chair_column_center[0] ,
+        referente[1] + chair_column_center[1] - chair_column_half_height,
+        referente[2] + chair_column_half_depth + chair_column_center[2]
+    )
+
+    b = (
+        referente[0] + chair_column_half_width + chair_column_center[0] ,
+        referente[1] + chair_column_center[1] - chair_column_half_height,
+        referente[2] + chair_column_half_depth + chair_column_center[2]
+    )
+
+    c = (
+        referente[0] + chair_column_half_width + chair_column_center[0] ,
+        referente[1] + chair_column_center[1] + chair_column_half_height,
+        referente[2] + chair_column_half_depth + chair_column_center[2]
+    )
+
+    d = (
+        referente[0] - chair_column_half_width + chair_column_center[0] ,
+        referente[1] + chair_column_center[1] + chair_column_half_height,
+        referente[2] + chair_column_half_depth + chair_column_center[2]
+    )
+
+    e = (
+        referente[0] - chair_column_half_width + chair_column_center[0] ,
+        referente[1] + chair_column_center[1] - chair_column_half_height,
+        referente[2] - chair_column_half_depth + chair_column_center[2]
+    )
+
+    f = (
+        referente[0] + chair_column_half_width + chair_column_center[0] ,
+        referente[1] + chair_column_center[1] - chair_column_half_height,
+        referente[2] - chair_column_half_depth + chair_column_center[2]
+    )
+
+    g = (
+        referente[0] + chair_column_half_width + chair_column_center[0] ,
+        referente[1] + chair_column_center[1] + chair_column_half_height,
+        referente[2] - chair_column_half_depth + chair_column_center[2]
+    )
+
+    h = (
+        referente[0] - chair_column_half_width + chair_column_center[0] ,
+        referente[1] + chair_column_center[1] + chair_column_half_height,
+        referente[2] - chair_column_half_depth + chair_column_center[2]
+    )
+
+    # This vector stores the vertices of the front face of the column part of the chair
+    chair_column_front = (a,b,c,d)
+    chair_column.append(chair_column_front)
+
+
+    # This vector stores the vertices of the column face of the column part of the chair
+    chair_column_back = (e,f,g,h)
+    chair_column.append(chair_column_back)
+
+    # This vector stores the vertices of the right face of the column part of the chair
+    chair_column_right = (b,f,g,c)
+    chair_column.append(chair_column_right)
+
+    # This vector stores the vertices of the left face of the column part of the chair
+    chair_column_left = (e,a,d,h)
+    chair_column.append(chair_column_left)
+
+    # This vector stores the vertices of the top face of the column part of the chair
+    chair_column_top = (c,g,h,d)
+    chair_column.append(chair_column_top)
+
+    # This vector stores the vertices of the bottom face of the column part of the chair
+    chair_column_bottom = (a,e,f,b)
+    chair_column.append(chair_column_bottom)
+
+    chair.append(chair_column)
     chairs.append(chair)
