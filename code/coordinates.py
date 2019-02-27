@@ -14,11 +14,12 @@ class Coordinates():
     floor = Floor()
     top = Top()
     door = Door(levels, centers)
-    chair = Chair()
 
     walls = wall.get_walls()
     floors = floor.get_floors()
     tops = top.get_tops()
     doors = door.get_doors()
-    chairs = chair.get_chairs()
+    chairs = [Chair([0,0,0]).get_chair(),
+              Chair([1,0,0]).get_chair(),
+              Chair([0,0,1]).get_chair()]
 

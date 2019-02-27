@@ -53,8 +53,8 @@ class Objects():
                 glEnd()
 
     def draw_chairs():
-        colorx = 0.2
         for chair in c.chairs:
+            colorx = 0.2
             for part in chair:
                 colorx += 0.2
                 for face in part:
