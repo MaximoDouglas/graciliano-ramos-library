@@ -20,11 +20,13 @@ class Coordinates():
     tops = top.get_tops()
 
     doors = []
-    for i in range(3):
-        door = Door(levels[i], 0)
+    for level in levels:
+        door = Door(level, 0)
         doors.append(door.get_door())
 
-    chairs = [Chair([0,0,0]).get_chair(),
-              Chair([1,0,0]).get_chair(),
-              Chair([0,0,1]).get_chair()]
+    chairs = []
+    c_coords = [(0,0,0),(1,0,0),(-1,0,0)]
+    for cc in c_coords:
+        chair = Chair(cc).get_chair()
+        chairs.append(chair)
 
