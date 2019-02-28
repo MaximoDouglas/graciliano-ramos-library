@@ -13,12 +13,17 @@ class Coordinates():
     wall = Wall()
     floor = Floor()
     top = Top()
-    door = Door(levels, centers)
+    #door = Door(levels, centers)
 
     walls = wall.get_walls()
     floors = floor.get_floors()
     tops = top.get_tops()
-    doors = door.get_doors()
+
+    doors = []
+    for i in range(3):
+        door = Door(levels[i], 0)
+        doors.append(door.get_door())
+
     chairs = [Chair([0,0,0]).get_chair(),
               Chair([1,0,0]).get_chair(),
               Chair([0,0,1]).get_chair()]
