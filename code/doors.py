@@ -9,48 +9,62 @@ class Door:
 
         for level in levels:
             for center in centers:
-                if (center == 0 and level == 0):
-                    door = []
-                    # --- LEFT
-                    door.append((-0.75, 2, 8))
-                    door.append((-0.75, 0, 8))
-                    door.append((0, 0, 8))
-                    door.append((0, 2, 8))
-                    for i in range(90, 181, 5):
-                        degInRad = i*(DEG2RAD)
-                        door.append((math.cos(degInRad)*(0.75), 2 + math.sin(degInRad)*(0.75), 8))
+                door = []
 
-                    # --- RIGHT
-                    door.append((0, 2, 8))
-                    door.append((0, 0, 8))
-                    door.append((0.75, 0, 8))
-                    door.append((0.75, 2, 8))
-                    for i in range(0, 91, 5):
-                        degInRad = i*(DEG2RAD)
-                        door.append((math.cos(degInRad)*(0.75), 2 + math.sin(degInRad)*(0.75), 8))
+                extra = 0
+                if center == level:
+                    extra = 0.25
 
-                    self.doors.append(door)
-                else:
-                    door = []
-                    # --- LEFT
-                    door.append((center - 0.5, level + 2, 8))
-                    door.append((center - 0.5, level, 8))
-                    door.append((center, level, 8))
-                    door.append((center, level + 2, 8))
-                    for i in range(90, 181, 5):
-                        degInRad = i*(DEG2RAD)
-                        door.append((center + math.cos(degInRad)*(0.5), level + 2 + math.sin(degInRad)*(0.5), 8))
+                dl = self.door_left(center, level, extra)
+                dr = self.door_right(center, level, extra)
 
-                    # --- RIGHT
-                    door.append((center, level + 2, 8))
-                    door.append((center, level, 8))
-                    door.append((center + 0.5, level, 8))
-                    door.append((center + 0.5, level + 2, 8))
-                    for i in range(0, 91, 5):
-                        degInRad = i*(DEG2RAD)
-                        door.append((center + math.cos(degInRad)*(0.5), level + 2 + math.sin(degInRad)*(0.5), 8))
+                door.extend(dl)
+                door.extend(dr)
 
-                    self.doors.append(door)
+                self.doors.append(door)
+
+    def door_left(self, center, level, extra):
+
+        door = []
+
+        door.append((center - 0.5 - extra, level + 2, 8))
+        door.append((center - 0.5 - extra, level, 8))
+        door.append((center, level, 8))
+        door.append((center, level + 2, 8))
+
+        ds = self.door_sup(center, level, extra, 'left')
+        door.extend(ds)
+
+        return door
+
+    def door_right(self, center, level, extra):
+
+        door = []
+
+        door.append((center, level + 2, 8))
+        door.append((center, level, 8))
+        door.append((center + 0.5 + extra, level, 8))
+        door.append((center + 0.5 + extra, level + 2, 8))
+
+        ds = self.door_sup(center, level, extra, 'right')
+        door.extend(ds)
+
+        return door
+
+    def door_sup(self, center, level, extra, direction):
+        door = []
+        start_angle = 0
+        if direction == 'left':
+            start_angle = 90
+
+        for i in range(0 + start_angle, 91 + start_angle, 5):
+            degInRad = i * (DEG2RAD)
+            x = center + math.cos(degInRad) * (0.5 + extra)
+            y = level + 2 + math.sin(degInRad) * (0.5 + extra)
+            z = 8
+            door.append((x, y, z))
+
+        return door
 
     def get_doors(self):
         return self.doors
