@@ -3,6 +3,8 @@ from floors import Floor
 from tops import Top
 from doors import Door
 from chairs import Chair
+from structure import Structure
+
 
 class Coordinates():
 
@@ -10,14 +12,11 @@ class Coordinates():
     levels = [0, 4, 7]
     centers = [-6.25, -4.75, -3.25, -1.75, 0, 1.75, 3.25, 4.75, 6.25]
 
-    wall = Wall()
-    floor = Floor()
-    top = Top()
-    #door = Door(levels, centers)
+    stct = Structure()
 
-    walls = wall.get_walls()
-    floors = floor.get_floors()
-    tops = top.get_tops()
+    walls = stct.get_walls()
+    floors = stct.get_floors()
+    tops =  stct.get_tops()
 
     doors = []
     for level in levels:
