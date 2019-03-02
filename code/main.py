@@ -17,6 +17,8 @@ width = 0
 height = 0
 aspect_ratio = 0
 
+center = [0.0, 0.0, 0.0]
+
 
 def init():
 	glClearColor(0.0, 0.0, 0.0, 0.0)
@@ -39,21 +41,19 @@ def reshape(w, h):
     gluLookAt(radius * math.sin(az_degree * rad),
               radius * math.sin(el_degree * rad),
               radius * math.cos(az_degree * rad),
-              0.0, 1.0, 0.0,
+              center[0], center[1], center[2],
               0.0, 1.0, 0.0)
 
 
-def navigate(elevate=False):
+def draw_scenario():
+
     glLoadIdentity()
     gluPerspective(45.0, aspect_ratio, 0.01, 100.0)
     gluLookAt(radius * math.sin(az_degree * rad),
               radius * math.sin(el_degree * rad),
               radius * math.cos(az_degree * rad),
-              0.0, 1.0, 0.0,
+              center[0], center[1], center[2],
               0.0, 1.0, 0.0)
-
-
-def draw_scenario():
 
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
@@ -74,19 +74,10 @@ def draw_scenario():
     glutSwapBuffers()
 
 
-# TODO: implement in `navigate`
-def OnMouseClick(button, state, x, y):
-    global rotate
-    global rotateLeft
-
-    if button == GLUT_LEFT_BUTTON:
-        rotate = True
-        rotateLeft = True
-    if button == GLUT_RIGHT_BUTTON:
-        rotate = True
-        rotateLeft = False
-    if button == GLUT_MIDDLE_BUTTON:
-        rotate = False
+def mouse_motion(x, y):
+    center[0] = (x - width/2)/radius
+    center[1] = - (y - height/2)/radius
+    glutPostRedisplay()
 
 
 def keyboard(key, x, y):
@@ -98,22 +89,16 @@ def keyboard(key, x, y):
 
     if key == 'r':
         az_degree = (az_degree + 5) % 360
-        navigate()
     elif key == 'R':
         az_degree = (az_degree - 5) % 360
-        navigate()
     elif key == 'e':
         el_degree = (el_degree + 5) % 360
-        navigate()
     elif key == 'E':
         el_degree = (el_degree - 5) % 360
-        navigate()
     elif key == 'w':
         radius -= 3
-        navigate()
     elif key == 's':
         radius += 3
-        navigate()
     elif key == 'q':
         sys.exit()
 
@@ -137,9 +122,9 @@ def main():
     glutCreateWindow("Graciliano Ramos Library")
     init()
     glutDisplayFunc(draw_scenario)
+    glutPassiveMotionFunc( mouse_motion )
     glutKeyboardFunc(keyboard)
     glutIdleFunc(draw_scenario)
-    glutMouseFunc(OnMouseClick)
     glutReshapeFunc(reshape)
     glutMainLoop()
 
