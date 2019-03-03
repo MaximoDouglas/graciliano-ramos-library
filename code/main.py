@@ -19,7 +19,6 @@ aspect_ratio = 0
 
 center = [0.0, 0.0, 0.0]
 
-
 def init():
 	glClearColor(0.0, 0.0, 0.0, 0.0)
 	glEnable(GL_DEPTH_TEST)
@@ -55,7 +54,7 @@ def draw_scenario():
               center[0], center[1], center[2],
               0.0, 1.0, 0.0)
 
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT)
 
     glPushMatrix()
 
@@ -66,28 +65,75 @@ def draw_scenario():
     obj.draw_chairs()
 
     alt = 50.0
+    alt_rev = -5
     axis((0.0, 0.0, alt), (1.0, 0.0, 0.0)) # z to red
     axis((0.0, alt, 0.0), (0.0, 1.0, 0.0)) # y to green
     axis((alt, 0.0, 0.0), (0.0, 0.0, 1.0)) # x to blue
+    axis((0.0, 0.0, alt_rev), (0.0, 0.0, 0.0)) # -z to black
+    axis((0.0, alt_rev, 0.0), (0.0, 0.0, 0.0)) # -y to black
+    axis((alt_rev, 0.0, 0.0), (0.0, 0.0, 0.0)) # -x to black
 
     glPopMatrix()
     glutSwapBuffers()
 
 
+def get_world_coords(x, y, verbose=1):
+
+    color = glReadPixels(x, width - y - 1, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE)
+    depth = glReadPixels(x, width - y - 1, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT)
+    index = glReadPixels(x, width - y - 1, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT)
+
+    # Screen space coords to world space coords
+    wx = x
+    wy = width - y - 1
+    wz = depth[0][0]
+    mvmat = glGetDoublev(GL_MODELVIEW_MATRIX)
+    pmat = glGetDoublev(GL_PROJECTION_MATRIX)
+    vmat = glGetIntegerv(GL_VIEWPORT)
+    world_coords = gluUnProject(wx, wy, wz, mvmat, pmat, vmat)
+    
+    # Print everything
+    if verbose:
+        print("{}".format(10*'-'))
+        #print(x, y, width, height)
+        print("Color: ", [int(c) for c in color])
+        print("Depth (0 is near): ", depth[0][0])
+        print("Stencil: ", obj.dnames[index[0][0]])
+        print("World coords: ", [round(wc, 3) for wc in world_coords])
+
+    center[0] = world_coords[0]/radius
+    center[1] = -world_coords[1]/radius
+    center[2] = world_coords[2]/radius
+
+
 def mouse_motion(x, y):
-    center[0] = (x - width/2)/radius
-    center[1] = - (y - height/2)/radius
+    get_world_coords(x, y, verbose=0)
     glutPostRedisplay()
 
+
+def mouse_click(button, state, x, y):
+    if state != GLUT_DOWN:
+        return
+    get_world_coords(x, y)
+    glutPostRedisplay()
 
 def keyboard(key, x, y):
     global az_degree
     global el_degree
     global radius
 
-    key = key.decode("utf-8")
+    if not isinstance(key, int):
+        key = key.decode("utf-8")
 
-    if key == 'r':
+    if key == GLUT_KEY_DOWN:
+        print("DOWN")
+    elif key == GLUT_KEY_UP:
+        print("UP")
+    elif key == GLUT_KEY_LEFT:
+        print("LEFT")
+    elif key == GLUT_KEY_RIGHT:
+        print("RIGHT")
+    elif key == 'r':
         az_degree = (az_degree + 5) % 360
     elif key == 'R':
         az_degree = (az_degree - 5) % 360
@@ -114,18 +160,24 @@ def axis(last_vertex, c):
     glEnd()
 
 
+def register_callbacks():
+    glutDisplayFunc(draw_scenario)
+    glutIdleFunc(draw_scenario)
+    glutMouseFunc(mouse_click)
+    glutPassiveMotionFunc(mouse_motion)
+    glutKeyboardFunc(keyboard)
+    glutSpecialFunc(keyboard)
+    glutReshapeFunc(reshape)
+
+
 def main():
     glutInit()
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_STENCIL)
     glutInitWindowSize(1200, 500)
     glutInitWindowPosition(100, 100)
     glutCreateWindow("Graciliano Ramos Library")
     init()
-    glutDisplayFunc(draw_scenario)
-    glutPassiveMotionFunc( mouse_motion )
-    glutKeyboardFunc(keyboard)
-    glutIdleFunc(draw_scenario)
-    glutReshapeFunc(reshape)
+    register_callbacks()
     glutMainLoop()
 
 

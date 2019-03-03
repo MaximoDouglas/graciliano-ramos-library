@@ -3,9 +3,21 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from coordinates import Coordinates as c
 
+
 class Objects():
 
+    dnames = {
+            0: 'background',
+            1: 'floor',
+            2: 'top',
+            3: 'wall',
+            4: 'door',
+            5: 'chair'
+            }
+
     def draw_floors():
+        Objects.identify_object(1)
+
         for floor in c.floors:
             glBegin(GL_QUADS)
             for vertex in floor:
@@ -14,6 +26,7 @@ class Objects():
             glEnd()
 
     def draw_tops():
+        Objects.identify_object(2)
         for top in c.tops:
             glPushMatrix()
             glBegin(GL_TRIANGLES)
@@ -24,6 +37,7 @@ class Objects():
             glPopMatrix()
 
     def draw_walls():
+        Objects.identify_object(3)
         for wall in c.walls:
             glBegin(GL_QUADS)
             for vertex in wall:
@@ -32,6 +46,7 @@ class Objects():
             glEnd()
 
     def draw_doors():
+        Objects.identify_object(4)
         for door in c.doors:
             glBegin(GL_POLYGON)
             for vertex in door:
@@ -53,6 +68,7 @@ class Objects():
                 glEnd()
 
     def draw_chairs():
+        Objects.identify_object(5)
         for chair in c.chairs:
             colorx = 0.2
             for part in chair:
@@ -63,3 +79,9 @@ class Objects():
                         glColor3fv((colorx, 0.0, 0.0))
                         glVertex3fv(vertex)
                     glEnd()
+
+    def identify_object(obj_id=None):
+        glEnable(GL_STENCIL_TEST)
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE)
+        glStencilFunc(GL_ALWAYS, obj_id, -1)
+
