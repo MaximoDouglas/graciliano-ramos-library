@@ -13,7 +13,7 @@ class Door:
 
     def build_door(self):
 
-        extra = 0 if self.center == self.level else 0.25
+        extra = 0.25 if self.center == self.level else 0
 
         dl = self.door_left(self.center, self.level, extra)
         dr = self.door_right(self.center, self.level, extra)
@@ -65,4 +65,3 @@ class Door:
 
     def get_door(self):
         return self.door
-
