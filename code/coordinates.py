@@ -3,6 +3,7 @@ from floors import Floor
 from tops import Top
 from doors import Door
 from chairs import Chair
+from bookcases import Bookcase
 from tables import Table
 from structure import Structure
 
@@ -36,3 +37,9 @@ class Coordinates():
     for ct in ct_coords:
         table = Table(ct).get_table()
         tables.append(table)
+
+    bookcases = []
+    cbc_coords = [(0,0,0)]
+    for cbc in cbc_coords:
+        bookcase = Bookcase(cbc).get_bookcase()
+        bookcases.append(bookcase)

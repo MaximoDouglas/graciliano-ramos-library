@@ -62,8 +62,9 @@ def draw_scenario():
 	obj.draw_tops()
 	obj.draw_walls()
 	obj.draw_doors()
-	obj.draw_chairs()
-	obj.draw_tables()
+	#obj.draw_chairs()
+	#obj.draw_tables()
+	obj.draw_book_cases()
 
 	alt = 50.0
 	alt_rev = -5
@@ -163,8 +164,8 @@ def axis(last_vertex, c):
 def register_callbacks():
     glutDisplayFunc(draw_scenario)
     glutIdleFunc(draw_scenario)
-    glutMouseFunc(mouse_click)
-    glutPassiveMotionFunc(mouse_motion)
+    #glutMouseFunc(mouse_click)
+    #glutPassiveMotionFunc(mouse_motion)
     glutKeyboardFunc(keyboard)
     glutSpecialFunc(keyboard)
     glutReshapeFunc(reshape)
