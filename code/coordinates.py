@@ -26,13 +26,13 @@ class Coordinates():
             doors.append(door.get_door())
 
     chairs = []
-    c_coords = [(0,0,0),(1,0,0),(-1,0,0)]
+    c_coords = [(0,0,-.35)]
     for cc in c_coords:
         chair = Chair(cc).get_chair()
         chairs.append(chair)
 
     tables = []
-    ct_coords = [(0.5,0,0),(1.5,0,0),(-1.5,0,0)]
+    ct_coords = [(0,0,0)]
     for ct in ct_coords:
         table = Table(ct).get_table()
         tables.append(table)

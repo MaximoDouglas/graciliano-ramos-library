@@ -6,7 +6,7 @@ class Table:
         self.reference = reference #x, y and z of the floor
         #A for iteration for each one of the seven parts that compose the table
         self.sub_part_half_width = [0.50, 0.01, 0.01, 0.01, 0.01]
-        self.sub_part_half_height = [0.05, 0.275, 0.275, 0.275, 0.275]
+        self.sub_part_half_height = [0.05, 0.325, 0.325, 0.325, 0.325]
         self.sub_part_half_depth = [0.50, 0.01, 0.01, 0.01, 0.01]
         self.sub_part_center = self.__get_sub_part_center(self.reference)
         self.table = []
@@ -15,11 +15,11 @@ class Table:
 
     def __get_sub_part_center(self, reference):
         sub_part_center = [
-                        (reference[0] + 0.0, reference[1] + 0.60, reference[2] + 0),
-                        (reference[0] + 0.49, reference[1] + 0.275, reference[2] - 0.49),
-                        (reference[0] - 0.49, reference[1] + 0.275, reference[2] - 0.49),
-                        (reference[0] + 0.49, reference[1] + 0.275, reference[2] + 0.49),
-                        (reference[0] - 0.49, reference[1] + 0.275, reference[2] + 0.49)
+                        (reference[0] + 0.0, reference[1] + 0.70, reference[2] + 0),
+                        (reference[0] + 0.49, reference[1] + 0.325, reference[2] - 0.49),
+                        (reference[0] - 0.49, reference[1] + 0.325, reference[2] - 0.49),
+                        (reference[0] + 0.49, reference[1] + 0.325, reference[2] + 0.49),
+                        (reference[0] - 0.49, reference[1] + 0.325, reference[2] + 0.49)
                         ]
         return sub_part_center
 
