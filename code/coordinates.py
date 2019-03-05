@@ -3,6 +3,7 @@ from floors import Floor
 from tops import Top
 from doors import Door
 from chairs import Chair
+from tables import Table
 from structure import Structure
 
 
@@ -29,3 +30,9 @@ class Coordinates():
     for cc in c_coords:
         chair = Chair(cc).get_chair()
         chairs.append(chair)
+
+    tables = []
+    ct_coords = [(0.5,0,0),(1.5,0,0),(-1.5,0,0)]
+    for ct in ct_coords:
+        table = Table(ct).get_table()
+        tables.append(table)

@@ -80,8 +80,20 @@ class Objects():
                         glVertex3fv(vertex)
                     glEnd()
 
+    def draw_tables():
+        Objects.identify_object(6)
+        for table in c.tables:
+            colorx = 0.2
+            for part in table:
+                colorx += 0.2
+                for face in part:
+                    glBegin(GL_QUADS)
+                    for vertex in face:
+                        glColor3fv((colorx, 0.0, 0.0))
+                        glVertex3fv(vertex)
+                    glEnd()
+
     def identify_object(obj_id=None):
         glEnable(GL_STENCIL_TEST)
         glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE)
         glStencilFunc(GL_ALWAYS, obj_id, -1)
-
