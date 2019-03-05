@@ -20,8 +20,8 @@ aspect_ratio = 0
 center = [0.0, 0.0, 0.0]
 
 def init():
-	glClearColor(0.0, 0.0, 0.0, 0.0)
-	glEnable(GL_DEPTH_TEST)
+    glClearColor(0.0, 0.0, 0.0, 0.0)
+    glEnable(GL_DEPTH_TEST)
 
 
 def reshape(w, h):
@@ -35,48 +35,45 @@ def reshape(w, h):
 
     glViewport(0, 0, w, h)
     glMatrixMode(GL_MODELVIEW)
+
+    update_view()
+
+def update_view():
     glLoadIdentity()
-    gluPerspective(45, aspect_ratio, 0.01, 100)
+    gluPerspective(45.0, aspect_ratio, 0.01, 100.0)
     gluLookAt(radius * math.sin(az_degree * rad),
               radius * math.sin(el_degree * rad),
               radius * math.cos(az_degree * rad),
               center[0], center[1], center[2],
               0.0, 1.0, 0.0)
 
-
 def draw_scenario():
 
-	glLoadIdentity()
-	gluPerspective(45.0, aspect_ratio, 0.01, 100.0)
-	gluLookAt(radius * math.sin(az_degree * rad),
-              radius * math.sin(el_degree * rad),
-              radius * math.cos(az_degree * rad),
-              center[0], center[1], center[2],
-              0.0, 1.0, 0.0)
+    update_view()
 
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT)
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT)
 
-	glPushMatrix()
+    glPushMatrix()
 
-	obj.draw_floors()
-	obj.draw_tops()
-	obj.draw_walls()
-	obj.draw_doors()
-	#obj.draw_chairs()
-	#obj.draw_tables()
-	obj.draw_book_cases()
+    obj.draw_floors()
+    obj.draw_tops()
+    obj.draw_walls()
+    obj.draw_doors()
+    #obj.draw_chairs()
+    #obj.draw_tables()
+    obj.draw_book_cases()
 
-	alt = 50.0
-	alt_rev = -5
-	axis((0.0, 0.0, alt), (1.0, 0.0, 0.0)) # z to red
-	axis((0.0, alt, 0.0), (0.0, 1.0, 0.0)) # y to green
-	axis((alt, 0.0, 0.0), (0.0, 0.0, 1.0)) # x to blue
-	axis((0.0, 0.0, alt_rev), (0.0, 0.0, 0.0)) # -z to black
-	axis((0.0, alt_rev, 0.0), (0.0, 0.0, 0.0)) # -y to black
-	axis((alt_rev, 0.0, 0.0), (0.0, 0.0, 0.0)) # -x to black
+    alt = 50.0
+    alt_rev = -5
+    axis((0.0, 0.0, alt), (1.0, 0.0, 0.0)) # z to red
+    axis((0.0, alt, 0.0), (0.0, 1.0, 0.0)) # y to green
+    axis((alt, 0.0, 0.0), (0.0, 0.0, 1.0)) # x to blue
+    axis((0.0, 0.0, alt_rev), (0.0, 0.0, 0.0)) # -z to black
+    axis((0.0, alt_rev, 0.0), (0.0, 0.0, 0.0)) # -y to black
+    axis((alt_rev, 0.0, 0.0), (0.0, 0.0, 0.0)) # -x to black
 
-	glPopMatrix()
-	glutSwapBuffers()
+    glPopMatrix()
+    glutSwapBuffers()
 
 def get_world_coords(x, y, verbose=1):
 
