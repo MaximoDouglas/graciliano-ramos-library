@@ -5,9 +5,9 @@ class Wall:
     def __init__(self, reference=None):
         self.reference = reference #x, y and z of the floor
         #A for iteration for each one of the seven parts that compose the wall
-        self.sub_part_half_width = [0.1]
-        self.sub_part_half_height = [5.0]
-        self.sub_part_half_depth = [8.0]
+        self.sub_part_half_width = [0.1, 7, 0.1]
+        self.sub_part_half_height = [5.0, 5.0, 5.0]
+        self.sub_part_half_depth = [8.0, 0.1, 8.0]
         self.sub_part_center = self.__get_sub_part_center(self.reference)
         self.wall = []
 
@@ -15,7 +15,9 @@ class Wall:
 
     def __get_sub_part_center(self, reference):
         sub_part_center = [
-                        (reference[0] - 7.1, reference[1] + 5, reference[2] + 0)
+                        (reference[0] - 7.1, reference[1] + 5, reference[2] + 0),
+                        (reference[0] + 0.0, reference[1] + 5, reference[2] - 8.1),
+                        (reference[0] + 7.1, reference[1] + 5, reference[2] + 0)
                         ]
         return sub_part_center
 

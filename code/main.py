@@ -61,7 +61,7 @@ def update_view():
     ctr = (round(cx, 3), round(cy, 3), round(cz, 3))
 
     glLoadIdentity()
-    gluPerspective(45.0, aspect_ratio, 0.01, 100.0)
+    gluPerspective(25.0, aspect_ratio, 0.01, 100.0)
     gluLookAt(eyex, eyey, eyez,
               cx, cy, cz,
               0.0, 1.0, 0.0)
