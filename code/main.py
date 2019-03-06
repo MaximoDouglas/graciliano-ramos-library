@@ -80,7 +80,7 @@ def draw_scenario():
     obj.draw_walls()
     obj.draw_doors()
     #obj.draw_chairs()
-    #obj.draw_tables()
+    obj.draw_tables()
     #obj.draw_book_cases()
 
     alt = 50.0

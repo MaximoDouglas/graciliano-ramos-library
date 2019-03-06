@@ -36,14 +36,25 @@ class Objects():
             glEnd()
             glPopMatrix()
 
-    def draw_walls():
+    '''def draw_walls():
         Objects.identify_object(3)
         for wall in c.walls:
             glBegin(GL_QUADS)
             for vertex in wall:
                 glColor3fv((1, 0.63, 0.48))
                 glVertex3fv(vertex)
-            glEnd()
+            glEnd()'''
+
+    def draw_walls():
+        Objects.identify_object(6)
+        for wall in c.walls:
+            for w in wall:
+                for face in w:
+                    glColor3fv((1, 0.63, 0.48))
+                    glBegin(GL_QUADS)
+                    for vertex in face:
+                        glVertex3fv(vertex)
+                    glEnd()
 
     def draw_doors():
         Objects.identify_object(4)
