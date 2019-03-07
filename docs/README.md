@@ -3,7 +3,9 @@ OpenGL model of the Graciliano Ramos Library
 
 ## First floor issues on modeling
 
-- [ ] Add thickness to the existing walls.
+- [x] Add thickness to the existing walls.
+
+- [x] Add thickness to the floors and the top.
 
 - [ ] Make the sketch for the first floor walls.
 
