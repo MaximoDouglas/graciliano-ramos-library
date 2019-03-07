@@ -15,16 +15,6 @@ class Objects():
             5: 'chair'
             }
 
-    '''def draw_floors():
-        Objects.identify_object(1)
-
-        for floor in c.floors:
-            glBegin(GL_QUADS)
-            for vertex in floor:
-                glColor3fv((0.76, 0.70, 0.58))
-                glVertex3fv(vertex)
-            glEnd()'''
-
     def draw_floors():
         Objects.identify_object(1)
         for floor in c.floors:
