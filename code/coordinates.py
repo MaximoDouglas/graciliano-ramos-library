@@ -17,7 +17,7 @@ class Coordinates():
     stct = Structure()
 
     #walls = stct.get_walls()
-    floors = stct.get_floors()
+    #floors = stct.get_floors()
     tops =  stct.get_tops()
 
     doors = []
@@ -49,3 +49,9 @@ class Coordinates():
     for cw in cw_coords:
         wall = Wall(cw).get_wall()
         walls.append(wall)
+
+    floors = []
+    cf_coords = [(0,0,0)]
+    for cf in cf_coords:
+        floor = Floor(cf).get_floor()
+        floors.append(floor)
