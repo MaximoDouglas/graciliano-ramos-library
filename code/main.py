@@ -1,3 +1,4 @@
+import numpy as np
 import sys
 import math
 from OpenGL.GL import *
@@ -11,9 +12,12 @@ aspect_ratio = 0
 
 rad = math.pi/180
 radius = 5.0
+
 eye_degree = [0, 20]  # in relation to center positon
 center_degree = [180, 0]  # in relation to eye position
 origin_centered = False
+
+init_center = [0, 0, 0]
 
 # debug
 eye = None
@@ -43,12 +47,16 @@ def update_view():
     global eye
     global ctr
 
-    eyex = radius * math.sin(eye_degree[0] * rad)
-    eyey = radius * math.sin(eye_degree[1] * rad)
-    eyez = radius * math.cos(eye_degree[0] * rad)
-    cx = radius * math.sin(center_degree[0] * rad) + eyex
-    cy = radius * math.sin(center_degree[1] * rad) + eyey
-    cz = radius * math.cos(center_degree[0] * rad) + eyez
+    # center initial position in this frame
+    cx, cy, cz = init_center
+    # with init_center we set camera position
+    eyex = cx + radius * math.sin(eye_degree[0] * rad)
+    eyey = cy + radius * math.sin(eye_degree[1] * rad)
+    eyez = cz + radius * math.cos(eye_degree[0] * rad)
+    # we recalculate the center in case we changed its center_degree
+    cx = eyex + radius * math.sin(center_degree[0] * rad)
+    cy = eyey + radius * math.sin(center_degree[1] * rad)
+    cz = eyez + radius * math.cos(center_degree[0] * rad)
 
     if origin_centered:
         eyex = 50 * math.sin(eye_degree[0] * rad)
@@ -79,7 +87,7 @@ def draw_scenario():
     obj.draw_tops()
     obj.draw_walls()
     obj.draw_doors()
-    #obj.draw_chairs()
+    obj.draw_chairs()
     #obj.draw_tables()
     #obj.draw_book_cases()
 
@@ -93,6 +101,8 @@ def draw_scenario():
     axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
     # line at (0,15,0)
     axis((0,0,0),(0,15,0),(0.0,0.0,0.0))
+    # line center to eye
+    axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0))
 
     glPopMatrix()
     glutSwapBuffers()
@@ -145,28 +155,34 @@ def keyboard(key, x, y):
     global radius
     global center_degree
     global origin_centered
+    global init_center
 
     if not isinstance(key, int):
         key = key.decode("utf-8")
 
-    print('--- distance eye to center_degree ---')
+    print('--- distance eye to center ---')
     print('radius ', radius)
     print('center ', ctr)
+    print('center_degree ', center_degree)
     print('eye    ', eye)
+    print('eye_degree ', eye_degree)
     print('dist   ', math.sqrt((eye[0] - ctr[0])**2 +
                                (eye[1] - ctr[1])**2 +
                                (eye[2] - ctr[2])**2))
 
-    origin_centered = False
 
     if key == GLUT_KEY_DOWN:
-        center_degree[1] = (center_degree[1] + 5) % 360
-    elif key == GLUT_KEY_UP:
         center_degree[1] = (center_degree[1] - 5) % 360
+        origin_centered = False
+    elif key == GLUT_KEY_UP:
+        center_degree[1] = (center_degree[1] + 5) % 360
+        origin_centered = False
     elif key == GLUT_KEY_LEFT:
         center_degree[0] = (center_degree[0] + 5) % 360
+        origin_centered = False
     elif key == GLUT_KEY_RIGHT:
         center_degree[0] = (center_degree[0] - 5) % 360
+        origin_centered = False
     elif key == 'r':
         origin_centered = True
         eye_degree[0] = (eye_degree[0] + 5) % 360
@@ -175,12 +191,22 @@ def keyboard(key, x, y):
         eye_degree[0] = (eye_degree[0] - 5) % 360
     elif key == 'e':
         eye_degree[1] = (eye_degree[1] + 5) % 360
+        origin_centered = False
     elif key == 'E':
         eye_degree[1] = (eye_degree[1] - 5) % 360
+        origin_centered = False
     elif key == 'w':
-        radius -= 3
+        init_center[2] -= 3
+        origin_centered = False
     elif key == 's':
-        radius += 3
+        init_center[2] += 3
+        origin_centered = False
+    elif key == 'a':
+        init_center[0] -= 3
+        origin_centered = False
+    elif key == 'd':
+        init_center[0] += 3
+        origin_centered = False
     elif key == 'q':
         sys.exit()
 
