@@ -22,6 +22,7 @@ init_center = [0, 0, 0]
 # debug
 eye = None
 ctr = None
+last_key = None
 
 def init():
     glClearColor(0.0, 0.0, 0.0, 0.0)
@@ -93,16 +94,16 @@ def draw_scenario():
 
     alt = 50.0
     alt_rev = -5
-    axis(ctr, (ctr[0], ctr[1], alt), (1.0, 0.0, 0.0)) # z to red
-    axis(ctr, (ctr[0], alt, ctr[2]), (0.0, 1.0, 0.0)) # y to green
-    axis(ctr, (alt, ctr[1], ctr[2]), (0.0, 0.0, 1.0)) # x to blue
-    axis(ctr, (ctr[0], ctr[1], alt_rev), (1.0, 1.0, 0.0)) # -z to yellow
-    axis(ctr, (ctr[0], alt_rev, ctr[2]), (1.0, 0.0, 1.0)) # -y to pink
-    axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
+    debug_axis(ctr, (ctr[0], ctr[1], alt), (1.0, 0.0, 0.0)) # z to red
+    debug_axis(ctr, (ctr[0], alt, ctr[2]), (0.0, 1.0, 0.0)) # y to green
+    debug_axis(ctr, (alt, ctr[1], ctr[2]), (0.0, 0.0, 1.0)) # x to blue
+    debug_axis(ctr, (ctr[0], ctr[1], alt_rev), (1.0, 1.0, 0.0)) # -z to yellow
+    debug_axis(ctr, (ctr[0], alt_rev, ctr[2]), (1.0, 0.0, 1.0)) # -y to pink
+    debug_axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
     # line at (0,15,0)
-    axis((0,0,0),(0,15,0),(0.0,0.0,0.0))
+    debug_axis((0,0,0),(0,15,0),(0.0,0.0,0.0))
     # line center to eye
-    axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0))
+    debug_axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0))
 
     glPopMatrix()
     glutSwapBuffers()
@@ -156,20 +157,14 @@ def keyboard(key, x, y):
     global center_degree
     global origin_centered
     global init_center
+    global last_key
 
     if not isinstance(key, int):
         key = key.decode("utf-8")
 
-    print('--- distance eye to center ---')
-    print('radius ', radius)
-    print('center ', ctr)
-    print('center_degree ', center_degree)
-    print('eye    ', eye)
-    print('eye_degree ', eye_degree)
-    print('dist   ', math.sqrt((eye[0] - ctr[0])**2 +
-                               (eye[1] - ctr[1])**2 +
-                               (eye[2] - ctr[2])**2))
-
+    #debug_info(key)
+    if key != 'i':
+        last_key = key
 
     if key == GLUT_KEY_DOWN:
         center_degree[1] = (center_degree[1] - 5) % 360
@@ -197,29 +192,59 @@ def keyboard(key, x, y):
         origin_centered = False
     elif key == 'w':
         init_center[2] -= 3
+        init_center[0] = get_new_center_x_from()
         origin_centered = False
     elif key == 's':
-        init_center[2] += 3
         origin_centered = False
     elif key == 'a':
-        init_center[0] -= 3
+        init_center[0] -= 1
         origin_centered = False
     elif key == 'd':
-        init_center[0] += 3
+        init_center[0] += 1
         origin_centered = False
+    elif key == 'i':
+        debug_info()
     elif key == 'q':
         sys.exit()
 
     glutPostRedisplay()
 
 
+def get_new_center_x_from():
+    m = (ctr[0] - eye[0])/(ctr[2] - eye[2])
+    x = m * init_center[2]  # new_z
+    return x
+
 # just for debug purposes :)
-def axis(center, last_vertex, c):
+def debug_axis(center, last_vertex, c):
     glColor(c)
     glBegin(GL_LINES)
     glVertex(center)
     glVertex(last_vertex)
     glEnd()
+
+
+# just for debug purposes :)
+def debug_info():
+    spec_keys = [GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT]
+    key_names = ["DOWN", "UP", "LEFT", "RIGHT"]
+
+    if isinstance(last_key, int):
+        lk = key_names[spec_keys.index(last_key)]
+    else:
+        lk = last_key
+
+    print('--- DEBUG START ---')
+    print('last_key\t', lk)
+    print('radius \t\t', radius)
+    print('center \t\t', ctr)
+    print('center_degree \t', center_degree)
+    print('eye    \t\t', eye)
+    print('eye_degree \t', eye_degree)
+    print('dist   \t\t', round(math.sqrt((eye[0] - ctr[0])**2 + 
+                                         (eye[1] - ctr[1])**2 +
+                                         (eye[2] - ctr[2])**2), 3))
+    print('--- DEBUG END ---')
 
 
 def register_callbacks():
