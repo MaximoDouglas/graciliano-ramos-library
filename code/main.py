@@ -195,6 +195,8 @@ def keyboard(key, x, y):
         init_center[0] = get_new_center_x_from()
         origin_centered = False
     elif key == 's':
+        init_center[2] += 3
+        init_center[0] = get_new_center_x_from()
         origin_centered = False
     elif key == 'a':
         init_center[0] -= 1
