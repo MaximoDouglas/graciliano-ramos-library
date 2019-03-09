@@ -24,4 +24,3 @@ class Top:
 
     def get_tops(self):
         return self.tops
-

@@ -17,13 +17,21 @@ class Objects():
 
     def draw_floors():
         Objects.identify_object(1)
-
         for floor in c.floors:
-            glBegin(GL_QUADS)
-            for vertex in floor:
-                glColor3fv((1, 1, 0.8))
-                glVertex3fv(vertex)
-            glEnd()
+            j = 0
+            for f in floor:
+                i = 0
+                for face in f:
+                    if ((j == 3) and (i == 0)):
+                        glColor3fv((1, 1, 1))
+                    else:
+                        glColor3fv((0.70, 0.63, 0.45))
+                    glBegin(GL_QUADS)
+                    for vertex in face:
+                        glVertex3fv(vertex)
+                    glEnd()
+                    i+=1
+                j+=1
 
     def draw_tops():
         Objects.identify_object(2)
@@ -37,13 +45,22 @@ class Objects():
             glPopMatrix()
 
     def draw_walls():
-        Objects.identify_object(3)
+        Objects.identify_object(8)
         for wall in c.walls:
-            glBegin(GL_QUADS)
-            for vertex in wall:
-                glColor3fv((1, 0.63, 0.48))
-                glVertex3fv(vertex)
-            glEnd()
+            j = 0
+            for w in wall:
+                i = 0
+                for face in w:
+                    if ((j == 0 or j == 2 or j == 3 or j == 5) and (i == 0)):
+                        glColor3fv((1, 1, 1))
+                    else:
+                        glColor3fv((1, 0.63, 0.48))
+                    glBegin(GL_QUADS)
+                    for vertex in face:
+                        glVertex3fv(vertex)
+                    glEnd()
+                    i+=1
+                j+=1
 
     def draw_doors():
         Objects.identify_object(4)

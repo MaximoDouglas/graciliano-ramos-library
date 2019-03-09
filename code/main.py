@@ -70,7 +70,7 @@ def update_view():
     ctr = (round(cx, 3), round(cy, 3), round(cz, 3))
 
     glLoadIdentity()
-    gluPerspective(45.0, aspect_ratio, 0.01, 100.0)
+    gluPerspective(30.0, aspect_ratio, 0.01, 100.0)
     gluLookAt(eyex, eyey, eyez,
               cx, cy, cz,
               0.0, 1.0, 0.0)
@@ -89,8 +89,8 @@ def draw_scenario():
     obj.draw_walls()
     obj.draw_doors()
     obj.draw_chairs()
-    #obj.draw_tables()
-    #obj.draw_book_cases()
+    obj.draw_tables()
+    obj.draw_book_cases()
 
     alt = 50.0
     alt_rev = -5
