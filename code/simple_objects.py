@@ -53,6 +53,8 @@ class Objects():
                 for face in w:
                     if ((j == 0 or j == 2 or j == 3 or j == 5) and (i == 0)):
                         glColor3fv((1, 1, 1))
+                    elif(j > 5):
+                        glColor3fv((1, 1, 1))
                     else:
                         glColor3fv((1, 0.63, 0.48))
                     glBegin(GL_QUADS)
