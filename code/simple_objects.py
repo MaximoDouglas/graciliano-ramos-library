@@ -79,8 +79,8 @@ class Objects():
 
                 h = 2.5
                 if x == 0 and y == 0: h = 2.75
-                glVertex3fv((x, y + h, 8.01))
-                glVertex3fv((x, y, 8.01))
+                glVertex3fv((x, y + h, 20.01))
+                glVertex3fv((x, y, 20.01))
 
                 glEnd()
 

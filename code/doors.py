@@ -25,10 +25,10 @@ class Door:
 
         door = []
 
-        door.append((center - 0.5 - extra, level + 2, 8))
-        door.append((center - 0.5 - extra, level, 8))
-        door.append((center, level, 8))
-        door.append((center, level + 2, 8))
+        door.append((center - 0.5 - extra, level + 2, 20))
+        door.append((center - 0.5 - extra, level, 20))
+        door.append((center, level, 20))
+        door.append((center, level + 2, 20))
 
         ds = self.door_sup(center, level, extra, 'left')
         door.extend(ds)
@@ -39,10 +39,10 @@ class Door:
 
         door = []
 
-        door.append((center, level + 2, 8))
-        door.append((center, level, 8))
-        door.append((center + 0.5 + extra, level, 8))
-        door.append((center + 0.5 + extra, level + 2, 8))
+        door.append((center, level + 2, 20))
+        door.append((center, level, 20))
+        door.append((center + 0.5 + extra, level, 20))
+        door.append((center + 0.5 + extra, level + 2, 20))
 
         ds = self.door_sup(center, level, extra, 'right')
         door.extend(ds)
@@ -58,7 +58,7 @@ class Door:
             degInRad = i * (DEG2RAD)
             x = center + math.cos(degInRad) * (0.5 + extra)
             y = level + 2 + math.sin(degInRad) * (0.5 + extra)
-            z = 8
+            z = 20
             door.append((x, y, z))
 
         return door
