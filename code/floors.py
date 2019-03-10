@@ -7,7 +7,7 @@ class Floor:
         #A for iteration for each one of the seven parts that compose the floor
         self.sub_part_half_width = [10, 7, 7, 7]
         self.sub_part_half_height = [0.1, 0.1, 0.1, 0.1]
-        self.sub_part_half_depth = [10, 8, 8, 8]
+        self.sub_part_half_depth = [25, 20, 20, 20]
         self.sub_part_center = self.__get_sub_part_center(self.reference)
         self.floor = []
 
