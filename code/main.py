@@ -12,15 +12,15 @@ height = 0
 aspect_ratio = 0
 
 rad = math.pi/180
-inc_deg = 10
-inc_axis = 10
+inc_deg = 1
+inc_axis = 1
 
 # TODO: put this in a dict
 rot_eye_keys = ('r', 'R', 'e', 'E')
 rot_ctr_keys = (GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT)
 nav_keys = ('w', 's', 'a', 'd')
 lvl_keys = ('0', '1', '2')
-cfg_keys = ('i', 'n', 'q')
+cfg_keys = ('g', 'h', 'c', 'i', 'n', 'q')
 
 scene_vars = {
         'eye': None, 'ctr': None,
@@ -161,23 +161,27 @@ def kb_nav_mov(key):
     elif key == 'w':
         if 90.0 <= scene_vars['center_degree'][0] <= 270:
             scene_vars['init_center'][2] -= inc_axis
-            m, scene_vars['init_center'][0] = get_new_center_x_from()
+            inc_x = math.sin(scene_vars['center_degree'][0] * rad)
+            scene_vars['init_center'][0] += inc_x
         else:
             scene_vars['init_center'][2] += inc_axis
-            m, scene_vars['init_center'][0] = get_new_center_x_from(reverse=True)
-        scene_vars['m'] = m
+            inc_x = math.sin(scene_vars['center_degree'][0] * rad)
+            scene_vars['init_center'][0] += inc_x
+        scene_vars['m'] = math.tan(scene_vars['center_degree'][0] * rad)
     elif key == 's':
         if 90.0 <= scene_vars['center_degree'][0] <= 270:
             scene_vars['init_center'][2] += inc_axis
-            m, scene_vars['init_center'][0] = get_new_center_x_from()
+            inc_x = x = math.sin(scene_vars['center_degree'][0] * rad)
+            scene_vars['init_center'][0] -= inc_x
         else:
             scene_vars['init_center'][2] -= inc_axis
-            m, scene_vars['init_center'][0] = get_new_center_x_from(reverse=True)
-        scene_vars['m'] = m
+            inc_x = x = math.sin(scene_vars['center_degree'][0] * rad)
+            scene_vars['init_center'][0] -= inc_x
+        scene_vars['m'] = math.tan(scene_vars['center_degree'][0] * rad)
     elif key == 'a':
-        scene_vars['init_center'][0] -= 1
+        scene_vars['init_center'][0] -= inc_axis
     elif key == 'd':
-        scene_vars['init_center'][0] += 1
+        scene_vars['init_center'][0] += inc_axis
 
 
 def kb_nav_to_lvl(key):
@@ -190,7 +194,17 @@ def kb_nav_to_lvl(key):
 
 
 def kb_cfg(key):
-    if key == 'i':
+    global inc_deg
+    if key == 'h':
+        inc_deg = 10
+    elif key == 'g':
+        inc_deg = 1
+    elif key == 'c' and not scene_vars['origin_centered']:
+        if scene_vars['init_center'][2] == 0:
+            scene_vars['init_center'][2] = 65
+        else:
+            scene_vars['init_center'][2] = 0
+    elif key == 'i':
         scene_vars['debug'] = ~scene_vars['debug']
     elif key == 'n':
         scene_vars['origin_centered'] = False
@@ -227,26 +241,6 @@ def keyboard(key, x, y):
 
     glutPostRedisplay()
 
-
-# Aux. method to get from line from camera to center 
-#   its inclination 
-#   and a new x give a new z
-# Called from kb_nav_mov
-def get_new_center_x_from(reverse=False):
-    ctr = scene_vars['ctr']
-    eye = scene_vars['eye']
-    if not reverse:
-        dx = (ctr[0] - eye[0])
-        dy = (ctr[2] - eye[2])
-    else:
-        dx = (eye[0] - ctr[0])
-        dy = (eye[2] - ctr[2])
-    if dy == 0:
-        m = 0
-    else:
-        m = dx/dy
-    x = m * scene_vars['init_center'][2]  # new_z
-    return m, x
 
 # Mouse callback
 def mouse_motion(x, y):
