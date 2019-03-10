@@ -18,9 +18,9 @@ class Wall:
                         (reference[0] - 7.1, reference[1] + 5, reference[2] + 0),
                         (reference[0] + 0.0, reference[1] + 5, reference[2] - 20.1),
                         (reference[0] + 7.1, reference[1] + 5, reference[2] + 0),
-                        (reference[0] - 1, reference[1] + 11, reference[2] + 5),
-                        (reference[0] + 0.0, reference[1] + 11, reference[2] + 4),
-                        (reference[0] + 1, reference[1] + 11, reference[2] + 5)
+                        (reference[0] - 1, reference[1] + 11, reference[2] + 17),
+                        (reference[0] + 0.0, reference[1] + 11, reference[2] + 16),
+                        (reference[0] + 1, reference[1] + 11, reference[2] + 17)
                         ]
         return sub_part_center
 
