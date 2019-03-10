@@ -25,9 +25,9 @@ cfg_keys = ('i', 'n', 'q')
 scene_vars = {
         'eye': None, 'ctr': None,
         'eye_degree' : [0, 20], 'center_degree' : [180, 0],
-        'origin_centered' : True, 'radius' : 5.0, 
+        'origin_centered' : True, 'radius' : 5.0,
         'init_center' : [0, 0, 65],
-        'last_key': None, 'm' : None, 
+        'last_key': None, 'm' : None,
         'debug': True}
 
 
@@ -142,7 +142,7 @@ def kb_rot_eye(key):
 
 def kb_rot_ctr(key):
     # only if is not centered at origin
-    if scene_vars['origin_centered']: 
+    if scene_vars['origin_centered']:
         pass
     elif key == GLUT_KEY_DOWN:
         scene_vars['center_degree'][1] = (scene_vars['center_degree'][1] - inc_deg) % 360
@@ -156,7 +156,7 @@ def kb_rot_ctr(key):
 
 def kb_nav_mov(key):
     # only if is not centered at origin
-    if scene_vars['origin_centered']: 
+    if scene_vars['origin_centered']:
         pass
     elif key == 'w':
         if 90.0 <= scene_vars['center_degree'][0] <= 270:
@@ -228,8 +228,8 @@ def keyboard(key, x, y):
     glutPostRedisplay()
 
 
-# Aux. method to get from line from camera to center 
-#   its inclination 
+# Aux. method to get from line from camera to center
+#   its inclination
 #   and a new x give a new z
 # Called from kb_nav_mov
 def get_new_center_x_from(reverse=False):
@@ -285,4 +285,3 @@ def main():
 
 
 main()
-
