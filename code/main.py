@@ -19,6 +19,7 @@ inc_axis = 1
 rot_eye_keys = ('r', 'R', 'e', 'E')
 rot_ctr_keys = (GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT)
 nav_keys = ('w', 's', 'a', 'd')
+lvl_keys = ('0', '1', '2')
 cfg_keys = ('i', 'n', 'q')
 
 scene_vars = {
@@ -113,9 +114,9 @@ def update_scene_params():
     cz = eyez + scene_vars['radius'] * math.cos(scene_vars['center_degree'][0] * rad)
 
     if scene_vars['origin_centered']:
-        eyex = 50 * math.sin(scene_vars['eye_degree'][0] * rad)
-        eyey = 50 * math.sin(scene_vars['eye_degree'][1] * rad)
-        eyez = 50 * math.cos(scene_vars['eye_degree'][0] * rad)
+        eyex = 70 * math.sin(scene_vars['eye_degree'][0] * rad)
+        eyey = 70 * math.sin(scene_vars['eye_degree'][1] * rad)
+        eyez = 70 * math.cos(scene_vars['eye_degree'][0] * rad)
         cx, cy, cz = 0, 0, 0
 
     # debug
@@ -129,6 +130,7 @@ def update_scene_params():
 
 def keyboard(key, x, y):
     global scene_vars
+
 
     if not isinstance(key, int):
         key = key.decode("utf-8")
@@ -185,6 +187,13 @@ def keyboard(key, x, y):
             scene_vars['init_center'][0] -= 1
         elif key == 'd':
             scene_vars['init_center'][0] += 1
+    elif key in lvl_keys:
+        if key == '0':
+            scene_vars['init_center'][1] = 0
+        elif key == '1':
+            scene_vars['init_center'][1] = 4
+        elif key == '2':
+            scene_vars['init_center'][1] = 7
     # config keys
     elif key in cfg_keys:
         if key == 'i':
