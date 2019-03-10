@@ -16,8 +16,8 @@ inc_deg = 1
 inc_axis = 1
 
 # TODO: put this in a dict
-rot_keys = ('r', 'R', 'e', 'E')
-spc_keys = (GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT)
+rot_eye_keys = ('r', 'R', 'e', 'E')
+rot_ctr_keys = (GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT)
 nav_keys = ('w', 's', 'a', 'd')
 cfg_keys = ('i', 'n', 'q')
 
@@ -137,7 +137,7 @@ def keyboard(key, x, y):
         scene_vars['last_key'] = key
 
     # rotation keys that changes `eye_degree`
-    if key in rot_keys:
+    if key in rot_eye_keys:
         scene_vars['origin_centered'] = True
         if key == 'r':
             scene_vars['eye_degree'][0] = (scene_vars['eye_degree'][0] + inc_deg) % 360
@@ -148,7 +148,7 @@ def keyboard(key, x, y):
         elif key == 'E':
             scene_vars['eye_degree'][1] = (scene_vars['eye_degree'][1] - inc_deg) % 360
     # spec. keys that rotates center by changes in `center_degree``
-    elif key in spc_keys:
+    elif key in rot_ctr_keys:
         # only if is not centered at origin
         if scene_vars['origin_centered']: 
             pass
