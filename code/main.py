@@ -117,7 +117,8 @@ def update_scene_params():
     scene_vars['ctr'] = (round(cx, 3), round(cy, 3), round(cz, 3))
 
     if scene_vars['debug']:
-        debug_info(scene_vars)
+        lk = debug_info(scene_vars)
+        scene_vars['last_key'] = lk
 
 
 def keyboard(key, x, y):

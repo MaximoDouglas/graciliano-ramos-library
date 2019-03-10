@@ -27,11 +27,11 @@ def debug_info(scene_vars):
 
     if isinstance(last_key, int):
         if last_key in spec_keys:
-            scene_vars['last_key'] = key_names[spec_keys.index(last_key)]
+            last_key = key_names[spec_keys.index(last_key)]
 
     print('--- DEBUG START ---')
 
-    print('last_key\t', scene_vars['last_key'])
+    print('last_key\t', last_key)
     print('radius \t\t', scene_vars['radius'])
     print('inclination \t', scene_vars['m'])
     print('init_center \t', scene_vars['init_center'])
@@ -42,6 +42,8 @@ def debug_info(scene_vars):
     print('dist   \t\t', debug_dist_e2c(scene_vars['ctr'], scene_vars['eye']))
                          
     print('--- DEBUG END ---')
+
+    return last_key
 
 
 # TODO: fix
