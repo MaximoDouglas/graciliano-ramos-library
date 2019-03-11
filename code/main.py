@@ -206,21 +206,22 @@ def kb_nav_mov(key):
     elif 270 <= cd < 315:
         pass
     elif 315 <= cd < 360:
+        # remember: inc_in_this_axis is negative here
         if key == 'w':
             # perform m7_m0
             scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] -= inc_in_this_axis
+            scene_vars['init_center'][0] += inc_in_this_axis
         elif key == 's':
             # perform m3_m4
             scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] += inc_in_this_axis
+            scene_vars['init_center'][0] -= inc_in_this_axis
         elif key == 'a':
             # perfom m1_m2
-            scene_vars['init_center'][2] += inc_in_this_axis
+            scene_vars['init_center'][2] -= inc_in_this_axis
             scene_vars['init_center'][0] += inc_axis
         elif key == 'd':
             # perform m5_m6
-            scene_vars['init_center'][2] -= inc_in_this_axis
+            scene_vars['init_center'][2] += inc_in_this_axis
             scene_vars['init_center'][0] -= inc_axis
 
     scene_vars['m'] = math.tan(scene_vars['center_degree'][0] * rad)
