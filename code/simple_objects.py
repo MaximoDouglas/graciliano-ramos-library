@@ -3,6 +3,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from coordinates import Coordinates as c
 
+open_main_door = False
 
 class Objects():
 
@@ -14,6 +15,7 @@ class Objects():
             4: 'door',
             5: 'chair'
             }
+
 
     def draw_floors():
         Objects.identify_object(1)
@@ -32,9 +34,6 @@ class Objects():
                     glEnd()
                     i+=1
                 j+=1
-
-    def open_doors():
-        print("Abrindo a porta")
 
     def draw_tops():
         Objects.identify_object(2)
@@ -77,14 +76,48 @@ class Objects():
                 glVertex3fv(vertex)
             glEnd()'''
 
+    def open_doors():
+        global open_main_door
+        open_main_door = True
+
+    def close_doors():
+        global open_main_door
+        open_main_door = False
+
     def draw_doors():
         Objects.identify_object(4)
-        for door in c.doors:
-            glBegin(GL_POLYGON)
-            for vertex in door:
-                glColor3fv((0, 0, 1))
-                glVertex3fv(vertex)
-            glEnd()
+        for lvl in c.levels:
+            for ctr in c.centers:
+                if lvl == ctr and open_main_door:
+                    door = c.doors_objects[0][0]
+                    glPushMatrix()
+                    # door left low corner is (-0.75, 0, 20)
+                    glTranslatef(-0.75, 0, 20)
+                    glRotatef(-45, 0, 1, 0)
+                    glTranslatef(-0.75, 0, -20.0)
+                    glBegin(GL_POLYGON)
+                    for vertex in door.get_left_door():
+                        glColor3fv((0, 0, 1))
+                        glVertex3fv(vertex)
+                    glEnd()
+                    glPopMatrix()
+                    glPushMatrix()
+                    # door left low corner is (-0.75, 0, 20)
+                    glTranslatef(0.75, 0, 20)
+                    glRotatef(45, 0, 1, 0)
+                    glTranslatef(-0.75, 0, -20.0)
+                    glBegin(GL_POLYGON)
+                    for vertex in door.get_right_door():
+                        glColor3fv((0, 0, 1))
+                        glVertex3fv(vertex)
+                    glEnd()
+                    glPopMatrix()
+                else:
+                    glBegin(GL_POLYGON)
+                    for vertex in c.doors_objects[lvl][ctr].get_door():
+                        glColor3fv((0, 0, 1))
+                        glVertex3fv(vertex)
+                    glEnd()
 
         # --- DRAW LINE TO SEPARETE DOORS (THIS WILL BE DELETED WHEN ADDED THE OPEN_DOORS FUNC)
         for y in c.levels:

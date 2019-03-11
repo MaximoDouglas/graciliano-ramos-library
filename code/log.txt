@@ -1,0 +1,22 @@
+--- DEBUG START ---
+last_key	 None
+radius 		 5.0
+inclination 	 None
+init_center 	 [0, 0, 32.12]
+center 		 (0, 0, 0)
+center_degree 	 [180, 0]
+eye    		 (0.0, 23.941, 70.0)
+eye_degree 	 [0, 20]
+dist   		 73.981
+--- DEBUG END ---
+--- DEBUG START ---
+last_key	 None
+radius 		 5.0
+inclination 	 None
+init_center 	 [0, 0, 32.12]
+center 		 (0, 0, 0)
+center_degree 	 [180, 0]
+eye    		 (0.0, 23.941, 70.0)
+eye_degree 	 [0, 20]
+dist   		 73.981
+--- DEBUG END ---

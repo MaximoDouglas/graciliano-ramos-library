@@ -19,8 +19,8 @@ inc_axis = 1
 rot_eye_keys = ('r', 'R', 'e', 'E')
 rot_ctr_keys = (GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT)
 nav_keys = ('w', 's', 'a', 'd')
-lvl_keys = ('0', '1', '2')
-cfg_keys = ('g', 'h', 'c', 'i', 'n', 'q')
+lvl_keys = ('0', '1', '2', 'o', 'O')
+cfg_keys = ('g', 'h', 'c', 'i', 'n', 'q', 't')
 
 scene_vars = {
         'eye': None, 'ctr': None,
@@ -28,7 +28,7 @@ scene_vars = {
         'origin_centered' : True, 'radius' : 5.0,
         'init_center' : [0, 0, 32.12],
         'last_key': None, 'm' : None,
-        'debug': True}
+        'show_axis': True, 'debug': True}
 
 
 def init():
@@ -82,19 +82,20 @@ def draw_scenario():
     obj.draw_book_cases()
 
     ### debug start
-    alt = 50.0
-    alt_rev = -5
-    ctr = scene_vars['ctr']
-    eye = scene_vars['eye']
-    debug_axis(ctr, (ctr[0], ctr[1], alt), (1.0, 0.0, 0.0)) # z to red
-    debug_axis(ctr, (ctr[0], alt, ctr[2]), (0.0, 1.0, 0.0)) # y to green
-    debug_axis(ctr, (alt, ctr[1], ctr[2]), (0.0, 0.0, 1.0)) # x to blue
-    debug_axis(ctr, (ctr[0], ctr[1], alt_rev), (1.0, 1.0, 0.0)) # -z to yellow
-    debug_axis(ctr, (ctr[0], alt_rev, ctr[2]), (1.0, 0.0, 1.0)) # -y to pink
-    debug_axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
-    debug_axis((0,0,0),(0,15,0),(0.0,0.0,0.0)) # line at (0,15,0)
-    debug_axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0)) # line center to eye
-    ### debug end
+    if scene_vars['show_axis']:
+        alt = 50.0
+        alt_rev = -5
+        ctr = scene_vars['ctr']
+        eye = scene_vars['eye']
+        debug_axis(ctr, (ctr[0], ctr[1], alt), (1.0, 0.0, 0.0)) # z to red
+        debug_axis(ctr, (ctr[0], alt, ctr[2]), (0.0, 1.0, 0.0)) # y to green
+        debug_axis(ctr, (alt, ctr[1], ctr[2]), (0.0, 0.0, 1.0)) # x to blue
+        debug_axis(ctr, (ctr[0], ctr[1], alt_rev), (1.0, 1.0, 0.0)) # -z to yellow
+        debug_axis(ctr, (ctr[0], alt_rev, ctr[2]), (1.0, 0.0, 1.0)) # -y to pink
+        debug_axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
+        debug_axis((0,0,0),(0,15,0),(0.0,0.0,0.0)) # line at (0,15,0)
+        debug_axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0)) # line center to eye
+        ### debug end
 
     glPopMatrix()
     glutSwapBuffers()
@@ -331,6 +332,10 @@ def kb_nav_to_lvl(key):
         scene_vars['init_center'][1] = 4
     elif key == '2':
         scene_vars['init_center'][1] = 7
+    elif key == 'o':
+        obj.open_doors()
+    elif key == 'O':
+        obj.close_doors()
 
 
 def kb_cfg(key):

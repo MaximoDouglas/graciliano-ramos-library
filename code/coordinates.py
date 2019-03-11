@@ -20,11 +20,15 @@ class Coordinates():
     tops = stct.get_tops()
     face = stct.get_face(centers)
 
+    doors_objects = {0: {}, 4: {}, 7: {}}
     doors = []
+    left_doors = []
     for level in levels:
         for center in centers:
             door = Door(level, center)
+            doors_objects[level][center] = door
             doors.append(door.get_door())
+            left_doors.append(door.get_left_door())
 
     chairs = []
     c_coords = [(-2.75,0,5), (-1,0,3), (-2.75,2,5), (-1,3.5,3)]
