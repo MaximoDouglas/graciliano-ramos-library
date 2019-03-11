@@ -15,7 +15,8 @@ class Coordinates():
     centers = [-6.25, -4.75, -3.25, -1.75, 0, 1.75, 3.25, 4.75, 6.25]
 
     stct = Structure()
-    tops =  stct.get_tops()
+    tops = stct.get_tops()
+    face = stct.get_face(centers)
 
     doors = []
     for level in levels:
