@@ -2,6 +2,7 @@ from floors import Floor
 from tops import Top
 from doors import Door
 from chairs import Chair
+from chairs2 import Chair2
 from walls import Wall
 from bookcases import Bookcase
 from tables import Table
@@ -25,19 +26,25 @@ class Coordinates():
             doors.append(door.get_door())
 
     chairs = []
-    c_coords = [(0,0,-.35)]
+    c_coords = [(-2.75,0,5), (-1,0,3)]
     for cc in c_coords:
         chair = Chair(cc).get_chair()
         chairs.append(chair)
 
+    chairs2 = []
+    c2_coords = [(2.75,0,3.25)]
+    for cc2 in c2_coords:
+        chair = Chair2(cc2).get_chair()
+        chairs2.append(chair)
+
     tables = []
-    ct_coords = [(1,0,0)]
+    ct_coords = [(-2.75,0,5.5), (-1,0,3.5)]
     for ct in ct_coords:
         table = Table(ct).get_table()
         tables.append(table)
 
     bookcases = []
-    cbc_coords = [(0,0,0)]
+    cbc_coords = [(1.2,0,5)]
     for cbc in cbc_coords:
         bookcase = Bookcase(cbc).get_bookcase()
         bookcases.append(bookcase)

@@ -49,17 +49,18 @@ class Objects():
 
     def draw_walls():
         Objects.identify_object(8)
-        for wall in c.walls:
+        for _, wall in enumerate(c.walls):
             j = 0
             for w in wall:
                 i = 0
                 for face in w:
                     if ((j == 0 or j == 2 or j == 3 or j == 5) and (i == 0)):
                         glColor3fv((1, 1, 1))
-                    elif(j > 5):
+                    elif(j > 7):
                         glColor3fv((1, 1, 1))
                     else:
                         glColor3fv((1, 0.63, 0.48))
+
                     glBegin(GL_QUADS)
                     for vertex in face:
                         glVertex3fv(vertex)
@@ -101,6 +102,17 @@ class Objects():
     def draw_chairs():
         Objects.identify_object(5)
         for chair in c.chairs:
+            colorx = 0.2
+            for part in chair:
+                colorx += 0.2
+                for face in part:
+                    glBegin(GL_QUADS)
+                    for vertex in face:
+                        glColor3fv((colorx, 0.0, 0.0))
+                        glVertex3fv(vertex)
+                    glEnd()
+
+        for chair in c.chairs2:
             colorx = 0.2
             for part in chair:
                 colorx += 0.2
