@@ -10,6 +10,7 @@ class Structure:
         self.tops.append(((-1, 12, 18), (-1, 12, 16), (0, 13, 17)))
         self.tops.append(((-1, 12, 16), (1, 12, 16), (0, 13, 17)))
         self.tops.append(((1, 12, 18), (1, 12, 16), (0, 13, 17)))
+        self.tops.append(((-1, 12, 18), (1, 12, 18), (0, 13, 17)))
 
     def build_face(self, centers):
         levels = [0.01]

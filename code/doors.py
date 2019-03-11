@@ -54,7 +54,7 @@ class Door:
         door = []
         start_angle = 0 if direction == 'left' else 90
 
-        for i in range(0 + start_angle, 91 + start_angle, 10):
+        for i in range(0 + start_angle, 91 + start_angle, 30):
             degInRad = i * (DEG2RAD)
             x = center + math.cos(degInRad) * (0.5 + extra)
             y = level + 2 + math.sin(degInRad) * (0.5 + extra)
