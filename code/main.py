@@ -26,7 +26,7 @@ scene_vars = {
         'eye': None, 'ctr': None,
         'eye_degree' : [0, 20], 'center_degree' : [180, 0],
         'origin_centered' : True, 'radius' : 5.0,
-        'init_center' : [0, 0, 65],
+        'init_center' : [0, 0, 32.12],
         'last_key': None, 'm' : None,
         'debug': True}
 
@@ -154,34 +154,76 @@ def kb_rot_ctr(key):
         scene_vars['center_degree'][0] = (scene_vars['center_degree'][0] - inc_deg) % 360
 
 
+def perform_move(move):
+    pass
+
+
 def kb_nav_mov(key):
     # only if is not centered at origin
     if scene_vars['origin_centered']:
         pass
-    elif key == 'w':
-        if 90.0 <= scene_vars['center_degree'][0] <= 270:
-            scene_vars['init_center'][2] -= inc_axis
-            inc_x = math.sin(scene_vars['center_degree'][0] * rad)
-            scene_vars['init_center'][0] += inc_x
-        else:
+    # there are 8 types of movements
+    #   m0 => +z _
+    #   m1 => +z +x
+    #   m2 =>  _ +x
+    #   m3 => -z +x
+    #   m4 => -z _
+    #   m5 => -z -x
+    #   m6 =>  _ -x
+    #   m7 => +z -x
+    cd = scene_vars['center_degree'][0]
+    #inc_in_this_axis = math.sin(cd * rad) * math.tan(cd * rad)  # for 1 z
+    inc_in_this_axis = math.sin(cd * rad) 
+    # here we have: w_m0_m1, s_m4_m5, a_m2_m3, d_m6_m7
+    # after that, we do the next for each (i.e., w_m1_m2...)
+    if 0 <= cd < 45:
+        if key == 'w':
+            # perform m0_m1
             scene_vars['init_center'][2] += inc_axis
-            inc_x = math.sin(scene_vars['center_degree'][0] * rad)
-            scene_vars['init_center'][0] += inc_x
-        scene_vars['m'] = math.tan(scene_vars['center_degree'][0] * rad)
-    elif key == 's':
-        if 90.0 <= scene_vars['center_degree'][0] <= 270:
-            scene_vars['init_center'][2] += inc_axis
-            inc_x = x = math.sin(scene_vars['center_degree'][0] * rad)
-            scene_vars['init_center'][0] -= inc_x
-        else:
+            scene_vars['init_center'][0] += inc_in_this_axis
+        elif key == 's':
+            # perform m4_m5
             scene_vars['init_center'][2] -= inc_axis
-            inc_x = x = math.sin(scene_vars['center_degree'][0] * rad)
-            scene_vars['init_center'][0] -= inc_x
-        scene_vars['m'] = math.tan(scene_vars['center_degree'][0] * rad)
-    elif key == 'a':
-        scene_vars['init_center'][0] -= inc_axis
-    elif key == 'd':
-        scene_vars['init_center'][0] += inc_axis
+            scene_vars['init_center'][0] -= inc_in_this_axis
+        elif key == 'a':
+            # perfom m2_m3
+            scene_vars['init_center'][2] -= inc_in_this_axis
+            scene_vars['init_center'][0] += inc_axis
+        elif key == 'd':
+            # perform m6_m7
+            scene_vars['init_center'][2] += inc_in_this_axis
+            scene_vars['init_center'][0] -= inc_axis
+    elif 45 <= cd < 90:
+        pass
+    elif 90 <= cd < 135:
+        pass
+    elif 135 <= cd < 180:
+        pass
+    elif 180 <= cd < 225:
+        pass
+    elif 225 <= cd < 270:
+        pass
+    elif 270 <= cd < 315:
+        pass
+    elif 315 <= cd < 360:
+        if key == 'w':
+            # perform m7_m0
+            scene_vars['init_center'][2] += inc_axis
+            scene_vars['init_center'][0] -= inc_in_this_axis
+        elif key == 's':
+            # perform m3_m4
+            scene_vars['init_center'][2] -= inc_axis
+            scene_vars['init_center'][0] += inc_in_this_axis
+        elif key == 'a':
+            # perfom m1_m2
+            scene_vars['init_center'][2] += inc_in_this_axis
+            scene_vars['init_center'][0] += inc_axis
+        elif key == 'd':
+            # perform m5_m6
+            scene_vars['init_center'][2] -= inc_in_this_axis
+            scene_vars['init_center'][0] -= inc_axis
+
+    scene_vars['m'] = math.tan(scene_vars['center_degree'][0] * rad)
 
 
 def kb_nav_to_lvl(key):
