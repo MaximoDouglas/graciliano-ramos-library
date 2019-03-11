@@ -78,8 +78,8 @@ def draw_scenario():
     obj.draw_walls()
     obj.draw_doors()
     obj.draw_chairs()
-    #obj.draw_tables()
-    #obj.draw_book_cases()
+    obj.draw_tables()
+    obj.draw_book_cases()
 
     ### debug start
     alt = 50.0
@@ -172,7 +172,7 @@ def kb_nav_mov(key):
     #   m6 =>  _ -x
     #   m7 => +z -x
     cd = scene_vars['center_degree'][0]
-    inc_with_sin = math.sin(cd * rad) 
+    inc_with_sin = math.sin(cd * rad)
     inc_with_cos = math.cos(cd * rad)
     # here we have: w_m0_m1, s_m4_m5, a_m2_m3, d_m6_m7
     # after that, we do the next for each (i.e., w_m1_m2...)

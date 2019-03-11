@@ -33,6 +33,9 @@ class Objects():
                     i+=1
                 j+=1
 
+    def open_doors():
+        print("Abrindo a porta")
+
     def draw_tops():
         Objects.identify_object(2)
         for top in c.tops:
