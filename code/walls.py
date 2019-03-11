@@ -7,13 +7,18 @@ class Wall:
         #A for iteration for each one of the seven parts that compose the wall
         self.sub_part_half_width = [0.1, 7.0, 0.1, 0.1, 1.0, 0.1, 0.1,
                                     0.1, 0.5, 0.1, 0.5, 0.1, 0.1, 1.0,
-                                    0.1, 1.75, 0.1, 0.1]
+                                    0.1, 1.75, 0.1, 0.1, 1.5, 0.1, 0.5,
+                                    0.5, 0.1, 1, 0.1, 0.1, 0.1, 0.20, 0.20,
+                                    0.20, 0.20, 0.20, 0.20, 0.20]
         self.sub_part_half_height = [5.0, 5.0, 5.0, 1.0, 1.0, 1.0, 2.0,
                                     2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0,
-                                    2.0, 2.0, 2.0, 2.0]
-        self.sub_part_half_depth = [20.0, 0.1, 20.0, 1.0, 0.1, 1.0, 3.0,
-                                    1.1, 0.1, 2.1, 0.1, 1.5, 3.1, 0.1,
-                                    1.75, 0.1, 2.0, 3.5]
+                                    2.0, 2.0, 2.0, 2.0, 2, 2, 2,
+                                    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+        self.sub_part_half_depth = [20.0, 0.1, 20.0, 1.0, 0.1, 1.0, 3.1,
+                                    1.1, 0.1, 2.1, 0.1, 1.6, 3.1, 0.1,
+                                    1.85, 0.1, 2.1, 3.6, 0.1, 0.6, 0.1,
+                                    0.1, 2, 0.1, 1.1, 2.1, 2.1, 0.1, 0.1, 0.1,
+                                    0.1, 0.1, 0.1, 0.1]
         self.sub_part_center = self.__get_sub_part_center(self.reference)
         self.wall = []
 
@@ -38,7 +43,23 @@ class Wall:
                         (reference[0] - 4, reference[1] + 1.9, reference[2] + 16.25),
                         (reference[0] - 2.75, reference[1] + 1.9, reference[2] + 16),
                         (reference[0] - 3, reference[1] + 1.9, reference[2] + 13),
-                        (reference[0] - 4, reference[1] + 1.9, reference[2] + 10)
+                        (reference[0] - 4, reference[1] + 1.9, reference[2] + 10),
+                        (reference[0] - 5.5, reference[1] + 1.9, reference[2] + 8),
+                        (reference[0] - 2, reference[1] + 1.9, reference[2] + 11.5),
+                        (reference[0] - 1.5, reference[1] + 1.9, reference[2] + 11),
+                        (reference[0] - 1.5, reference[1] + 1.9, reference[2] + 10),
+                        (reference[0] - 1, reference[1] + 1.9, reference[2] + 9),
+                        (reference[0] - 2, reference[1] + 1.9, reference[2] + 8),
+                        (reference[0] - 3, reference[1] + 1.9, reference[2] + 9),
+                        (reference[0] + 1, reference[1] + 1.9, reference[2] + 9),
+                        (reference[0] + 4, reference[1] + 1.9, reference[2] + 9),
+                        (reference[0] - 6.9, reference[1] + 1.9, reference[2] + 16),
+                        (reference[0] - 6.9, reference[1] + 1.9, reference[2] + 12),
+                        (reference[0] - 4.1, reference[1] + 1.9, reference[2] + 12),
+                        (reference[0] + 4.1, reference[1] + 1.9, reference[2] + 11),
+                        (reference[0] + 6.9, reference[1] + 1.9, reference[2] + 11),
+                        (reference[0] + 4.1, reference[1] + 1.9, reference[2] + 8),
+                        (reference[0] + 6.9, reference[1] + 1.9, reference[2] + 8)
                         ]
         return sub_part_center
 
