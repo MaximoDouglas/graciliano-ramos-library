@@ -153,6 +153,18 @@ class Objects():
                     glEnd()
                 i += 1
 
+        for bookcase in c.bookcases2:
+            i = 0
+            colors = [(0, 0.5, 0)]
+            for part in bookcase:
+                for face in part:
+                    glBegin(GL_QUADS)
+                    for vertex in face:
+                        glColor3fv(colors[0])
+                        glVertex3fv(vertex)
+                    glEnd()
+                i += 1
+
     def identify_object(obj_id=None):
         glEnable(GL_STENCIL_TEST)
         glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE)

@@ -5,12 +5,12 @@ class Bookcase2:
     def __init__(self, reference=None):
         self.reference = reference #x, y and z of the floor
         #A for iteration for each one of the seven parts that compose the bookcase
-        self.sub_part_half_width = [0.1, 0.05, 0.05, 0.5, 0.5, 0.5, 0.5,
-                                    0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-        self.sub_part_half_height = [1, 1, 1, 0.1, 0.1, 0.05, 0.05,
-                                    0.025, 0.025, 0.025, 0.025, 0.025, 0.025]
-        self.sub_part_half_depth = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
-                                    0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+        self.sub_part_half_width = [0.1, 0.05, 0.5, 0.5,
+                                    0.5, 0.5, 0.5]
+        self.sub_part_half_height = [1, 1, 0.1, 0.05,
+                                    0.015, 0.015, 0.015]
+        self.sub_part_half_depth = [0.5, 0.5, 0.5, 0.5,
+                                    0.5, 0.5, 0.5]
         self.sub_part_center = self.__get_sub_part_center(self.reference)
         self.bookcase = []
 
@@ -20,17 +20,11 @@ class Bookcase2:
         sub_part_center = [
                         (reference[0] + 0.0, reference[1] + 1, reference[2] + 0.0),
                         (reference[0] - 1.15, reference[1] + 1, reference[2] + 0.0),
-                        (reference[0] + 1.15, reference[1] + 1, reference[2] + 0.0),
                         (reference[0] - 0.60, reference[1] + 0.1, reference[2] + 0.0),
-                        (reference[0] + 0.60, reference[1] + 0.1, reference[2] + 0.0),
                         (reference[0] - 0.60, reference[1] + 1.95, reference[2] + 0.0),
-                        (reference[0] + 0.60, reference[1] + 1.95, reference[2] + 0.0),
                         (reference[0] - 0.60, reference[1] + 0.625, reference[2] + 0.0),
                         (reference[0] - 0.60, reference[1] + 1.075, reference[2] + 0.0),
-                        (reference[0] - 0.60, reference[1] + 1.525, reference[2] + 0.0),
-                        (reference[0] + 0.60, reference[1] + 0.625, reference[2] + 0.0),
-                        (reference[0] + 0.60, reference[1] + 1.075, reference[2] + 0.0),
-                        (reference[0] + 0.60, reference[1] + 1.525, reference[2] + 0.0)
+                        (reference[0] - 0.60, reference[1] + 1.525, reference[2] + 0.0)
                         ]
         return sub_part_center
 
