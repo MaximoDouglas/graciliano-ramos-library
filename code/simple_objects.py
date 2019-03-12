@@ -67,14 +67,15 @@ class Objects():
                     i+=1
                 j+=1
 
-        '''glColor3fv((0, 0, 0))
-        for piece in c.face:
-            glBegin(GL_POLYGON)
-            print("lista")
-            print(piece)
-            for vertex in piece:
-                glVertex3fv(vertex)
-            glEnd()'''
+    def draw_front():
+        Objects.identify_object(9)
+        glColor3fv((0, 0, 0))
+        for piece in c.front:
+            for face in piece:
+                glBegin(GL_QUADS)
+                for vertex in face:
+                    glVertex3fv(vertex)
+                glEnd()
 
     def open_doors():
         global open_main_door

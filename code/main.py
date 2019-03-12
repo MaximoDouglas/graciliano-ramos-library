@@ -80,6 +80,7 @@ def draw_scenario():
     obj.draw_chairs()
     obj.draw_tables()
     obj.draw_book_cases()
+    obj.draw_front()
 
     ### debug start
     if scene_vars['show_axis']:

@@ -8,6 +8,7 @@ from bookcases import Bookcase
 from bookcases2 import Bookcase2
 from tables import Table
 from structure import Structure
+from front import Front
 
 
 class Coordinates():
@@ -18,7 +19,7 @@ class Coordinates():
 
     stct = Structure()
     tops = stct.get_tops()
-    face = stct.get_face(centers)
+    front = Front().get_front()
 
     doors_objects = {0: {}, 4: {}, 7: {}}
     doors = []
