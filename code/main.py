@@ -32,9 +32,17 @@ scene_vars = {
 
 
 def init():
+    mat_specular = [0.0, 0.0, 0.0, 1.0]
+    mat_shininess = [50.0]
+    light_position = [0.0, 0.0, 0.0, 1.0]
     glClearColor(0.0, 0.0, 0.0, 0.0)
-    glEnable(GL_DEPTH_TEST)
 
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular)
+    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess)
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position)
+    glEnable(GL_LIGHTING)
+    glEnable(GL_LIGHT0)
+    glEnable(GL_DEPTH_TEST)
 
 # Reshape callback
 def reshape(w, h):
