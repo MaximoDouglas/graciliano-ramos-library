@@ -85,7 +85,7 @@ class Objects():
         global open_main_door
         open_main_door = False
 
-    def draw_doors():
+    def draw_doors(texture_id):
         Objects.identify_object(4)
         for lvl in c.levels:
             for ctr in c.centers:
@@ -97,9 +97,11 @@ class Objects():
                     glRotatef(-45, 0, 1, 0)
                     glTranslatef(-0.75, 0, -20.0)
                     glBegin(GL_POLYGON)
+
                     for vertex in door.get_left_door():
                         glColor3fv((0, 0, 1))
                         glVertex3fv(vertex)
+
                     glEnd()
                     glPopMatrix()
                     glPushMatrix()
@@ -114,24 +116,19 @@ class Objects():
                     glEnd()
                     glPopMatrix()
                 else:
+                    glEnable(GL_TEXTURE_2D)
+                    glBindTexture(GL_TEXTURE_2D, texture_id) # target, texture
+
                     glBegin(GL_POLYGON)
+
                     for vertex in c.doors_objects[lvl][ctr].get_door():
                         glColor3fv((0, 0, 1))
+                        glTexCoord3fv(vertex)
                         glVertex3fv(vertex)
+
                     glEnd()
+                    glDisable(GL_TEXTURE_2D)
 
-        # --- DRAW LINE TO SEPARETE DOORS (THIS WILL BE DELETED WHEN ADDED THE OPEN_DOORS FUNC)
-        for y in c.levels:
-            for x in c.centers:
-                glBegin(GL_LINES)
-                glColor3fv((0, 0, 0))
-
-                h = 2.5
-                if x == 0 and y == 0: h = 2.75
-                glVertex3fv((x, y + h, 20.01))
-                glVertex3fv((x, y, 20.01))
-
-                glEnd()
 
     def draw_chairs():
         Objects.identify_object(5)

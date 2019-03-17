@@ -2,6 +2,7 @@ import time
 import numpy as np
 import sys
 import math
+from PIL import Image
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -29,11 +30,13 @@ scene_vars = {
         'origin_centered' : True, 'radius' : 5.0,
         'init_center' : [0, 0, 32.12],
         'last_key': None, 'm' : None,
-        'show_axis': True, 'debug': True,
+        'show_axis': False, 'debug': True,
         'fps' : {'frames': 0, 'last_time' : time.time(), 'current' : 0},
         'spf' : 0
         }
 
+# global for texture
+texture_id = None
 
 def init():
     mat_specular = [0.0, 0.0, 0.0, 1.0]
@@ -41,11 +44,11 @@ def init():
     light_position = [0.0, 0.0, 0.0, 1.0]
     glClearColor(0.0, 0.0, 0.0, 0.0)
 
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular)
-    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess)
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position)
-    glEnable(GL_LIGHTING)
-    glEnable(GL_LIGHT0)
+    #glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular)
+    #glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess)
+    #glLightfv(GL_LIGHT0, GL_POSITION, light_position)
+    #glEnable(GL_LIGHTING)
+    #glEnable(GL_LIGHT0)
     glEnable(GL_DEPTH_TEST)
 
 # Reshape callback
@@ -86,13 +89,13 @@ def draw_scenario():
     glPushMatrix()
 
     obj.draw_floors()
-    obj.draw_tops()
-    obj.draw_walls()
-    obj.draw_doors()
-    obj.draw_chairs()
-    obj.draw_tables()
-    obj.draw_book_cases()
-    obj.draw_front()
+    #obj.draw_tops()
+    #obj.draw_walls()
+    obj.draw_doors(texture_id)
+    #obj.draw_chairs()
+    #obj.draw_tables()
+    #obj.draw_book_cases()
+    #obj.draw_front()
 
     ### debug start
     if scene_vars['show_axis']:
@@ -277,7 +280,46 @@ def register_callbacks():
     glutReshapeFunc(reshape)
 
 
+def read_texture(filename):
+    # Returns an Image object for the given image file
+    img = Image.open(filename)
+    # Contents of the img as a numpy arra containing pixel values in a flattened way 
+    # with four channels: R, G, B, A
+    img_data = np.array(list(img.getdata()), np.int8)
+    # Generate texture names
+    texture_id = glGenTextures(1)  # return 1 texture name 
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+    # Set pixel storage mode to GL_UNPACK_ALIGNMENT
+    # Affects how pixel data is read from client memory
+    # (significant to glDrawPixels, glTexImage2D, etc.)
+    # 1 -> byte alignment
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1)  # pname, param
+    # Set texture parameters
+    # All targets are GL_TEXTURE_2D
+    # params
+    #  GL_CLAMP causes s/t coordinates to be clamped to the range [0,1]
+    #  GL_REPEAT causes the integer part of the s/t coordinates to only use the
+    #           fractional part of the s/t coordinate, thereby creating a repeating pattern
+    #  GL_NEAREST returns the value of the texutre element that is nearest to the center of the
+    #           pixel being textured
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)  # target, pname, param
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+    # Set texture environment parameters
+    #  GL_TEXTURE_ENV environment
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
+    # Specify a two-dimensional texture image
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.size[0], img.size[1], 0,
+                 GL_RGBA, GL_UNSIGNED_BYTE, img_data)
+    return texture_id
+
+
 def main():
+    global texture_id
+
     glutInit()
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_STENCIL)
     glutInitWindowSize(1200, 500)
@@ -285,6 +327,7 @@ def main():
     glutCreateWindow("Graciliano Ramos Library")
     init()
     register_callbacks()
+    texture_id = read_texture('textures/door_1.png')
     glutMainLoop()
 
 
