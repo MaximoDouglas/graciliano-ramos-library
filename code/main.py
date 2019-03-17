@@ -95,7 +95,7 @@ def draw_scenario():
     #obj.draw_chairs()
     #obj.draw_tables()
     #obj.draw_book_cases()
-    #obj.draw_front()
+    obj.draw_front()
 
     ### debug start
     if scene_vars['show_axis']:
@@ -176,14 +176,14 @@ def kb_nav_mov(key):
 
     cd = scene_vars['center_degree'][0]
 
-    # inc in degree 
+    # inc in degree
     dir = {'w': 0, 'a': 90, 's': 180, 'd': 270}
 
     # cd gives the angle of the center in ref. to z+
     # angle_move adjusts the angle by the movement I will perform
     # If I look to the center at 180 degrees and move to the right, I need to adjust the angle by -90 (or 270) degrees.
     # If I move left, I adjust by 90. If I move back, I adjust by 180.
-    angle_move = (dir[key] + cd) % 360 
+    angle_move = (dir[key] + cd) % 360
     iwsin = math.sin(angle_move * rad)
     iwcos = math.cos(angle_move * rad)
 
@@ -283,11 +283,11 @@ def register_callbacks():
 def read_texture(filename):
     # Returns an Image object for the given image file
     img = Image.open(filename)
-    # Contents of the img as a numpy arra containing pixel values in a flattened way 
+    # Contents of the img as a numpy arra containing pixel values in a flattened way
     # with four channels: R, G, B, A
     img_data = np.array(list(img.getdata()), np.int8)
     # Generate texture names
-    texture_id = glGenTextures(1)  # return 1 texture name 
+    texture_id = glGenTextures(1)  # return 1 texture name
     glBindTexture(GL_TEXTURE_2D, texture_id)
     # Set pixel storage mode to GL_UNPACK_ALIGNMENT
     # Affects how pixel data is read from client memory
