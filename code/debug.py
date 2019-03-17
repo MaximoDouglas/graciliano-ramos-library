@@ -4,6 +4,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from simple_objects import Objects as obj
 
+
 def debug_axis(ctr, eye):
     alt = 50.0
     alt_rev = -5
@@ -54,6 +55,7 @@ def debug_info(scene_vars):
     print('eye    \t\t', scene_vars['eye'])
     print('eye_degree \t', scene_vars['eye_degree'])
     print('origin_centered \t', scene_vars['origin_centered'])
+    print('fps \t\t', scene_vars['fps']['current'])  # seems like vsync is enabled
     print('dist   \t\t', debug_dist_e2c(scene_vars['ctr'], scene_vars['eye']))
                          
     print('--- DEBUG END ---')

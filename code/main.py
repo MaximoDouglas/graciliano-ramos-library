@@ -1,3 +1,4 @@
+import time
 import numpy as np
 import sys
 import math
@@ -28,7 +29,10 @@ scene_vars = {
         'origin_centered' : True, 'radius' : 5.0,
         'init_center' : [0, 0, 32.12],
         'last_key': None, 'm' : None,
-        'show_axis': True, 'debug': True}
+        'show_axis': True, 'debug': True,
+        'fps' : {'frames': 0, 'last_time' : time.time(), 'current' : 0},
+        'spf' : 0
+        }
 
 
 def init():
@@ -82,17 +86,27 @@ def draw_scenario():
     glPushMatrix()
 
     obj.draw_floors()
-    #obj.draw_tops()
-    #obj.draw_walls()
-    #obj.draw_doors()
-    #obj.draw_chairs()
-    #obj.draw_tables()
-    #obj.draw_book_cases()
-    #obj.draw_front()
+    obj.draw_tops()
+    obj.draw_walls()
+    obj.draw_doors()
+    obj.draw_chairs()
+    obj.draw_tables()
+    obj.draw_book_cases()
+    obj.draw_front()
 
     ### debug start
     if scene_vars['show_axis']:
         debug_axis(scene_vars['ctr'], scene_vars['eye'])
+
+
+    scene_vars['fps']['frames'] += 1
+    frames = scene_vars['fps']['frames']
+    last_time = scene_vars['fps']['last_time']
+    if time.time() - last_time  >= 1:
+        scene_vars['fps']['current'] = frames / (time.time() - last_time)
+        scene_vars['fps']['frames'] = 0
+        scene_vars['fps']['last_time'] = time.time()
+
 
     glPopMatrix()
     glutSwapBuffers()
