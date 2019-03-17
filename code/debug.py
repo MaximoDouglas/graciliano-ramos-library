@@ -48,11 +48,12 @@ def debug_info(scene_vars):
     print('last_key\t', last_key)
     print('radius \t\t', scene_vars['radius'])
     print('inclination \t', scene_vars['m'])
-    print('init_center \t', scene_vars['init_center'])
+    print('init_center \t', [round(x, 3) for x in scene_vars['init_center']])
     print('center \t\t', scene_vars['ctr'])
     print('center_degree \t', scene_vars['center_degree'])
     print('eye    \t\t', scene_vars['eye'])
     print('eye_degree \t', scene_vars['eye_degree'])
+    print('origin_centered \t', scene_vars['origin_centered'])
     print('dist   \t\t', debug_dist_e2c(scene_vars['ctr'], scene_vars['eye']))
                          
     print('--- DEBUG END ---')

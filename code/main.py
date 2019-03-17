@@ -82,12 +82,12 @@ def draw_scenario():
     glPushMatrix()
 
     obj.draw_floors()
-    obj.draw_tops()
-    obj.draw_walls()
-    obj.draw_doors()
-    obj.draw_chairs()
-    obj.draw_tables()
-    obj.draw_book_cases()
+    #obj.draw_tops()
+    #obj.draw_walls()
+    #obj.draw_doors()
+    #obj.draw_chairs()
+    #obj.draw_tables()
+    #obj.draw_book_cases()
     #obj.draw_front()
 
     ### debug start
@@ -152,172 +152,26 @@ def kb_rot_ctr(key):
         scene_vars['center_degree'][0] = (scene_vars['center_degree'][0] - inc_deg) % 360
 
 
-def perform_move(move):
-    pass
-
-
 def kb_nav_mov(key):
     # only if is not centered at origin
     if scene_vars['origin_centered']:
-        pass
-    # there are 8 types of movements
-    #   m0 => +z _
-    #   m1 => +z +x
-    #   m2 =>  _ +x
-    #   m3 => -z +x
-    #   m4 => -z _
-    #   m5 => -z -x
-    #   m6 =>  _ -x
-    #   m7 => +z -x
+        return
+
     cd = scene_vars['center_degree'][0]
-    inc_with_sin = math.sin(cd * rad)
-    inc_with_cos = math.cos(cd * rad)
-    # here we have: w_m0_m1, s_m4_m5, a_m2_m3, d_m6_m7
-    # after that, we do the next for each (i.e., w_m1_m2...)
-    if 0 <= cd < 45:
-        # inc_with_sin goes from 0 to 0.7
-        if key == 'w':
-            # perform m0_m1
-            scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] += inc_with_sin
-        elif key == 's':
-            # perform m4_m5
-            scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] -= inc_with_sin
-        elif key == 'a':
-            # perfom m2_m3
-            scene_vars['init_center'][2] -= inc_with_sin
-            scene_vars['init_center'][0] += inc_axis
-        elif key == 'd':
-            # perform m6_m7
-            scene_vars['init_center'][2] += inc_with_sin
-            scene_vars['init_center'][0] -= inc_axis
-    elif 45 <= cd < 90:
-        # inc_with_cos goes from 0.7 to 0
-        if key == 'w':
-            # m1_m2
-            scene_vars['init_center'][2] += inc_with_cos
-            scene_vars['init_center'][0] += inc_axis
-        elif key == 's':
-            # m5_m6
-            scene_vars['init_center'][2] -= inc_with_cos
-            scene_vars['init_center'][0] -= inc_axis
-        elif key == 'a':
-            # m3_m4
-            scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] += inc_with_cos
-        elif key == 'd':
-            # m7_m0
-            scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] -= inc_with_cos
-    elif 90 <= cd < 135:
-        # inc_with_cos goes from 0 to 0.7
-        if key == 'w':
-            # m2_m3
-            scene_vars['init_center'][2] -= inc_with_cos
-            scene_vars['init_center'][0] += inc_axis
-        elif key == 's':
-            # m6_m7
-            scene_vars['init_center'][2] += inc_with_cos
-            scene_vars['init_center'][0] -= inc_axis
-        elif key == 'a':
-            # m4_m5
-            scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] -= inc_with_cos
-        elif key == 'd':
-            # m0_m1
-            scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] += inc_with_cos
-    elif 135 <= cd < 180:
-        # inc_with_sin goes from 0.7 to 0
-        if key == 'w':
-            # m3_m4
-            scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] += inc_with_sin
-        elif key == 's':
-            # m7_m0
-            scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] -= inc_with_sin
-        elif key == 'a':
-            # m5_m6
-            scene_vars['init_center'][2] -= inc_with_sin
-            scene_vars['init_center'][0] -= inc_axis
-        elif key == 'd':
-            # m1_m2
-            scene_vars['init_center'][2] += inc_with_sin
-            scene_vars['init_center'][0] += inc_axis
-    elif 180 <= cd < 225:
-        # inc_with_sin goes from 0 to -0.7
-        if key == 'w':
-            # perform m4_m5
-            scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] += inc_with_sin
-        elif key == 's':
-            # perform m0_m1
-            scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] -= inc_with_sin
-        elif key == 'a':
-            # perform m6_m7
-            scene_vars['init_center'][2] -= inc_with_sin
-            scene_vars['init_center'][0] -= inc_axis
-        elif key == 'd':
-            # perfom m2_m3
-            scene_vars['init_center'][2] += inc_with_sin
-            scene_vars['init_center'][0] += inc_axis
-    elif 225 <= cd < 270:
-        # inc_with_cos goes from -0.7 to 0
-        if key == 'w':
-            # m5_m6
-            scene_vars['init_center'][2] += inc_with_cos
-            scene_vars['init_center'][0] -= inc_axis
-        elif key == 's':
-            # m1_m2
-            scene_vars['init_center'][2] -= inc_with_cos
-            scene_vars['init_center'][0] += inc_axis
-        elif key == 'a':
-            # m7_m0
-            scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] += inc_with_cos
-        elif key == 'd':
-            # m3_m4
-            scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] -= inc_with_cos
-    elif 270 <= cd < 315:
-        # inc_with_cos goes from 0 to 0.7
-        if key == 'w':
-            # m6_m7
-            scene_vars['init_center'][2] += inc_with_cos
-            scene_vars['init_center'][0] -= inc_axis
-        elif key == 's':
-            # m2_m3
-            scene_vars['init_center'][2] -= inc_with_cos
-            scene_vars['init_center'][0] += inc_axis
-        elif key == 'a':
-            # m0_m1
-            scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] += inc_with_cos
-        elif key == 'd':
-            # m4_m5
-            scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] -= inc_with_cos
-    elif 315 <= cd < 360:
-        # inc_with_sin goes from -0.7 to 0
-        if key == 'w':
-            # perform m7_m0
-            scene_vars['init_center'][2] += inc_axis
-            scene_vars['init_center'][0] += inc_with_sin
-        elif key == 's':
-            # perform m3_m4
-            scene_vars['init_center'][2] -= inc_axis
-            scene_vars['init_center'][0] -= inc_with_sin
-        elif key == 'a':
-            # perfom m1_m2
-            scene_vars['init_center'][2] -= inc_with_sin
-            scene_vars['init_center'][0] += inc_axis
-        elif key == 'd':
-            # perform m5_m6
-            scene_vars['init_center'][2] += inc_with_sin
-            scene_vars['init_center'][0] -= inc_axis
+
+    # inc in degree 
+    dir = {'w': 0, 'a': 90, 's': 180, 'd': 270}
+
+    # cd gives the angle of the center in ref. to z+
+    # angle_move adjusts the angle by the movement I will perform
+    # If I look to the center at 180 degrees and move to the right, I need to adjust the angle by -90 (or 270) degrees.
+    # If I move left, I adjust by 90. If I move back, I adjust by 180.
+    angle_move = (dir[key] + cd) % 360 
+    iwsin = math.sin(angle_move * rad)
+    iwcos = math.cos(angle_move * rad)
+
+    scene_vars['init_center'][2] += iwcos
+    scene_vars['init_center'][0] += iwsin
 
     scene_vars['m'] = math.tan(scene_vars['center_degree'][0] * rad)
 
