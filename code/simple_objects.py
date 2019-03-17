@@ -95,7 +95,7 @@ class Objects():
                     # door left low corner is (-0.75, 0, 20)
                     glTranslatef(-0.75, 0, 20)
                     glRotatef(-45, 0, 1, 0)
-                    glTranslatef(-0.75, 0, -20.0)
+                    glTranslatef(0.75, 0, -20.0)
                     glBegin(GL_POLYGON)
 
                     for vertex in door.get_left_door():
@@ -104,6 +104,7 @@ class Objects():
 
                     glEnd()
                     glPopMatrix()
+
                     glPushMatrix()
                     # door left low corner is (-0.75, 0, 20)
                     glTranslatef(0.75, 0, 20)
