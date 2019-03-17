@@ -92,19 +92,7 @@ def draw_scenario():
 
     ### debug start
     if scene_vars['show_axis']:
-        alt = 50.0
-        alt_rev = -5
-        ctr = scene_vars['ctr']
-        eye = scene_vars['eye']
-        debug_axis(ctr, (ctr[0], ctr[1], alt), (1.0, 0.0, 0.0)) # z to red
-        debug_axis(ctr, (ctr[0], alt, ctr[2]), (0.0, 1.0, 0.0)) # y to green
-        debug_axis(ctr, (alt, ctr[1], ctr[2]), (0.0, 0.0, 1.0)) # x to blue
-        debug_axis(ctr, (ctr[0], ctr[1], alt_rev), (1.0, 1.0, 0.0)) # -z to yellow
-        debug_axis(ctr, (ctr[0], alt_rev, ctr[2]), (1.0, 0.0, 1.0)) # -y to pink
-        debug_axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
-        debug_axis((0,0,0),(0,15,0),(0.0,0.0,0.0)) # line at (0,15,0)
-        debug_axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0)) # line center to eye
-        ### debug end
+        debug_axis(scene_vars['ctr'], scene_vars['eye'])
 
     glPopMatrix()
     glutSwapBuffers()

@@ -4,7 +4,21 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from simple_objects import Objects as obj
 
-def debug_axis(center, last_vertex, c):
+def debug_axis(ctr, eye):
+    alt = 50.0
+    alt_rev = -5
+    draw_axis(ctr, (ctr[0], ctr[1], alt), (1.0, 0.0, 0.0)) # z to red
+    draw_axis(ctr, (ctr[0], alt, ctr[2]), (0.0, 1.0, 0.0)) # y to green
+    draw_axis(ctr, (alt, ctr[1], ctr[2]), (0.0, 0.0, 1.0)) # x to blue
+    draw_axis(ctr, (ctr[0], ctr[1], alt_rev), (1.0, 1.0, 0.0)) # -z to yellow
+    draw_axis(ctr, (ctr[0], alt_rev, ctr[2]), (1.0, 0.0, 1.0)) # -y to pink
+    draw_axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
+    draw_axis((0,0,0),(0,15,0),(0.0,0.0,0.0)) # line at (0,15,0)
+    draw_axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0)) # line center to eye
+    ### debug end
+
+
+def draw_axis(center, last_vertex, c):
     glColor(c)
     glBegin(GL_LINES)
     glVertex(center)
