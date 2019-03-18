@@ -7,7 +7,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from simple_objects import Objects as obj
-from debug import debug_axis, debug_info, debug_world_coords
+from debug import debug_axis, debug_info
 
 width = 0
 height = 0

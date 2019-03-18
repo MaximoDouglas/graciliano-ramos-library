@@ -7,18 +7,7 @@ open_main_door = False
 
 class Objects():
 
-    dnames = {
-            0: 'background',
-            1: 'floor',
-            2: 'top',
-            3: 'wall',
-            4: 'door',
-            5: 'chair'
-            }
-
-
     def draw_floors():
-        Objects.identify_object(1)
         for floor in c.floors:
             j = 0
             for f in floor:
@@ -35,8 +24,8 @@ class Objects():
                     i+=1
                 j+=1
 
+
     def draw_tops():
-        Objects.identify_object(2)
         for top in c.tops:
             glPushMatrix()
             glBegin(GL_TRIANGLES)
@@ -46,8 +35,8 @@ class Objects():
             glEnd()
             glPopMatrix()
 
+
     def draw_walls():
-        Objects.identify_object(8)
         for _, wall in enumerate(c.walls):
             j = 0
             for w in wall:
@@ -67,8 +56,8 @@ class Objects():
                     i+=1
                 j+=1
 
+
     def draw_front():
-        Objects.identify_object(9)
         glColor3fv((0, 0, 0))
         for piece in c.front:
             for face in piece:
@@ -86,7 +75,6 @@ class Objects():
         open_main_door = False
 
     def draw_doors(texture_id):
-        Objects.identify_object(4)
         for lvl in c.levels:
             for ctr in c.centers:
                 if lvl == ctr and open_main_door:
@@ -132,7 +120,6 @@ class Objects():
 
 
     def draw_chairs():
-        Objects.identify_object(5)
         for chair in c.chairs:
             colorx = 0.2
             for part in chair:
@@ -156,7 +143,6 @@ class Objects():
                     glEnd()
 
     def draw_tables():
-        Objects.identify_object(6)
         for table in c.tables:
             colorx = 0.2
             for part in table:
@@ -169,7 +155,6 @@ class Objects():
                     glEnd()
 
     def draw_book_cases():
-        Objects.identify_object(7)
         for bookcase in c.bookcases:
             i = 0
             colors = [(0.81, 0.66, 0.13), (0.67, 0.66, 0.62)]
@@ -197,7 +182,3 @@ class Objects():
                     glEnd()
                 i += 1
 
-    def identify_object(obj_id=None):
-        glEnable(GL_STENCIL_TEST)
-        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE)
-        glStencilFunc(GL_ALWAYS, obj_id, -1)

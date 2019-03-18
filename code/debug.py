@@ -62,30 +62,3 @@ def debug_info(scene_vars):
 
     return last_key
 
-
-# TODO: fix
-def debug_world_coords(scene_vars, width, height, x, y, verbose=1):
-
-    color = glReadPixels(x, width - y - 1, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE)
-    depth = glReadPixels(x, width - y - 1, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT)
-    index = glReadPixels(x, width - y - 1, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT)
-
-    # Screen space coords to world space coords
-    wx = x
-    wy = width - y - 1
-    wz = depth[0][0]
-    mvmat = glGetDoublev(GL_MODELVIEW_MATRIX)
-    pmat = glGetDoublev(GL_PROJECTION_MATRIX)
-    vmat = glGetIntegerv(GL_VIEWPORT)
-    world_coords = gluUnProject(wx, wy, wz, mvmat, pmat, vmat)
-
-    # Print everything
-    if verbose:
-        print("{}".format(10*'-'))
-        #print(x, y, width, height)
-        print("Color: ", [int(c) for c in color])
-        print("Depth (0 is near): ", depth[0][0])
-        print("Stencil: ", obj.dnames[index[0][0]])
-        print("World coords: ", [round(wc, 3) for wc in world_coords])
-
-
