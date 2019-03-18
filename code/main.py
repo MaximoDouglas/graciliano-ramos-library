@@ -6,7 +6,7 @@ from PIL import Image
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from simple_objects import Objects as obj
+import objects as obj
 from debug import debug_axis, debug_info
 
 width = 0
@@ -50,6 +50,7 @@ def init():
     #glEnable(GL_LIGHTING)
     #glEnable(GL_LIGHT0)
     glEnable(GL_DEPTH_TEST)
+
 
 # Reshape callback
 def reshape(w, h):
@@ -272,7 +273,7 @@ def mouse_click(button, state, x, y):
 # Callbacks registration
 def register_callbacks():
     glutDisplayFunc(draw_scenario)
-    glutIdleFunc(draw_scenario)
+    #glutIdleFunc(draw_scenario)
     #glutMouseFunc(mouse_click)
     #glutPassiveMotionFunc(mouse_motion)
     glutKeyboardFunc(keyboard)
@@ -297,20 +298,19 @@ def read_texture(filename):
     # Set texture parameters
     # All targets are GL_TEXTURE_2D
     # params
-    #  GL_CLAMP causes s/t coordinates to be clamped to the range [0,1]
     #  GL_REPEAT causes the integer part of the s/t coordinates to only use the
     #           fractional part of the s/t coordinate, thereby creating a repeating pattern
     #  GL_NEAREST returns the value of the texutre element that is nearest to the center of the
     #           pixel being textured
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)  # target, pname, param
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)  # repeat in s when done, if needed
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)  # repeat in t when done, if needed
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)  # how to upsample?
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)  # how to downsample?
     # Set texture environment parameters
     #  GL_TEXTURE_ENV environment
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
+    #  GL_DECAL     -> color interpolation using _alpha_
+    #  GL_MODULATE  -> texture color * material color
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE)
     # Specify a two-dimensional texture image
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.size[0], img.size[1], 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, img_data)
@@ -327,7 +327,7 @@ def main():
     glutCreateWindow("Graciliano Ramos Library")
     init()
     register_callbacks()
-    texture_id = read_texture('textures/door_1.png')
+    texture_id = read_texture('textures/door_1_28x28.png')
     glutMainLoop()
 
 

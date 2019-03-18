@@ -2,7 +2,7 @@ import math
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from simple_objects import Objects as obj
+import objects as obj
 
 
 def debug_axis(ctr, eye):
