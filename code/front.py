@@ -11,7 +11,7 @@ class Front:
         self.sub_part_center = self.__get_sub_part_center(self.reference)
         self.front = []
 
-        n_parts = 10
+        n_parts = 9
         print(self.__get_arc_dims(n_parts))
 
         self.__generate_coordinates()
@@ -26,9 +26,18 @@ class Front:
         rect_half_depth = (wall_depth)/2
         half_depths     = [rect_half_depth]*n_parts
 
+        height_diff = 0.75
+        h = height_diff
+        dim = height_diff/(n_parts/2)
         half_heights    = []
-        for _ in range(n_parts):
-            half_heights.append(0)
+
+        for i in range(n_parts):
+            if (i > 0 and i < n_parts/2):
+                h -= dim
+            elif (i > 0 and i > n_parts/2 and i <= n_parts - 1):
+                h += dim
+
+            half_heights.append(h)
 
         return half_widths, half_heights, half_depths
 
