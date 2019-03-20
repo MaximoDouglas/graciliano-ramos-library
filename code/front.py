@@ -44,10 +44,10 @@ class Front:
         centers = []
         z_centers = 19.88
         x_i = -0.75
-        y_i = 2
+        y_i = 2.75
 
         for w, h in zip(half_widths, half_heights):
-            center = (reference[0] + x_i + w, reference[1] + y_i + h,
+            center = (reference[0] + x_i + w, reference[1] + y_i - h,
                         reference[2] + z_centers)
 
             centers.append(center)
