@@ -10,6 +10,9 @@ class Front:
         self.sub_part_half_height = [2, 2, 0.624]
         self.sub_part_half_depth = [0.1, 0.1, 0.1]
         w, h, d = self.__get_arc_dims(n_parts)
+        self.sub_part_half_width.extend(w)
+        self.sub_part_half_height.extend(h)
+        self.sub_part_half_depth.extend(d)
         self.sub_part_center = self.__get_sub_part_center(self.reference, w, h)
         self.front = []
 
@@ -55,13 +58,15 @@ class Front:
         return centers
 
     def __get_sub_part_center(self, reference, w, h):
-        print(self.__get_arc_centers(reference, w, h))
 
         sub_part_center = [
                         (reference[0] - 3.875, reference[1] + 1.9, reference[2] + 19.88),
                         (reference[0] + 3.875, reference[1] + 1.9, reference[2] + 19.88),
                         (reference[0] + 0, reference[1] + 3.375, reference[2] + 19.88)
                         ]
+
+        sub_part_center.extend(self.__get_arc_centers(reference, w, h))
+
         return sub_part_center
 
     def __gen_vertexes(self, i):
