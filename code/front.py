@@ -66,7 +66,6 @@ class Front:
                         ]
 
         sub_part_center.extend(self.__get_arc_centers(reference, w, h))
-
         return sub_part_center
 
     def __gen_vertexes(self, i):
@@ -124,6 +123,7 @@ class Front:
     def __generate_coordinates(self):
 
         # For loop to generate all the coordinates of the front parts
+        print(len(self.sub_part_half_height))
         for i in range(len(self.sub_part_half_height)):
             sub_part = []
 

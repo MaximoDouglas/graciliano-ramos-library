@@ -57,7 +57,7 @@ def draw_walls():
 
 
 def draw_front():
-    glColor3fv((0, 0, 0))
+    glColor3fv((0.5, 0.5, 0.5))
     for piece in c.front:
         for face in piece:
             glBegin(GL_QUADS)
@@ -136,7 +136,7 @@ def draw_doors(texture_id):
             draw_door_func(lvl, ctr, texture_id)
             glDisable(GL_TEXTURE_2D)
 
-            
+
 
 def draw_chairs():
     for chair in c.chairs:
@@ -202,4 +202,3 @@ def draw_book_cases():
                     glVertex3fv(vertex)
                 glEnd()
             i += 1
-
