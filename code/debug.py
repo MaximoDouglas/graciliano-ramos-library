@@ -1,25 +1,44 @@
-import math
+from math import sqrt
+from time import time
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
+
 import objects as obj
 
+SPEC_KEYS = [GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT]
+KEY_NAMES = ["DOWN", "UP", "LEFT", "RIGHT"]
 
-def debug_axis(ctr, eye):
+
+def fps(scene_vars):
+
+    scene_vars['fps']['frames'] += 1
+    frames = scene_vars['fps']['frames']
+    last_time = scene_vars['fps']['last_time']
+    if time() - last_time  >= 1:
+        scene_vars['fps']['current'] = frames / (time() - last_time)
+        scene_vars['fps']['frames'] = 0
+        scene_vars['fps']['last_time'] = time()
+
+
+def axis(ctr, eye):
+
     alt = 50.0
     alt_rev = -5
-    draw_axis(ctr, (ctr[0], ctr[1], alt), (1.0, 0.0, 0.0)) # z to red
-    draw_axis(ctr, (ctr[0], alt, ctr[2]), (0.0, 1.0, 0.0)) # y to green
-    draw_axis(ctr, (alt, ctr[1], ctr[2]), (0.0, 0.0, 1.0)) # x to blue
-    draw_axis(ctr, (ctr[0], ctr[1], alt_rev), (1.0, 1.0, 0.0)) # -z to yellow
-    draw_axis(ctr, (ctr[0], alt_rev, ctr[2]), (1.0, 0.0, 1.0)) # -y to pink
-    draw_axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
-    draw_axis((0,0,0),(0,15,0),(0.0,0.0,0.0)) # line at (0,15,0)
-    draw_axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0)) # line center to eye
+    __draw_axis(ctr, (ctr[0], ctr[1], alt), (1.0, 0.0, 0.0)) # z to red
+    __draw_axis(ctr, (ctr[0], alt, ctr[2]), (0.0, 1.0, 0.0)) # y to green
+    __draw_axis(ctr, (alt, ctr[1], ctr[2]), (0.0, 0.0, 1.0)) # x to blue
+    __draw_axis(ctr, (ctr[0], ctr[1], alt_rev), (1.0, 1.0, 0.0)) # -z to yellow
+    __draw_axis(ctr, (ctr[0], alt_rev, ctr[2]), (1.0, 0.0, 1.0)) # -y to pink
+    __draw_axis(ctr, (alt_rev, ctr[1], ctr[2]), (0.0, 1.0, 1.0)) # -x to cyan
+    __draw_axis((0,0,0),(0,15,0),(0.0,0.0,0.0)) # line at (0,15,0)
+    __draw_axis(ctr, (eye[0], 0, eye[2]), (1.0, 1.0, 1.0)) # line center to eye
     ### debug end
 
 
-def draw_axis(center, last_vertex, c):
+def __draw_axis(center, last_vertex, c):
+
     glColor(c)
     glBegin(GL_LINES)
     glVertex(center)
@@ -27,22 +46,23 @@ def draw_axis(center, last_vertex, c):
     glEnd()
 
 
-def debug_dist_e2c(ctr, eye):
-    return round(math.sqrt(
-        (eye[0] - ctr[0])**2 +
-        (eye[1] - ctr[1])**2 +
-        (eye[2] - ctr[2])**2), 3)
+def dist_e2c(ctr, eye):
+
+    dist = round(sqrt(
+                    (eye[0] - ctr[0])**2 +
+                    (eye[1] - ctr[1])**2 +
+                    (eye[2] - ctr[2])**2),
+                 3)
+    return dist
 
 
-def debug_info(scene_vars):
-    spec_keys = [GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT]
-    key_names = ["DOWN", "UP", "LEFT", "RIGHT"]
+def scene_info(scene_vars):
 
     last_key = scene_vars['last_key']
 
     if isinstance(last_key, int):
-        if last_key in spec_keys:
-            last_key = key_names[spec_keys.index(last_key)]
+        if last_key in SPEC_KEYS:
+            last_key = KEY_NAMES[SPEC_KEYS.index(last_key)]
 
     print('--- DEBUG START ---')
 
@@ -56,7 +76,7 @@ def debug_info(scene_vars):
     print('eye_degree \t', scene_vars['eye_degree'])
     print('origin_centered \t', scene_vars['origin_centered'])
     print('fps \t\t', scene_vars['fps']['current'])  # seems like vsync is enabled
-    print('dist   \t\t', debug_dist_e2c(scene_vars['ctr'], scene_vars['eye']))
+    print('dist   \t\t', dist_e2c(scene_vars['ctr'], scene_vars['eye']))
                          
     print('--- DEBUG END ---')
 
