@@ -23,4 +23,4 @@ OpenGL model of the Graciliano Ramos Library
 
 - [x] Draw the front wall - with squared doors.
 
-- [ ] Draw the front wall - with arched doors.
+- [x] Draw the front wall - with arched doors.
