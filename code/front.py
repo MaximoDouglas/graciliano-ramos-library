@@ -6,7 +6,7 @@ class Front:
     def __init__(self):
         self.reference = (0, 0, 0) #x, y and z of the floor
         #A for iteration for each one of the seven parts that compose the front
-        n_parts = 30
+        n_parts = 150
         self.sub_part_half_width = [3.125, 3.125, 0.75]
         self.sub_part_half_height = [2, 2, 0.624]
         self.sub_part_half_depth = [0.1, 0.1, 0.1]
@@ -20,8 +20,10 @@ class Front:
         self.__generate_coordinates()
 
     def __get_arc_dims(self, n_parts):
-        door_width      = 1.5
-        wall_depth      = 0.2
+        door_width  = 1.5
+        door_begin  = -0.75
+        wall_depth  = 0.2
+        r           = 0.75
 
         rect_half_width = (door_width/n_parts)/2
         half_widths     = [rect_half_width]*n_parts
@@ -29,25 +31,12 @@ class Front:
         rect_half_depth = (wall_depth)/2
         half_depths     = [rect_half_depth]*n_parts
 
-        height_diff = 0.75
-        h = height_diff
-        dim = height_diff/(n_parts/2)
+        x = door_begin + rect_half_width
         half_heights    = []
-
-        '''for i in range(n_parts):
-            if (i > 0 and i < n_parts/2):
-                h -= dim
-            elif (i > 0 and i > n_parts/2 and i <= n_parts - 1):
-                h += dim
-
-            half_heights.append(h/2)'''
-
-        x = -0.75
         for i in range(n_parts):
-            h = math.sqrt(math.pow(height_diff, 2) - math.pow(x, 2))
-            half_heights.append((0.75 - h)/2)
+            h = math.sqrt(math.pow(r, 2) - math.pow(x, 2))
+            half_heights.append((r - h)/2)
 
-            print(x)
             x += half_widths[0]*2
 
         return half_widths, half_heights, half_depths

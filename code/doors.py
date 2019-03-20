@@ -45,7 +45,7 @@ class Door:
         self.max_width = max([vertex[0] for vertex in door])
         self.center_point = ((self.max_width + self.min_width)/2.0,
                 (self.max_height + self.min_height)/2.0)
-        
+
         self.left_door.extend(door)
 
         return door
@@ -71,7 +71,7 @@ class Door:
         door = []
         start_angle = 0 if direction == 'right' else 90
 
-        for i in range(0 + start_angle, 91 + start_angle, 30):
+        for i in range(0 + start_angle, 91 + start_angle, 10):
             degInRad = i * (DEG2RAD)
             x = center + math.cos(degInRad) * (0.5 + extra)
             y = level + 2 + math.sin(degInRad) * (0.5 + extra)
@@ -88,4 +88,3 @@ class Door:
 
     def get_right_door(self):
         return self.right_door
-
