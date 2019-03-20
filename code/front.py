@@ -11,7 +11,7 @@ class Front:
         self.sub_part_center = self.__get_sub_part_center(self.reference)
         self.front = []
 
-        n_parts = 9
+        n_parts = 10
         print(self.__get_arc_dims(n_parts))
 
         self.__generate_coordinates()
@@ -37,7 +37,7 @@ class Front:
             elif (i > 0 and i > n_parts/2 and i <= n_parts - 1):
                 h += dim
 
-            half_heights.append(h)
+            half_heights.append(h/2)
 
         return half_widths, half_heights, half_depths
 
