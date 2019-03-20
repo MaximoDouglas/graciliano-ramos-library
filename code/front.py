@@ -1,3 +1,4 @@
+import math
 
 class Front:
 
@@ -5,7 +6,7 @@ class Front:
     def __init__(self):
         self.reference = (0, 0, 0) #x, y and z of the floor
         #A for iteration for each one of the seven parts that compose the front
-        n_parts = 10
+        n_parts = 30
         self.sub_part_half_width = [3.125, 3.125, 0.75]
         self.sub_part_half_height = [2, 2, 0.624]
         self.sub_part_half_depth = [0.1, 0.1, 0.1]
@@ -33,13 +34,21 @@ class Front:
         dim = height_diff/(n_parts/2)
         half_heights    = []
 
-        for i in range(n_parts):
+        '''for i in range(n_parts):
             if (i > 0 and i < n_parts/2):
                 h -= dim
             elif (i > 0 and i > n_parts/2 and i <= n_parts - 1):
                 h += dim
 
-            half_heights.append(h/2)
+            half_heights.append(h/2)'''
+
+        x = -0.75
+        for i in range(n_parts):
+            h = math.sqrt(math.pow(height_diff, 2) - math.pow(x, 2))
+            half_heights.append((0.75 - h)/2)
+
+            print(x)
+            x += half_widths[0]*2
 
         return half_widths, half_heights, half_depths
 
@@ -52,6 +61,7 @@ class Front:
         for w, h in zip(half_widths, half_heights):
             center = (reference[0] + x_i + w, reference[1] + y_i - h,
                         reference[2] + z_centers)
+            x_i += 2*w
 
             centers.append(center)
 
