@@ -42,51 +42,45 @@ scene_vars = {
 # global for texture
 textures = {'door': None}
 
+lightIntensity = 0.3
+factor = 0.01
+
+# model = GL_FLAT
+model = GL_SMOOTH
 
 def init():
     glClearColor(0.0, 0.0, 0.0, 0.0)
 
-    # Habilita o depth-buffering
-    glEnable(GL_DEPTH_TEST)
-
-    # Habilita o uso de iluminação
-    glEnable(GL_LIGHTING)
-
     # Bloco para iluminação ambiente ---------------
-    luzAmbiente   = [0.5, 0.5, 0.5, 1]
-    posicaoLuz    = [0.0, 1000.0, 0.0, 0.1]
+    luzAmbiente   = [0.2, 0.2, 0.2, 1]
+    luzDifusa     = [0.9, 0.9, 0.9, 0.2]
+    luzEspecular  = [1.0, 1.0, 1.0, 0.2]
+    posicaoLuz    = [0.0, 1000.0, 0.0, lightIntensity]
 
-    # Habilita o modelo de colorização de Gouraud
-    glShadeModel(GL_SMOOTH)
+    # Habilita o modelo de colorização definido na variável global model
+    glShadeModel(model)
 
     # Ativa o uso da luz ambiente
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente)
 
     # Define os parâmetros da luz de número 0
     glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente)
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa)
+    glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular)
     glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz)
 
     # Habilita a definição da cor do material a partir da cor corrente
     glEnable(GL_COLOR_MATERIAL)
 
+    # Habilita o uso de iluminação
+    glEnable(GL_LIGHTING)
+
     # Habilita a luz de número 0
     glEnable(GL_LIGHT0)
     # Fim do bloco para iluminação ambiente ---------------
 
-    # Bloco para iluminação pontual (0, 3.8, 0) ---------------
-    ambientLuz1 = [0.01, 0.01, 0.01, 1]
-    difuseLuz1  = [0.5, 0.5, 0.5, 1]
-    posicaoLuz1 = [0.0, 3.8, 0.0, 1]
-
-    glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLuz1);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, difuseLuz1)
-    glLightfv(GL_LIGHT1, GL_POSITION, posicaoLuz1)
-
-    # Habilita a luz de número 1
-    glEnable(GL_LIGHT1)
-
-    # Fim do bloco para iluminação potual ---------------
-
+    # Habilita o depth-buffering
+    glEnable(GL_DEPTH_TEST)
 
 
 # Reshape callback
