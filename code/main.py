@@ -30,7 +30,7 @@ scene_vars = {
         'eye_degree' : [0, 20], 'center_degree' : [180, 0],
         'radius' : 5.0, 'm' : None,
         'inc_deg': 1, 'inc_axis': 1,
-        'origin_centered' : True, 
+        'origin_centered' : True,
         'last_key': None, 'show_axis': False, 'debug': True,
         'fps' : {
                  'frames': 0, 'last_time' : time(), 'current' : 0,
@@ -44,19 +44,34 @@ textures = {'door': None}
 
 
 def init():
-
-    mat_specular = [0.0, 0.0, 0.0, 1.0]
-    mat_shininess = [50.0]
-    light_position = [0.0, 0.0, 0.0, 1.0]
     glClearColor(0.0, 0.0, 0.0, 0.0)
 
-    #glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular)
-    #glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess)
-    #glLightfv(GL_LIGHT0, GL_POSITION, light_position)
-    #glEnable(GL_LIGHTING)
-    #glEnable(GL_LIGHT0)
-    glEnable(GL_DEPTH_TEST)
+    # Bloco para iluminação ambiente ---------------
+    luzAmbiente   = [0.5, 0.5, 0.5, 1]
+    posicaoLuz    = [0.0, 1000.0, 0.0, 0.1]
 
+    # Habilita o modelo de colorização de Gouraud
+    glShadeModel(GL_SMOOTH)
+
+    # Ativa o uso da luz ambiente
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente)
+
+    # Define os parâmetros da luz de número 0
+    glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente)
+    glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz)
+
+    # Habilita a definição da cor do material a partir da cor corrente
+    glEnable(GL_COLOR_MATERIAL)
+
+    # Habilita o uso de iluminação
+    glEnable(GL_LIGHTING)
+
+    # Habilita a luz de número 0
+    glEnable(GL_LIGHT0)
+    # Fim do bloco para iluminação ambiente ---------------
+
+    # Habilita o depth-buffering
+    glEnable(GL_DEPTH_TEST)
 
 # Reshape callback
 def reshape(w, h):
@@ -97,12 +112,12 @@ def draw_scenario():
     glPushMatrix()
 
     obj.draw_floors()
-    #obj.draw_tops()
-    #obj.draw_walls()
+    obj.draw_tops()
+    obj.draw_walls()
     obj.draw_doors(textures['door'])
-    #obj.draw_chairs()
-    #obj.draw_tables()
-    #obj.draw_book_cases()
+    obj.draw_chairs()
+    obj.draw_tables()
+    obj.draw_book_cases()
     obj.draw_front()
 
     ### debug start
