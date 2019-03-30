@@ -23,7 +23,7 @@ kb_keys = {
         'nav' : ('w', 's', 'a', 'd'),
         'lvl' : ('0', '1', '2', 'o', 'O'),
         'cfg' : ('g', 'h', 'c', 'i', 'n', 'q', 't'),
-        'lig' : ('l', 'L', 'm')
+        'lig' : ('l', 'L', 'ç', 'Ç', 'm')
         }
 
 scene_vars = {
@@ -39,7 +39,7 @@ scene_vars = {
                  },
         'spf' : 0,
         'light': {
-                 'inc_factor' : 0.01, 'intensity' : 0.3, 'model' : GL_SMOOTH
+            'inc_factor' : 0.01, 'inc_pl_y' : 0, 'intensity' : 0.3, 'model' : GL_SMOOTH
                  }
         }
 
@@ -53,7 +53,8 @@ def init():
     luzAmbiente   = [0.2, 0.2, 0.2, 1]
     luzDifusa     = [0.9, 0.9, 0.9, 0.2]
     luzEspecular  = [1.0, 1.0, 1.0, 0.2]
-    posicaoLuz    = [0.0, 600.0, 0.0, scene_vars['light']['intensity']]
+    posicaoLuz    = [0.0, 600.0 + scene_vars['light']['inc_pl_y'],
+                     0.0, scene_vars['light']['intensity']]
 
     # Habilita o modelo de colorização definido na variável global model
     glShadeModel(scene_vars['light']['model'])
@@ -174,6 +175,8 @@ def update_scene_params():
 
 # Keyboard callback
 def keyboard(key, x, y):
+
+    print(key)
 
     if not isinstance(key, int):
         key = key.decode("utf-8")

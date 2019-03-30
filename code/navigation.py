@@ -161,9 +161,9 @@ def kb_light(key, scene_vars):
     model = scene_vars['light']['model'] 
 
     if key == 'l':
-        scene_vars['light']['intensity'] = (scene_vars['light']['intensity'] + inc) % 1
+        scene_vars['light']['inc_pl_y'] = (scene_vars['light']['inc_pl_y'] + 50) % 600
     elif key == 'L':
-        scene_vars['light']['intensity'] = (scene_vars['light']['intensity'] - inc) % 1
+        scene_vars['light']['inc_pl_y'] = (scene_vars['light']['inc_pl_y'] - 50) % 600
     elif key == 'm':
         scene_vars['light']['model'] = GL_FLAT if model == GL_SMOOTH else GL_SMOOTH
 
