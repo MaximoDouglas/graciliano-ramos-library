@@ -151,3 +151,14 @@ def kb_cfg(key, scene_vars):
     elif key == 'q':
         sys.exit()
 
+
+def kb_light(key, scene_vars):
+
+    inc = scene_vars['light']['inc_factor']
+
+    if key == 'l':
+        scene_vars['light']['intensity'] = (scene_vars['light']['intensity'] + inc) % 1
+    elif key == 'L':
+        scene_vars['light']['intensity'] = (scene_vars['light']['intensity'] - inc) % 1
+
+

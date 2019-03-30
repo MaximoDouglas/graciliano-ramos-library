@@ -22,7 +22,8 @@ kb_keys = {
         'rot_ctr' : (GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT),
         'nav' : ('w', 's', 'a', 'd'),
         'lvl' : ('0', '1', '2', 'o', 'O'),
-        'cfg' : ('g', 'h', 'c', 'i', 'n', 'q', 't')
+        'cfg' : ('g', 'h', 'c', 'i', 'n', 'q', 't'),
+        'lig' : ('l', 'L')
         }
 
 scene_vars = {
@@ -36,17 +37,14 @@ scene_vars = {
                  'frames': 0, 'last_time' : time(), 'current' : 0,
                  'enable': True
                  },
-        'spf' : 0
+        'spf' : 0,
+        'light': {
+                 'inc_factor' : 0.01, 'intensity' : 0.3, 'model' : GL_SMOOTH
+                 }
         }
 
 # global for texture
 textures = {'door': None}
-
-lightIntensity = 0.3
-factor = 0.01
-
-# model = GL_FLAT
-model = GL_SMOOTH
 
 def init():
     glClearColor(0.0, 0.0, 0.0, 0.0)
@@ -55,10 +53,10 @@ def init():
     luzAmbiente   = [0.2, 0.2, 0.2, 1]
     luzDifusa     = [0.9, 0.9, 0.9, 0.2]
     luzEspecular  = [1.0, 1.0, 1.0, 0.2]
-    posicaoLuz    = [0.0, 1000.0, 0.0, lightIntensity]
+    posicaoLuz    = [0.0, 1000.0, 0.0, scene_vars['light']['intensity']]
 
     # Habilita o modelo de colorização definido na variável global model
-    glShadeModel(model)
+    glShadeModel(scene_vars['light']['model'])
 
     # Ativa o uso da luz ambiente
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente)
@@ -198,6 +196,9 @@ def keyboard(key, x, y):
     elif key in kb_keys['cfg']:
         # config keys
         nav.kb_cfg(key, scene_vars)
+    elif key in kb_keys['lig']:
+        nav.kb_light(key, scene_vars)
+        
 
     update_scene_params()
 

@@ -77,6 +77,7 @@ def scene_info(scene_vars):
     print('origin_centered \t', scene_vars['origin_centered'])
     print('fps \t\t', scene_vars['fps']['current'])  # seems like vsync is enabled
     print('dist   \t\t', dist_e2c(scene_vars['ctr'], scene_vars['eye']))
+    print('light\t\t', scene_vars['light'])
                          
     print('--- DEBUG END ---')
 
