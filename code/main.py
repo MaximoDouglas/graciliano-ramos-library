@@ -137,6 +137,11 @@ def draw_scenario():
         debug.fps(scene_vars)
 
     glPopMatrix()
+
+    posicaoLuz = [0.0, 600.0 + scene_vars['light']['inc_pl_y'],
+                     0.0, scene_vars['light']['intensity']]
+    glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz)
+
     glutSwapBuffers()
 
 
