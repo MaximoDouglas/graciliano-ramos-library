@@ -6,6 +6,9 @@ from OpenGL.GLUT import GLUT_KEY_UP
 from OpenGL.GLUT import GLUT_KEY_RIGHT
 from OpenGL.GLUT import GLUT_KEY_LEFT
 
+from OpenGL.GL import GL_FLAT
+from OpenGL.GL import GL_SMOOTH
+
 import objects as obj
 
 
@@ -155,10 +158,13 @@ def kb_cfg(key, scene_vars):
 def kb_light(key, scene_vars):
 
     inc = scene_vars['light']['inc_factor']
+    model = scene_vars['light']['model'] 
 
     if key == 'l':
         scene_vars['light']['intensity'] = (scene_vars['light']['intensity'] + inc) % 1
     elif key == 'L':
         scene_vars['light']['intensity'] = (scene_vars['light']['intensity'] - inc) % 1
+    elif key == 'm':
+        scene_vars['light']['model'] = GL_FLAT if model == GL_SMOOTH else GL_SMOOTH
 
 
