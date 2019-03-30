@@ -46,6 +46,12 @@ textures = {'door': None}
 def init():
     glClearColor(0.0, 0.0, 0.0, 0.0)
 
+    # Habilita o depth-buffering
+    glEnable(GL_DEPTH_TEST)
+
+    # Habilita o uso de iluminação
+    glEnable(GL_LIGHTING)
+
     # Bloco para iluminação ambiente ---------------
     luzAmbiente   = [0.5, 0.5, 0.5, 1]
     posicaoLuz    = [0.0, 1000.0, 0.0, 0.1]
@@ -63,15 +69,25 @@ def init():
     # Habilita a definição da cor do material a partir da cor corrente
     glEnable(GL_COLOR_MATERIAL)
 
-    # Habilita o uso de iluminação
-    glEnable(GL_LIGHTING)
-
     # Habilita a luz de número 0
     glEnable(GL_LIGHT0)
     # Fim do bloco para iluminação ambiente ---------------
 
-    # Habilita o depth-buffering
-    glEnable(GL_DEPTH_TEST)
+    # Bloco para iluminação pontual (0, 3.8, 0) ---------------
+    ambientLuz1 = [0.01, 0.01, 0.01, 1]
+    difuseLuz1  = [0.5, 0.5, 0.5, 1]
+    posicaoLuz1 = [0.0, 3.8, 0.0, 1]
+
+    glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLuz1);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, difuseLuz1)
+    glLightfv(GL_LIGHT1, GL_POSITION, posicaoLuz1)
+
+    # Habilita a luz de número 1
+    glEnable(GL_LIGHT1)
+
+    # Fim do bloco para iluminação potual ---------------
+
+
 
 # Reshape callback
 def reshape(w, h):
