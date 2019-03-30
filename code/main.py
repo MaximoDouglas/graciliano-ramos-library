@@ -48,16 +48,34 @@ textures = {'door': None}
 
 def init():
     glClearColor(0.0, 0.0, 0.0, 0.0)
+
+    # Bloco para iluminação ambiente ---------------
     luzAmbiente   = [0.2, 0.2, 0.2, 1]
+    luzDifusa     = [0.9, 0.9, 0.9, 0.2]
+    luzEspecular  = [1.0, 1.0, 1.0, 0.2]
+    posicaoLuz    = [0.0, 600.0, 0.0, scene_vars['light']['intensity']]
+
+    # Habilita o modelo de colorização definido na variável global model
+    glShadeModel(scene_vars['light']['model'])
 
     # Ativa o uso da luz ambiente
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente)
+
+    # Define os parâmetros da luz de número 0
+    glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente)
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa)
+    glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular)
+    glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz)
 
     # Habilita a definição da cor do material a partir da cor corrente
     glEnable(GL_COLOR_MATERIAL)
 
     # Habilita o uso de iluminação
     glEnable(GL_LIGHTING)
+
+    # Habilita a luz de número 0
+    glEnable(GL_LIGHT0)
+    # Fim do bloco para iluminação ambiente ---------------
 
     # Habilita o depth-buffering
     glEnable(GL_DEPTH_TEST)
@@ -118,26 +136,6 @@ def draw_scenario():
         debug.fps(scene_vars)
 
     glPopMatrix()
-
-    # Bloco para iluminação da luz 0 ---------------
-    luzAmbiente   = [0.2, 0.2, 0.2, 1]
-    luzDifusa     = [0.9, 0.9, 0.9, 0.2]
-    luzEspecular  = [1.0, 1.0, 1.0, 0.2]
-    posicaoLuz    = [0.0, 1000.0, 0.0, scene_vars['light']['intensity']]
-
-    # Habilita o modelo de colorização definido na variável global model
-    glShadeModel(scene_vars['light']['model'])
-
-    # Define os parâmetros da luz de número 0
-    glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente)
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa)
-    glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular)
-    glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz)
-
-    # Habilita a luz de número 0
-    glEnable(GL_LIGHT0)
-    # Fim do bloco para iluminação ambiente ---------------
-
     glutSwapBuffers()
 
 
