@@ -15,6 +15,9 @@ class Door:
         self.max_width = None
         self.min_width = None
 
+        # texture
+        self.filename = 'door_1_28x28.png'
+
         self.build_door()
 
     def build_door(self):

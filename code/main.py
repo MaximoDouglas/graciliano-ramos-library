@@ -222,17 +222,9 @@ def register_callbacks():
 
 
 def register_textures():
-    global textures
 
-    folder = 'textures/'
-    filename = folder + 'door_1_28x28.png'
-    texture_id = tex.read_texture(filename)
-    textures['door'] = texture_id
-
-    folder = 'textures/'
-    filename = folder + 'front_1_28x28.png'
-    texture_id = tex.read_texture(filename)
-    textures['front'] = texture_id
+    textures['door'] = tex.gen_texture_id('door', '1')
+    textures['front'] = tex.gen_texture_id('front', '1')
 
 
 def main():

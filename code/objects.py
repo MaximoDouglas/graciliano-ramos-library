@@ -58,16 +58,19 @@ def draw_walls():
 
 def draw_front(texture_id):
     glColor3fv((0.5, 0.5, 0.5))
+
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, texture_id) # target, texture
+
     for piece in c.front:
         for face in piece:
-            glEnable(GL_TEXTURE_2D)
-            glBindTexture(GL_TEXTURE_2D, texture_id) # target, texture
             glBegin(GL_QUADS)
             for vertex in face:
                 glTexCoord3fv(vertex)
                 glVertex3fv(vertex)
             glEnd()
-            glDisable(GL_TEXTURE_2D)
+
+    glDisable(GL_TEXTURE_2D)
 
 
 def open_doors():

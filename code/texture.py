@@ -7,6 +7,13 @@ from OpenGL.GLUT import *
 from PIL import Image
 
 
+def gen_texture_id(object, id):
+    folder = 'textures/'
+    filename = folder + object + '_' + id + '_28x28.png'
+    texture_id = read_texture(filename)
+    return texture_id
+ 
+
 def read_image_data(filename):
     img = Image.open(filename)
     img_data = np.array(list(img.getdata()), np.int8)
