@@ -44,7 +44,10 @@ scene_vars = {
         }
 
 # global for texture
-textures = {'door': None, 'front': None}
+textures = {
+        'floors': None, 'door': None, 'front': None, 'walls' : None,
+        'tops': None, 'chairs' : None, 'tables' : None, 'bookcases': None,
+        }
 
 def init():
     glClearColor(0.0, 0.0, 0.0, 0.0)
@@ -120,14 +123,12 @@ def draw_scenario():
 
     glPushMatrix()
 
-    obj.draw_floors()
-    obj.draw_tops()
-    obj.draw_walls()
-    obj.draw_doors(textures['door'])
-    obj.draw_chairs()
-    obj.draw_tables()
-    obj.draw_book_cases()
-    obj.draw_front(textures['front'])
+    draw_funcs = [obj.draw_floors, obj.draw_doors, obj.draw_front, obj.draw_walls,
+                  obj.draw_tops, obj.draw_chairs, obj.draw_tables, obj.draw_book_cases]
+    textures_id = textures.values()
+
+    for df, tid in zip(draw_funcs, textures_id):
+        obj.draw_object(df, tid)
 
     ### debug start
     if scene_vars['show_axis']:
@@ -225,6 +226,9 @@ def register_textures():
 
     textures['door'] = tex.gen_texture_id('door', '1')
     textures['front'] = tex.gen_texture_id('front', '1')
+    #textures['floors'] = tex.gen_texture_id('floor', '1')
+    textures['floors'] = tex.gen_texture_id('door', '1')
+    textures['walls'] = tex.gen_texture_id('front', '1')
 
 
 def main():

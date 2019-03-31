@@ -3,38 +3,56 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from coordinates import Coordinates as c
 
+from functools import partial
+
 open_main_door = False
 
 
+def draw_object(draw_obj, obj_texture_id):
+    
+    if obj_texture_id is not None:
+        glEnable(GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, obj_texture_id) # target, texture
+        draw_obj()
+        glDisable(GL_TEXTURE_2D)
+    else:
+        draw_obj()
+
+
+# ----------------------------------------------------------------- FLOORS METHODS BEGIN
 def draw_floors():
-    for floor in c.floors:
+    for floor in c.floors:  # there are 4 floors
         j = 0
-        for f in floor:
+        for f in floor:  # there are 6 faces for each floor
             i = 0
-            for face in f:
+            for face in f:  # there are 4 vertices for each face
                 if ((j == 3) and (i == 0)):
                     glColor3fv((1, 1, 1))
                 else:
                     glColor3fv((0.70, 0.63, 0.45))
                 glBegin(GL_QUADS)
-                for vertex in face:
-                    glVertex3fv(vertex)
+                for vertex in face:  # there are 3 literals in each vertex
+                    glTexCoord2fv((vertex[0], vertex[2]))
+                    glVertex3fv(vertex)  # here we have vertex = (x, y, z)
                 glEnd()
                 i+=1
             j+=1
+# ----------------------------------------------------------------- FLOORS METHODS END
 
-
+# ----------------------------------------------------------------- TOPS METHODS BEGIN
 def draw_tops():
     for top in c.tops:
         glPushMatrix()
         glBegin(GL_TRIANGLES)
         for vertex in top:
             glColor3fv((0.5, 0.5, 0.5))
+            glTexCoord2fv((vertex[0], vertex[2]))
             glVertex3fv(vertex)
         glEnd()
         glPopMatrix()
+# ----------------------------------------------------------------- TOPS METHODS END
 
-
+# ----------------------------------------------------------------- WALLS METHODS BEGIN
 def draw_walls():
     for _, wall in enumerate(c.walls):
         j = 0
@@ -50,18 +68,17 @@ def draw_walls():
 
                 glBegin(GL_QUADS)
                 for vertex in face:
+                    glTexCoord2fv((vertex[1], vertex[2]))
                     glVertex3fv(vertex)
                 glEnd()
                 i+=1
             j+=1
+# ----------------------------------------------------------------- WALLS METHODS END
 
+# ----------------------------------------------------------------- FRONT METHODS BEGIN
+def draw_front():
 
-def draw_front(texture_id):
     glColor3fv((0.5, 0.5, 0.5))
-
-    glEnable(GL_TEXTURE_2D)
-    glBindTexture(GL_TEXTURE_2D, texture_id) # target, texture
-
     for piece in c.front:
         for face in piece:
             glBegin(GL_QUADS)
@@ -69,10 +86,9 @@ def draw_front(texture_id):
                 glTexCoord3fv(vertex)
                 glVertex3fv(vertex)
             glEnd()
+# ----------------------------------------------------------------- FRONT METHODS END
 
-    glDisable(GL_TEXTURE_2D)
-
-
+# ----------------------------------------------------------------- DOORS METHODS BEGIN
 def open_doors():
     global open_main_door
     open_main_door = True
@@ -83,9 +99,7 @@ def close_doors():
     open_main_door = False
 
 
-def _draw_main_door(lvl, ctr, texture_id):
-    door = c.doors_objects[lvl][ctr]
-
+def __draw_main_left_door(door):
     glPushMatrix()
     # door left low corner is (-0.75, 0, 20)
     glTranslatef(-0.75, 0, 20)
@@ -95,11 +109,14 @@ def _draw_main_door(lvl, ctr, texture_id):
 
     for vertex in door.get_left_door():
         glColor3fv((0, 0, 1))
-        glTexCoord3fv(vertex)
+        glTexCoord2fv((vertex[0], vertex[1]))
         glVertex3fv(vertex)
 
     glEnd()
     glPopMatrix()
+
+
+def __draw_main_right_door(door):
 
     glPushMatrix()
     # door left low corner is (-0.75, 0, 20)
@@ -110,26 +127,33 @@ def _draw_main_door(lvl, ctr, texture_id):
 
     for vertex in door.get_right_door():
         glColor3fv((0, 0, 1))
-        glTexCoord3fv(vertex)
+        glTexCoord2fv((vertex[0], vertex[1]))
         glVertex3fv(vertex)
 
     glEnd()
     glPopMatrix()
 
 
-def _draw_other_doors(lvl, ctr, texture_id):
+def _draw_main_door(lvl, ctr):
+    door = c.doors_objects[lvl][ctr]
+
+    __draw_main_left_door(door)
+    __draw_main_right_door(door)
+
+
+def _draw_other_doors(lvl, ctr):
 
     glBegin(GL_POLYGON)
 
     for vertex in c.doors_objects[lvl][ctr].get_door():
         glColor3fv((0, 0, 1))
-        glTexCoord3fv(vertex)
+        glTexCoord2fv((vertex[0], vertex[1]))
         glVertex3fv(vertex)
 
     glEnd()
 
 
-def draw_doors(texture_id):
+def draw_doors():
     draw_door_func = None
     for lvl in c.levels:
         for ctr in c.centers:
@@ -138,13 +162,11 @@ def draw_doors(texture_id):
             else:
                 draw_door_func = _draw_other_doors
 
-            glEnable(GL_TEXTURE_2D)
-            glBindTexture(GL_TEXTURE_2D, texture_id) # target, texture
-            draw_door_func(lvl, ctr, texture_id)
-            glDisable(GL_TEXTURE_2D)
+            draw_door_func(lvl, ctr)
+# ----------------------------------------------------------------- DOORS METHODS END
 
 
-
+# ----------------------------------------------------------------- CHAIRS METHODS BEGIN
 def draw_chairs():
     for chair in c.chairs:
         colorx = 0.2
@@ -167,8 +189,9 @@ def draw_chairs():
                     glColor3fv((colorx, 0.0, 0.0))
                     glVertex3fv(vertex)
                 glEnd()
+# ----------------------------------------------------------------- CHAIRS METHODS END
 
-
+# ----------------------------------------------------------------- TABLE METHODS BEGIN
 def draw_tables():
     for table in c.tables:
         colorx = 0.2
@@ -180,8 +203,9 @@ def draw_tables():
                     glColor3fv((colorx, 0.0, 0.0))
                     glVertex3fv(vertex)
                 glEnd()
+# ----------------------------------------------------------------- TABLE METHODS END
 
-
+# ----------------------------------------------------------------- BOOKCASES METHODS BEGIN
 def draw_book_cases():
     for bookcase in c.bookcases:
         i = 0
@@ -209,3 +233,5 @@ def draw_book_cases():
                     glVertex3fv(vertex)
                 glEnd()
             i += 1
+# ----------------------------------------------------------------- BOOKCASES METHODS END
+
