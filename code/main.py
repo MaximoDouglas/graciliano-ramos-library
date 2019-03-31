@@ -44,7 +44,7 @@ scene_vars = {
         }
 
 # global for texture
-textures = {'door': None}
+textures = {'door': None, 'front': None}
 
 def init():
     glClearColor(0.0, 0.0, 0.0, 0.0)
@@ -127,7 +127,7 @@ def draw_scenario():
     obj.draw_chairs()
     obj.draw_tables()
     obj.draw_book_cases()
-    obj.draw_front()
+    obj.draw_front(textures['front'])
 
     ### debug start
     if scene_vars['show_axis']:
@@ -181,8 +181,6 @@ def update_scene_params():
 # Keyboard callback
 def keyboard(key, x, y):
 
-    print(key)
-
     if not isinstance(key, int):
         key = key.decode("utf-8")
 
@@ -226,8 +224,15 @@ def register_callbacks():
 def register_textures():
     global textures
 
-    texture_id = tex.read_texture('textures/door_1_28x28.png')
+    folder = 'textures/'
+    filename = folder + 'door_1_28x28.png'
+    texture_id = tex.read_texture(filename)
     textures['door'] = texture_id
+
+    folder = 'textures/'
+    filename = folder + 'front_1_28x28.png'
+    texture_id = tex.read_texture(filename)
+    textures['front'] = texture_id
 
 
 def main():

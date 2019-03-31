@@ -7,10 +7,13 @@ from OpenGL.GLUT import *
 from PIL import Image
 
 
-def read_texture(filename):
-
+def read_image_data(filename):
     img = Image.open(filename)
     img_data = np.array(list(img.getdata()), np.int8)
+    return img_data, img.size
+
+
+def read_texture(filename):
 
     texture_id = glGenTextures(1)  # return 1 texture name
 
@@ -25,8 +28,10 @@ def read_texture(filename):
 
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE)
 
+    img_data, dims = read_image_data(filename)
+
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-                 img.size[0], img.size[1], 0,
+                 dims[0], dims[1], 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, img_data)
 
     return texture_id
