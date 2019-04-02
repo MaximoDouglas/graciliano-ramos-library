@@ -173,6 +173,7 @@ class Wall:
             sub_part.append(sub_part_bottom)
 
             self.wall.append(sub_part)
+            break
 
     def get_wall(self):
             return self.wall
