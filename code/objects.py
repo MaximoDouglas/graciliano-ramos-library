@@ -9,7 +9,7 @@ open_main_door = False
 
 
 def draw_object(draw_obj, obj_texture_id):
-    
+
     if obj_texture_id is not None:
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, obj_texture_id) # target, texture
@@ -171,7 +171,12 @@ def draw_doors():
 
 # ----------------------------------------------------------------- CHAIRS METHODS BEGIN
 def draw_chairs():
-    for chair in c.chairs:
+    for i, chair in enumerate(c.chairs):
+        glPushMatrix()
+
+        glTranslatef(c.c_coordsT[i][0], c.c_coordsT[i][1], c.c_coordsT[i][2])
+        glRotatef(0, 0, 1, 0)
+
         colorx = 0.2
         for part in chair:
             colorx += 0.2
@@ -181,6 +186,7 @@ def draw_chairs():
                     glColor3fv((colorx, 0.0, 0.0))
                     glVertex3fv(vertex)
                 glEnd()
+        glPopMatrix()
 
     for chair in c.chairs2:
         colorx = 0.2
@@ -196,7 +202,11 @@ def draw_chairs():
 
 # ----------------------------------------------------------------- TABLE METHODS BEGIN
 def draw_tables():
-    for table in c.tables:
+    for i, table in enumerate(c.tables):
+        glPushMatrix()
+
+        glTranslatef(c.ct_coordsT[i][0], c.ct_coordsT[i][1], c.ct_coordsT[i][2])
+
         colorx = 0.2
         for part in table:
             colorx += 0.2
@@ -206,6 +216,8 @@ def draw_tables():
                     glColor3fv((colorx, 0.0, 0.0))
                     glVertex3fv(vertex)
                 glEnd()
+        glPopMatrix()
+
 # ----------------------------------------------------------------- TABLE METHODS END
 
 # ----------------------------------------------------------------- BOOKCASES METHODS BEGIN
@@ -237,4 +249,3 @@ def draw_book_cases():
                 glEnd()
             i += 1
 # ----------------------------------------------------------------- BOOKCASES METHODS END
-
