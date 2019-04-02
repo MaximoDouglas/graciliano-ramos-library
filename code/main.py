@@ -54,10 +54,9 @@ def init():
 
     # Bloco para iluminação ambiente ---------------
     luzAmbiente   = [0.2, 0.2, 0.2, 1]
-    luzDifusa     = [0.9, 0.9, 0.9, 0.2]
-    luzEspecular  = [1.0, 1.0, 1.0, 0.2]
-    posicaoLuz    = [0.0, 600.0 + scene_vars['light']['inc_pl_y'],
-                     0.0, scene_vars['light']['intensity']]
+    luzDifusa     = [0.9, 0.9, 0.9, 1]
+    luzEspecular  = [1.0, 1.0, 1.0, 1]
+    posicaoLuz    = [0.0, 600.0, 0.8, 1]
 
     # Habilita o modelo de colorização definido na variável global model
     glShadeModel(scene_vars['light']['model'])
@@ -148,12 +147,7 @@ def draw_scenario():
 
     glPopMatrix()
 
-    posicaoLuz = [0.0, 600.0 + scene_vars['light']['inc_pl_y'],
-                     0.0, scene_vars['light']['intensity']]
-    glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz)
-
     glutSwapBuffers()
-
 
 def update_scene_params():
 
