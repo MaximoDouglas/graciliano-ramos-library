@@ -56,6 +56,7 @@ def draw_tops():
 
 # ----------------------------------------------------------------- WALLS METHODS BEGIN
 def draw_walls():
+    texcoords = [(0,0),(40,0),(40,10),(0,10)]
 
     for _, wall in enumerate(c.walls):
         j = 0
@@ -70,8 +71,8 @@ def draw_walls():
                     glColor3fv((1, 0.63, 0.48))
 
                 glBegin(GL_QUADS)
-                for vertex in face:
-                    glTexCoord2fv((vertex[1], vertex[2]))
+                for t, vertex in enumerate(face):
+                    glTexCoord2fv(texcoords[t])
                     glVertex3fv(vertex)
                 glEnd()
                 i+=1

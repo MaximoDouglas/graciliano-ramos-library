@@ -230,7 +230,7 @@ def register_textures():
     textures['door'] = tex.gen_texture_id('door', '1')
     textures['front'] = tex.gen_texture_id('front', '1')
     textures['floors'] = tex.gen_texture_id('floor', '3', '256')
-    textures['walls'] = tex.gen_texture_id('wall', '1', '256')
+    textures['walls'] = tex.gen_texture_id('wall', '2', '256')
 
 
 def main():
