@@ -115,8 +115,8 @@ def __draw_main_left_door(door):
     glTranslatef(0.75, 0, -20.0)
     glBegin(GL_POLYGON)
 
-    for vertex in door.get_left_door():
-        glColor3fv((0, 0, 1))
+    for t, vertex in enumerate(door.get_left_door()):
+        #glColor3fv((0, 0, 1))
         glTexCoord2fv((vertex[0], vertex[1]))
         glVertex3fv(vertex)
 
@@ -133,8 +133,8 @@ def __draw_main_right_door(door):
     glTranslatef(-0.75, 0, -20.0)
     glBegin(GL_POLYGON)
 
-    for vertex in door.get_right_door():
-        glColor3fv((0, 0, 1))
+    for t, vertex in enumerate(door.get_right_door()):
+        #glColor3fv((0, 0, 1))
         glTexCoord2fv((vertex[0], vertex[1]))
         glVertex3fv(vertex)
 
@@ -262,10 +262,15 @@ def draw_book_cases():
 # ----------------------------------------------------------------- BOOKCASES METHODS END
 
 # utils
-def __get_tex_coords_from(face):
+def __get_tex_coords_from(face, from_obj=None):
     def dist(u, v):
         diff = np.asarray(u) - np.asarray(v)
         return np.linalg.norm(diff)
+
+    if from_obj == 'door':
+        f = list(face[1:])
+        f.append(face[0])
+        face = tuple(f)
 
     v1, v2, v3, v4 = face
     s1 = 0
@@ -275,3 +280,4 @@ def __get_tex_coords_from(face):
     tc = [(s1,t1),(s2,t1),(s2,t2),(s1,t2)]
 
     return tc
+
