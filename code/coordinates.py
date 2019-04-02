@@ -32,8 +32,12 @@ class Coordinates():
             left_doors.append(door.get_left_door())
 
     chairs = []
-    c_coordsT = [(-5.5,0,5)]
-    c_coords = [(0, 0, 0)]*1
+    c_coordsT = [(-5.5,0,5), (-4, 0, -15.7), (0, 0, -15.7), (4, 0, -15.7),
+                    (-4.7, 0, -15), (-0.7, 0, -15), (3.3, 0, -15),
+                    (-3.3, 0, -15), (0.7, 0, -15), (4.7, 0, -15),
+                    (-4, 0, -14.3), (0, 0, -14.3), (4, 0, -14.3)]
+                    
+    c_coords = [(0, 0, 0)]*13
     for cc in c_coords:
         chair = Chair(cc).get_chair()
         chairs.append(chair)
@@ -45,8 +49,8 @@ class Coordinates():
         chairs2.append(chair)
 
     tables = []
-    ct_coordsT = [(-5.5,0,5.7)]
-    ct_coords = [(0, 0, 0)]*1
+    ct_coordsT = [(-5.5,0,5.7), (-4, 0, -15), (0, 0, -15), (4, 0, -15)]
+    ct_coords = [(0, 0, 0)]*4
     for ct in ct_coords:
         table = Table(ct).get_table()
         tables.append(table)
