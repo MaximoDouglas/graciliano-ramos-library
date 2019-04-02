@@ -175,8 +175,14 @@ def draw_chairs():
         glPushMatrix()
 
         glTranslatef(c.c_coordsT[i][0], c.c_coordsT[i][1], c.c_coordsT[i][2])
-        glRotatef(0, 0, 1, 0)
 
+        if(i >= 4 and i <= 6):
+            glRotatef(90, 0, 1, 0)
+        elif(i >= 7 and i <= 9):
+            glRotatef(-90, 0, 1, 0)
+        elif(i >= 10 and i <= 13):
+            glRotatef(180, 0, 1, 0)
+            
         colorx = 0.2
         for part in chair:
             colorx += 0.2
