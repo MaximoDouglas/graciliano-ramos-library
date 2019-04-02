@@ -7,9 +7,10 @@ from OpenGL.GLUT import *
 from PIL import Image
 
 
-def gen_texture_id(object, id, px='28'):
+def gen_texture_id(obj, id, px='28'):
     folder = 'textures/'
-    filename = f"{folder}{object}_{id}_{px}.png"
+    #filename = f"{folder}{obj}_{id}_{px}.png"
+    filename = "{}{}_{}_{}.png".format(folder, obj, id, px)
     texture_id = read_texture(filename)
     return texture_id
  
