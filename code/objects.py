@@ -106,7 +106,7 @@ def __draw_main_left_door(door):
     glPushMatrix()
     # door left low corner is (-0.75, 0, 20)
     glTranslatef(-0.75, 0, 20)
-    glRotatef(-45, 0, 1, 0)
+    glRotatef(-75, 0, 1, 0)
     glTranslatef(0.75, 0, -20.0)
     glBegin(GL_POLYGON)
 
@@ -124,7 +124,7 @@ def __draw_main_right_door(door):
     glPushMatrix()
     # door left low corner is (-0.75, 0, 20)
     glTranslatef(0.75, 0, 20)
-    glRotatef(45, 0, 1, 0)
+    glRotatef(75, 0, 1, 0)
     glTranslatef(-0.75, 0, -20.0)
     glBegin(GL_POLYGON)
 
@@ -182,7 +182,7 @@ def draw_chairs():
             glRotatef(-90, 0, 1, 0)
         elif(i >= 10 and i <= 13):
             glRotatef(180, 0, 1, 0)
-            
+
         colorx = 0.2
         for part in chair:
             colorx += 0.2
