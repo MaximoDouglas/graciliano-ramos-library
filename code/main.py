@@ -123,9 +123,18 @@ def draw_scenario():
 
     glPushMatrix()
 
-    draw_funcs = [obj.draw_floors, obj.draw_doors, obj.draw_front, obj.draw_walls,
-                  obj.draw_tops, obj.draw_chairs, obj.draw_tables, obj.draw_book_cases]
-    textures_id = textures.values()
+    draw_funcs = [
+            obj.draw_floors,
+            obj.draw_doors,
+            obj.draw_front,
+            obj.draw_walls,
+            obj.draw_tops,
+            obj.draw_chairs,
+            obj.draw_tables,
+            obj.draw_book_cases
+            ]
+
+    textures_id = list(textures.values())
 
     for df, tid in zip(draw_funcs, textures_id):
         obj.draw_object(df, tid)
@@ -226,9 +235,8 @@ def register_textures():
 
     textures['door'] = tex.gen_texture_id('door', '1')
     textures['front'] = tex.gen_texture_id('front', '1')
-    #textures['floors'] = tex.gen_texture_id('floor', '1')
-    textures['floors'] = tex.gen_texture_id('door', '1')
-    textures['walls'] = tex.gen_texture_id('front', '1')
+    textures['floors'] = tex.gen_texture_id('floor', '3', '256')
+    textures['walls'] = tex.gen_texture_id('wall', '1', '256')
 
 
 def main():

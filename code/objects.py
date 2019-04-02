@@ -21,6 +21,7 @@ def draw_object(draw_obj, obj_texture_id):
 
 # ----------------------------------------------------------------- FLOORS METHODS BEGIN
 def draw_floors():
+
     for floor in c.floors:  # there are 4 floors
         j = 0
         for f in floor:  # there are 6 faces for each floor
@@ -31,7 +32,7 @@ def draw_floors():
                 else:
                     glColor3fv((0.70, 0.63, 0.45))
                 glBegin(GL_QUADS)
-                for vertex in face:  # there are 3 literals in each vertex
+                for t, vertex in enumerate(face):  # there are 3 literals in each vertex
                     glTexCoord2fv((vertex[0], vertex[2]))
                     glVertex3fv(vertex)  # here we have vertex = (x, y, z)
                 glEnd()
@@ -41,6 +42,7 @@ def draw_floors():
 
 # ----------------------------------------------------------------- TOPS METHODS BEGIN
 def draw_tops():
+
     for top in c.tops:
         glPushMatrix()
         glBegin(GL_TRIANGLES)
@@ -54,6 +56,7 @@ def draw_tops():
 
 # ----------------------------------------------------------------- WALLS METHODS BEGIN
 def draw_walls():
+
     for _, wall in enumerate(c.walls):
         j = 0
         for w in wall:

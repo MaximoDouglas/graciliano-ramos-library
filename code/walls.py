@@ -1,7 +1,6 @@
 
 class Wall:
 
-
     def __init__(self, reference=None):
         self.reference = reference #x, y and z of the floor
         #A for iteration for each one of the seven parts that compose the wall
@@ -177,3 +176,4 @@ class Wall:
 
     def get_wall(self):
             return self.wall
+

@@ -7,9 +7,9 @@ from OpenGL.GLUT import *
 from PIL import Image
 
 
-def gen_texture_id(object, id):
+def gen_texture_id(object, id, px='28'):
     folder = 'textures/'
-    filename = folder + object + '_' + id + '_28x28.png'
+    filename = f"{folder}{object}_{id}_{px}.png"
     texture_id = read_texture(filename)
     return texture_id
  
@@ -30,6 +30,8 @@ def read_texture(filename):
 
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)  # repeat in s when done, if needed
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)  # repeat in t when done, if needed
+    #glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)  # repeat in s when done, if needed
+    #glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)  # repeat in t when done, if needed
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)  # how to upsample?
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)  # how to downsample?
 
