@@ -39,60 +39,6 @@ def kb_rot_ctr(key, scene_vars):
         scene_vars['center_degree'][0] = (scene_vars['center_degree'][0] - scene_vars['inc_deg']) % 360
 
 
-def kb_rot_eye(key, scene_vars):
-
-    if key == 'r':
-        scene_vars['eye_degree'][0] = (scene_vars['eye_degree'][0] + scene_vars['inc_deg']) % 360
-    elif key == 'R':
-        scene_vars['eye_degree'][0] = (scene_vars['eye_degree'][0] - scene_vars['inc_deg']) % 360
-    elif key == 'e':
-        scene_vars['eye_degree'][1] = (scene_vars['eye_degree'][1] + scene_vars['inc_deg']) % 360
-    elif key == 'E':
-        scene_vars['eye_degree'][1] = (scene_vars['eye_degree'][1] - scene_vars['inc_deg']) % 360
-
-
-def kb_rot_ctr(key, scene_vars):
-
-    # only if is not centered at origin
-    if scene_vars['origin_centered']:
-        pass
-    elif key == GLUT_KEY_DOWN:
-        scene_vars['center_degree'][1] = (scene_vars['center_degree'][1] - scene_vars['inc_deg']) % 360
-    elif key == GLUT_KEY_UP:
-        scene_vars['center_degree'][1] = (scene_vars['center_degree'][1] + scene_vars['inc_deg']) % 360
-    elif key == GLUT_KEY_LEFT:
-        scene_vars['center_degree'][0] = (scene_vars['center_degree'][0] + scene_vars['inc_deg']) % 360
-    elif key == GLUT_KEY_RIGHT:
-        scene_vars['center_degree'][0] = (scene_vars['center_degree'][0] - scene_vars['inc_deg']) % 360
-
-
-def kb_rot_eye(key, scene_vars):
-
-    if key == 'r':
-        scene_vars['eye_degree'][0] = (scene_vars['eye_degree'][0] + scene_vars['inc_deg']) % 360
-    elif key == 'R':
-        scene_vars['eye_degree'][0] = (scene_vars['eye_degree'][0] - scene_vars['inc_deg']) % 360
-    elif key == 'e':
-        scene_vars['eye_degree'][1] = (scene_vars['eye_degree'][1] + scene_vars['inc_deg']) % 360
-    elif key == 'E':
-        scene_vars['eye_degree'][1] = (scene_vars['eye_degree'][1] - scene_vars['inc_deg']) % 360
-
-
-def kb_rot_ctr(key, scene_vars):
-
-    # only if is not centered at origin
-    if scene_vars['origin_centered']:
-        pass
-    elif key == GLUT_KEY_DOWN:
-        scene_vars['center_degree'][1] = (scene_vars['center_degree'][1] - scene_vars['inc_deg']) % 360
-    elif key == GLUT_KEY_UP:
-        scene_vars['center_degree'][1] = (scene_vars['center_degree'][1] + scene_vars['inc_deg']) % 360
-    elif key == GLUT_KEY_LEFT:
-        scene_vars['center_degree'][0] = (scene_vars['center_degree'][0] + scene_vars['inc_deg']) % 360
-    elif key == GLUT_KEY_RIGHT:
-        scene_vars['center_degree'][0] = (scene_vars['center_degree'][0] - scene_vars['inc_deg']) % 360
-
-
 def kb_nav_mov(key, scene_vars):
 
     # only if is not centered at origin
