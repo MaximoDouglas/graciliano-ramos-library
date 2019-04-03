@@ -32,7 +32,7 @@ scene_vars = {
         'radius' : 5.0, 'm' : None,
         'inc_deg': 1, 'inc_axis': 1,
         'origin_centered' : True,
-        'last_key': None, 'show_axis': False, 'debug': True,
+        'last_key': None, 'show_axis': False, 'debug': False,
         'fps' : {
                  'frames': 0, 'last_time' : time(), 'current' : 0,
                  'enable': True
@@ -45,9 +45,10 @@ scene_vars = {
 
 # global for texture
 textures = {
-        'floors': None, 'door': None, 'front': None, 'walls' : None,
-        'tops': None, 'chairs' : None, 'tables' : None, 'bookcases': None,
-        'chairs': None, 'tables': None, 'bookcases_sides': None
+        'floors': None, 'doors': None, 'front' : None,
+        'walls' : None, 'tops':  None, 'chairs': None,
+        'tables': None, 'bookcases_cs':          None,
+        'bookcases_corners' : None
         }
 
 def init():
@@ -131,8 +132,8 @@ def draw_scenario():
             obj.draw_tops,
             obj.draw_chairs,
             obj.draw_tables,
-            obj.draw_book_cases_sides,
-            obj.draw_book_cases_center
+            obj.draw_book_cases_center_sides,
+            obj.draw_book_cases_corners
             ]
 
     textures_id = list(textures.values())
@@ -229,16 +230,14 @@ def register_callbacks():
 
 def register_textures():
 
-    #textures['door']   = tex.gen_texture_id('door', '1', '64')
-    textures['door']   = tex.gen_texture_id('door', '5','64')
-    #textures['door']   = tex.gen_texture_id('door', '4','512')
-    #textures['door']   = tex.gen_texture_id('wall', '2', '512')
-    textures['front']  = tex.gen_texture_id('wall', '4', '256')
-    textures['floors'] = tex.gen_texture_id('floor', '3', '256')
-    textures['walls']  = tex.gen_texture_id('wall', '2', '256')
-    textures['chairs'] = tex.gen_texture_id('chair', '1', '512')
-    textures['tables'] = tex.gen_texture_id('table', '3', '1024')
-    textures['bookcases_sides'] = tex.gen_texture_id('bookcase', '1', '256')
+    textures['doors']              = tex.gen_texture_id('door',     '5',   '64')
+    textures['front']             = tex.gen_texture_id('wall',     '4',  '256')
+    textures['floors']            = tex.gen_texture_id('floor',    '3',  '256')
+    textures['walls']             = tex.gen_texture_id('wall',     '2',  '256')
+    textures['chairs']            = tex.gen_texture_id('chair',    '1',  '512')
+    textures['tables']            = tex.gen_texture_id('table',    '3', '1024')
+    textures['bookcases_cs']      = tex.gen_texture_id('bookcase', '1',  '256')
+    textures['bookcases_corners'] = tex.gen_texture_id('bookcase', '2',  '512')
 
 
 def main():

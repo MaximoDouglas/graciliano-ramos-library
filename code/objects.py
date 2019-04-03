@@ -240,7 +240,7 @@ def draw_tables():
 # ----------------------------------------------------------------- TABLE METHODS END
 
 # ----------------------------------------------------------------- BOOKCASES METHODS BEGIN
-def draw_book_cases_sides():
+def draw_book_cases_center_sides():
     for ind, bookcase in enumerate(c.bookcases):
         glPushMatrix()
 
@@ -266,7 +266,8 @@ def draw_book_cases_sides():
 
         glPopMatrix()
 
-def draw_book_cases_center():
+
+def draw_book_cases_corners():
     for ind2, bookcase in enumerate(c.bookcases2):
         glPushMatrix()
 
@@ -278,7 +279,7 @@ def draw_book_cases_center():
                 texcoords = __get_tex_coords_from(face)
                 glBegin(GL_QUADS)
                 for t, vertex in enumerate(face):
-                    glColor3fv(colors[0])
+                    #glColor3fv(colors[0])
                     glTexCoord2fv(texcoords[t])
                     glVertex3fv(vertex)
                 glEnd()
