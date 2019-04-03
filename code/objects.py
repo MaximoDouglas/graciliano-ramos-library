@@ -194,11 +194,11 @@ def draw_chairs():
 
         glTranslatef(c.c_coordsT[i][0], c.c_coordsT[i][1], c.c_coordsT[i][2])
 
-        if(i >= 6 and i <= 10):
+        if(i >= 6 and i <= 11):
             glRotatef(90, 0, 1, 0)
-        elif(i >= 11 and i <= 15):
+        elif(i >= 12 and i <= 16):
             glRotatef(-90, 0, 1, 0)
-        elif(i >= 16 and i <= 20):
+        elif(i >= 17 and i <= 21):
             glRotatef(180, 0, 1, 0)
 
         colorx = 0.2
@@ -258,7 +258,7 @@ def draw_book_cases_center_sides():
         glPushMatrix()
 
         glTranslatef(c.cbc_coordsT[ind][0], c.cbc_coordsT[ind][1], c.cbc_coordsT[ind][2])
-        if (ind >= 2 and ind <= 13):
+        if (ind >= 2 and ind <= 16):
             glRotatef(90, 0, 1, 0)
 
         i = 0
