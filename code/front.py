@@ -7,9 +7,9 @@ class Front:
         self.reference = (0, 0, 0) #x, y and z of the floor
         #A for iteration for each one of the seven parts that compose the front
         n_parts = 150
-        self.sub_part_half_width = [3.125, 3.125, 0.75]
-        self.sub_part_half_height = [2, 2, 0.624]
-        self.sub_part_half_depth = [0.1, 0.1, 0.1]
+        self.sub_part_half_width = [3.125, 3.125, 0.75, 7, 7]
+        self.sub_part_half_height = [2, 2, 0.624, 1.5, 1.5]
+        self.sub_part_half_depth = [0.1, 0.1, 0.1, 0.1, 0.1]
         w, h, d = self.__get_arc_dims(n_parts)
         self.sub_part_half_width.extend(w)
         self.sub_part_half_height.extend(h)
@@ -61,7 +61,9 @@ class Front:
         sub_part_center = [
                         (reference[0] - 3.875, reference[1] + 1.9, reference[2] + 19.88),
                         (reference[0] + 3.875, reference[1] + 1.9, reference[2] + 19.88),
-                        (reference[0] + 0, reference[1] + 3.375, reference[2] + 19.88)
+                        (reference[0] + 0, reference[1] + 3.375, reference[2] + 19.88),
+                        (reference[0] + 0, reference[1] + 5.5, reference[2] + 19.88),
+                        (reference[0] + 0, reference[1] + 8.5, reference[2] + 19.88)
                         ]
 
         sub_part_center.extend(self.__get_arc_centers(reference, w, h))
