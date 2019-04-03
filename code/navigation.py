@@ -62,8 +62,9 @@ def kb_nav_mov(key, scene_vars):
     iwsin = math.sin(math.radians(angle_move))
     iwcos = math.cos(math.radians(angle_move))
 
-    scene_vars['init_center'][2] += 0.5 * iwcos
-    scene_vars['init_center'][0] += 0.5 * iwsin
+    step_size = 0.5
+    scene_vars['init_center'][2] += step_size * iwcos
+    scene_vars['init_center'][0] += step_size * iwsin
 
     scene_vars['m'] = math.tan(math.radians(scene_vars['center_degree'][0]))
 
