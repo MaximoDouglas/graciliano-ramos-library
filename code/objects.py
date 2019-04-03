@@ -1,9 +1,11 @@
+import numpy as np
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from coordinates import Coordinates as c
-
 from functools import partial
+
+from coordinates import Coordinates as c
 
 open_main_door = False
 
@@ -56,7 +58,7 @@ def draw_tops():
 
 # ----------------------------------------------------------------- WALLS METHODS BEGIN
 def draw_walls():
-    texcoords = [(0,0),(40,0),(40,10),(0,10)]
+    #texcoords = [(0,0),(40,0),(40,10),(0,10)]
 
     for _, wall in enumerate(c.walls):
         j = 0
@@ -69,6 +71,8 @@ def draw_walls():
                     glColor3fv((1, 1, 1))
                 else:
                     glColor3fv((1, 0.63, 0.48))
+
+                texcoords = __get_tex_coords_from(face)
 
                 glBegin(GL_QUADS)
                 for t, vertex in enumerate(face):
@@ -111,8 +115,8 @@ def __draw_main_left_door(door):
     glTranslatef(0.75, 0, -20.0)
     glBegin(GL_POLYGON)
 
-    for vertex in door.get_left_door():
-        glColor3fv((0, 0, 1))
+    for t, vertex in enumerate(door.get_left_door()):
+        #glColor3fv((0, 0, 1))
         glTexCoord2fv((vertex[0], vertex[1]))
         glVertex3fv(vertex)
 
@@ -129,8 +133,8 @@ def __draw_main_right_door(door):
     glTranslatef(-0.75, 0, -20.0)
     glBegin(GL_POLYGON)
 
-    for vertex in door.get_right_door():
-        glColor3fv((0, 0, 1))
+    for t, vertex in enumerate(door.get_right_door()):
+        #glColor3fv((0, 0, 1))
         glTexCoord2fv((vertex[0], vertex[1]))
         glVertex3fv(vertex)
 
@@ -262,3 +266,24 @@ def draw_book_cases():
                 glEnd()
             i += 1
 # ----------------------------------------------------------------- BOOKCASES METHODS END
+
+# utils
+def __get_tex_coords_from(face, from_obj=None):
+    def dist(u, v):
+        diff = np.asarray(u) - np.asarray(v)
+        return np.linalg.norm(diff)
+
+    if from_obj == 'door':
+        f = list(face[1:])
+        f.append(face[0])
+        face = tuple(f)
+
+    v1, v2, v3, v4 = face
+    s1 = 0
+    s2 = dist(v1, v2)
+    t1 = 0
+    t2 = dist(v2, v3)
+    tc = [(s1,t1),(s2,t1),(s2,t2),(s1,t2)]
+
+    return tc
+
