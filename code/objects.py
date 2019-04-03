@@ -151,6 +151,13 @@ def _draw_main_door(lvl, ctr):
 
 def _draw_other_doors(lvl, ctr):
 
+    glPushMatrix()
+
+    if lvl == 10 and ctr == 0:
+        glTranslatef(0.0, -10.0, -20.0)
+        glScalef(0.5, 0.5, 0.5)
+        glTranslatef(0.0, 30.0, 56.4)
+
     glBegin(GL_POLYGON)
 
     for vertex in c.doors_objects[lvl][ctr].get_door():
@@ -159,6 +166,8 @@ def _draw_other_doors(lvl, ctr):
         glVertex3fv(vertex)
 
     glEnd()
+    glPopMatrix()
+
 
 
 def draw_doors():
@@ -169,6 +178,10 @@ def draw_doors():
                 draw_door_func = _draw_main_door
             else:
                 draw_door_func = _draw_other_doors
+
+            if lvl == 10:
+                if ctr != 0:
+                    continue
 
             draw_door_func(lvl, ctr)
 # ----------------------------------------------------------------- DOORS METHODS END

@@ -31,6 +31,14 @@ class Coordinates():
             doors.append(door.get_door())
             left_doors.append(door.get_left_door())
 
+    # tops door
+    lvl, ctr = 10, 0
+    levels.append(lvl)
+    doors_objects[lvl] = {}
+    door = Door(lvl, ctr)
+    doors_objects[lvl][ctr] = door
+    doors.append(door.get_door())
+
     chairs = []
     c_coordsT = [(-5.5,0,9.3),
                 (-4, 0, -15.7), (0, 0, -15.7), (4, 0, -15.7), (-2, 0, -12.7), (2, 0, -12.7), # 0 degrees
