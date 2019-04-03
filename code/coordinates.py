@@ -56,7 +56,8 @@ class Coordinates():
         tables.append(table)
 
     bookcases = []
-    cbc_coords = [(1.2,0,5), (1.2,2,5)]
+    cbc_coordsT = [(2.5,0,5), (2.5,4,5)]
+    cbc_coords = [(0, 0, 0)]*2
     for cbc in cbc_coords:
         bookcase = Bookcase(cbc).get_bookcase()
         bookcases.append(bookcase)

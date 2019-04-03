@@ -229,7 +229,11 @@ def draw_tables():
 
 # ----------------------------------------------------------------- BOOKCASES METHODS BEGIN
 def draw_book_cases():
-    for bookcase in c.bookcases:
+    for i, bookcase in enumerate(c.bookcases):
+        glPushMatrix()
+
+        glTranslatef(c.cbc_coordsT[i][0], c.cbc_coordsT[i][1], c.cbc_coordsT[i][2])
+
         i = 0
         colors = [(0.81, 0.66, 0.13), (0.67, 0.66, 0.62)]
         for part in bookcase:
@@ -243,6 +247,8 @@ def draw_book_cases():
                     glVertex3fv(vertex)
                 glEnd()
             i += 1
+
+        glPopMatrix()
 
     for bookcase in c.bookcases2:
         i = 0
