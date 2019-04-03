@@ -21,7 +21,7 @@ kb_keys = {
         'rot_eye' : ('r', 'R', 'e', 'E'),
         'rot_ctr' : (GLUT_KEY_DOWN, GLUT_KEY_UP, GLUT_KEY_LEFT, GLUT_KEY_RIGHT),
         'nav' : ('w', 's', 'a', 'd'),
-        'lvl' : ('0', '1', '2', 'o', 'O'),
+        'lvl' : ('0', '1', '2', '@', 'o', 'O'),
         'cfg' : ('g', 'h', 'c', 'i', 'n', 'q', 't'),
         'lig' : ('l', 'L', 'ç', 'Ç', 'm')
         }

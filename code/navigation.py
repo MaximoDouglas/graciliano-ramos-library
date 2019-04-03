@@ -77,6 +77,8 @@ def kb_nav_to_lvl(key, scene_vars):
         scene_vars['init_center'][1] = 4
     elif key == '2':
         scene_vars['init_center'][1] = 7
+    elif key == '@':
+        scene_vars['init_center'][1] = 10
     elif key == 'o':
         obj.open_doors()
     elif key == 'O':
