@@ -256,7 +256,10 @@ def draw_book_cases():
 
         glPopMatrix()
 
-    for bookcase in c.bookcases2:
+    for ind2, bookcase in enumerate(c.bookcases2):
+        glPushMatrix()
+
+        glTranslatef(c.cbc2_coordsT[ind2][0], c.cbc2_coordsT[ind2][1], c.cbc2_coordsT[ind2][2])
         i = 0
         colors = [(0, 0.5, 0)]
         for part in bookcase:
@@ -267,6 +270,7 @@ def draw_book_cases():
                     glVertex3fv(vertex)
                 glEnd()
             i += 1
+        glPopMatrix()
 # ----------------------------------------------------------------- BOOKCASES METHODS END
 
 # utils
