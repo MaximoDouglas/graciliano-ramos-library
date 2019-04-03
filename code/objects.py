@@ -233,10 +233,12 @@ def draw_tables():
 
 # ----------------------------------------------------------------- BOOKCASES METHODS BEGIN
 def draw_book_cases():
-    for i, bookcase in enumerate(c.bookcases):
+    for ind, bookcase in enumerate(c.bookcases):
         glPushMatrix()
 
-        glTranslatef(c.cbc_coordsT[i][0], c.cbc_coordsT[i][1], c.cbc_coordsT[i][2])
+        glTranslatef(c.cbc_coordsT[ind][0], c.cbc_coordsT[ind][1], c.cbc_coordsT[ind][2])
+        if (ind >= 2 and ind <= 9):
+            glRotatef(90, 0, 1, 0)
 
         i = 0
         colors = [(0.81, 0.66, 0.13), (0.67, 0.66, 0.62)]
@@ -286,4 +288,3 @@ def __get_tex_coords_from(face, from_obj=None):
     tc = [(s1,t1),(s2,t1),(s2,t2),(s1,t2)]
 
     return tc
-
