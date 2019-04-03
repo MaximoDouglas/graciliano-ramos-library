@@ -236,8 +236,8 @@ def register_textures():
     textures['walls']             = tex.gen_texture_id('wall',     '2',  '256')
     textures['chairs']            = tex.gen_texture_id('chair',    '1',  '512')
     textures['tables']            = tex.gen_texture_id('table',    '3', '1024')
-    textures['bookcases_cs']      = tex.gen_texture_id('bookcase', '1',  '256')
-    textures['bookcases_corners'] = tex.gen_texture_id('bookcase', '2',  '512')
+    textures['bookcases_corners']      = tex.gen_texture_id('bookcase', '1',  '256')
+    textures['bookcases_cs'] = tex.gen_texture_id('bookcase', '2',  '512')
 
 
 def main():
