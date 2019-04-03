@@ -181,11 +181,11 @@ def draw_chairs():
 
         glTranslatef(c.c_coordsT[i][0], c.c_coordsT[i][1], c.c_coordsT[i][2])
 
-        if(i >= 4 and i <= 6):
+        if(i >= 6 and i <= 10):
             glRotatef(90, 0, 1, 0)
-        elif(i >= 7 and i <= 9):
+        elif(i >= 11 and i <= 15):
             glRotatef(-90, 0, 1, 0)
-        elif(i >= 10 and i <= 13):
+        elif(i >= 16 and i <= 20):
             glRotatef(180, 0, 1, 0)
 
         colorx = 0.2
@@ -199,7 +199,10 @@ def draw_chairs():
                 glEnd()
         glPopMatrix()
 
-    for chair in c.chairs2:
+    for ind, chair in enumerate(c.chairs2):
+        glPushMatrix()
+
+        glTranslatef(c.c2_coordsT[ind][0], c.c2_coordsT[ind][1], c.c2_coordsT[ind][2])
         colorx = 0.2
         for part in chair:
             colorx += 0.2
@@ -209,6 +212,7 @@ def draw_chairs():
                     glColor3fv((colorx, 0.0, 0.0))
                     glVertex3fv(vertex)
                 glEnd()
+        glPopMatrix()
 # ----------------------------------------------------------------- CHAIRS METHODS END
 
 # ----------------------------------------------------------------- TABLE METHODS BEGIN
