@@ -245,7 +245,7 @@ def draw_book_cases_center_sides():
         glPushMatrix()
 
         glTranslatef(c.cbc_coordsT[ind][0], c.cbc_coordsT[ind][1], c.cbc_coordsT[ind][2])
-        if (ind >= 2 and ind <= 9):
+        if (ind >= 2 and ind <= 13):
             glRotatef(90, 0, 1, 0)
 
         i = 0

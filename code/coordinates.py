@@ -55,8 +55,9 @@ class Coordinates():
         chairs2.append(chair)
 
     tables = []
-    ct_coordsT = [(-5.5,0,10), (-4, 0, -15), (0, 0, -15), (4, 0, -15), (-2, 0, -12), (2, 0, -12)]
-    ct_coords = [(0, 0, 0)]*6
+    ct_coordsT = [(-5.5,0,10), (-4, 0, -15), (0, 0, -15), (4, 0, -15), (-2, 0, -12), (2, 0, -12),
+                    (-5.5, 0, -1)]
+    ct_coords = [(0, 0, 0)]*7
     for ct in ct_coords:
         table = Table(ct).get_table()
         tables.append(table)
@@ -64,17 +65,18 @@ class Coordinates():
     bookcases = []
     cbc_coordsT = [(3.5,0,3), (3.5,4,3), (-6.6, 0, -6.5), (-6.6, 0, -9.5),
                     (-6.6, 0, -12.5), (-6.6, 0, -15.5), (6.6, 0, -6.5),
-                    (6.6, 0, -9.5), (6.6, 0, -12.5), (6.6, 0, -15.5),
-                    (-1.5, 0, -19), (1.5, 0, -19)]
-    cbc_coords = [(0, 0, 0)]*12
+                    (6.6, 0, -9.5), (6.6, 0, -12.5), (-6.5, 0, 6.5), (-6.5, 0, 3.7),
+                    (-6.5, 0, 1.3), (6.6, 0, -15.5),
+                    (-6.6, 0, 14), (-1.5, 0, -19), (1.5, 0, -19)]
+    cbc_coords = [(0, 0, 0)]*16
     for cbc in cbc_coords:
         bookcase = Bookcase(cbc).get_bookcase()
         bookcases.append(bookcase)
 
     bookcases2 = []
     cbc2_coordsT = [(3.5,0,1), (3.5,4,1), (-5.5, 0, -19), (6.5, 0, -19),
-                    (-3.5, 0, -19), (4.5, 0, -19)]
-    cbc2_coords = [(0, 0, 0)]*6
+                    (-3.5, 0, -19), (4.5, 0, -19), (-4.2, 0, 1)]
+    cbc2_coords = [(0, 0, 0)]*7
     for cbc2 in cbc2_coords:
         bookcase2 = Bookcase2(cbc2).get_bookcase()
         bookcases2.append(bookcase2)
