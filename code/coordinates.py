@@ -56,14 +56,19 @@ class Coordinates():
         tables.append(table)
 
     bookcases = []
-    cbc_coordsT = [(2.5,0,5), (2.5,4,5)]
-    cbc_coords = [(0, 0, 0)]*2
+    cbc_coordsT = [(3.5,0,3), (3.5,4,3), (-6.6, 0, -6.5), (-6.6, 0, -9.5),
+                    (-6.6, 0, -12.5), (-6.6, 0, -15.5), (6.6, 0, -6.5),
+                    (6.6, 0, -9.5), (6.6, 0, -12.5), (6.6, 0, -15.5),
+                    (-1.5, 0, -19), (1.5, 0, -19)]
+    cbc_coords = [(0, 0, 0)]*12
     for cbc in cbc_coords:
         bookcase = Bookcase(cbc).get_bookcase()
         bookcases.append(bookcase)
 
     bookcases2 = []
-    cbc2_coords = [(1.5,0,4), (1.5,3.5,4)]
+    cbc2_coordsT = [(3.5,0,1), (3.5,4,1), (-5.5, 0, -19), (6.5, 0, -19),
+                    (-3.5, 0, -19), (4.5, 0, -19)]
+    cbc2_coords = [(0, 0, 0)]*6
     for cbc2 in cbc2_coords:
         bookcase2 = Bookcase2(cbc2).get_bookcase()
         bookcases2.append(bookcase2)
