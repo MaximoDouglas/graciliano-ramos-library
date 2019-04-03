@@ -195,6 +195,7 @@ def draw_chairs():
                 glBegin(GL_QUADS)
                 for vertex in face:
                     glColor3fv((colorx, 0.0, 0.0))
+                    glTexCoord2fv((vertex[0], vertex[1]))
                     glVertex3fv(vertex)
                 glEnd()
         glPopMatrix()
@@ -222,9 +223,12 @@ def draw_tables():
         for part in table:
             colorx += 0.2
             for face in part:
+                texcoords = __get_tex_coords_from(face)
                 glBegin(GL_QUADS)
-                for vertex in face:
-                    glColor3fv((colorx, 0.0, 0.0))
+                for t, vertex in enumerate(face):
+                    glColor3fv((0.5 * colorx, 0.0, 0.0))
+                    #glTexCoord2fv((vertex[0], vertex[1]))
+                    glTexCoord2fv(texcoords[t])
                     glVertex3fv(vertex)
                 glEnd()
         glPopMatrix()
@@ -232,7 +236,7 @@ def draw_tables():
 # ----------------------------------------------------------------- TABLE METHODS END
 
 # ----------------------------------------------------------------- BOOKCASES METHODS BEGIN
-def draw_book_cases():
+def draw_book_cases_sides():
     for ind, bookcase in enumerate(c.bookcases):
         glPushMatrix()
 
@@ -244,18 +248,21 @@ def draw_book_cases():
         colors = [(0.81, 0.66, 0.13), (0.67, 0.66, 0.62)]
         for part in bookcase:
             for face in part:
+                texcoords = __get_tex_coords_from(face)
                 glBegin(GL_QUADS)
-                for vertex in face:
+                for t, vertex in enumerate(face):
                     if (i <= 2):
                         glColor3fv(colors[0])
                     else:
                         glColor3fv(colors[1])
+                    glTexCoord2fv(texcoords[t])
                     glVertex3fv(vertex)
                 glEnd()
             i += 1
 
         glPopMatrix()
 
+def draw_book_cases_center():
     for ind2, bookcase in enumerate(c.bookcases2):
         glPushMatrix()
 
@@ -264,9 +271,11 @@ def draw_book_cases():
         colors = [(0, 0.5, 0)]
         for part in bookcase:
             for face in part:
+                texcoords = __get_tex_coords_from(face)
                 glBegin(GL_QUADS)
-                for vertex in face:
+                for t, vertex in enumerate(face):
                     glColor3fv(colors[0])
+                    glTexCoord2fv(texcoords[t])
                     glVertex3fv(vertex)
                 glEnd()
             i += 1
