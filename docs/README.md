@@ -1,7 +1,7 @@
 # Graciliano Ramos Library
 OpenGL model of the Graciliano Ramos Library
 
-## Requested
+## Required
 - python3.7
 - OpenGL
 - PyOpenGL
